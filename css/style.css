@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "Space Age";
+	src: url('space_age.ttf');
+   }
+
+body{
+    background-image: url(../img/univers_2.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 200px;
+}
+
+h1{
+    font-family: "Space Age";
+    color: white;
+    font-size: 70px;
+}
+
+button{
+    font-family: "Space Age";
+    font-size: 15px;
+    box-shadow: 2px 3px 4px #000000;
+    background: #ffffff;
+    height: 50px;
+    border-color: #1b395f;
+    border-radius: 15px;
+}
