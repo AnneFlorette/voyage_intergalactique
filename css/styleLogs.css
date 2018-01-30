@@ -1,0 +1,111 @@
+@font-face {
+    font-family: "Space Age";
+	src: url('space_age.ttf');
+   }
+@font-face{
+    font-family: "Sansation";
+    src: url('Sansation_regular.ttf');
+}
+
+:focus{
+    outline: none;
+}
+
+body{
+    background-image: url(../img/univers_5.jpg);
+    background-size: cover;
+    height: 100%
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-family: "Sansation";
+}
+
+#titleBox{
+    margin: auto;
+}
+
+h1{
+    font-family: "Space Age";
+    color: white;
+    font-size: 120px;
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+a{
+    text-decoration: none;
+}
+
+#logs{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: white;
+}
+
+#signUp{
+    background-color: #1b395f8f;
+    border-radius: 18px;
+    margin: 32px;
+    padding: 26px;
+}
+
+#logIn{
+    background-color: #1b395f8f;
+    border-radius: 18px;
+    margin: 32px;
+    padding: 26px;
+}
+
+h3{
+    margin-top: 0px;
+    font-family: "Space Age";
+    font-size: 20px;
+    text-align: center;
+}
+
+form{
+}
+
+label{
+}
+
+input{
+    margin: 6px;
+    padding: 3px;
+    height: 20px;
+    width: 200px;
+    border-radius: 6px;
+    font-size: 12px;
+    border: none;
+    background: #ffffff7a;
+    box-shadow: 2px 2px 5px #000000;
+}
+.submit{
+    font-family: "Space Age";
+    font-size: 14px;
+    background: #ffffff;
+    width: 120px;
+    height: 30px;
+    margin: 16px 50px;
+    border: none;
+    border-radius: 28px;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+.submit:Hover{  
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+    
+.submit:focus{
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+}
+
+

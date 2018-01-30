@@ -1,0 +1,198 @@
+@font-face {
+    font-family: "Space Age";
+	src: url('space_age.ttf');
+   }
+@font-face{
+    font-family: "Sansation";
+    src: url('Sansation_regular.ttf');
+}
+
+:focus{
+    outline: none;
+}
+
+body{
+    background-image: url(../img/univers_4.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: 0px;
+    color: #000000;
+}
+
+#front{
+    margin: 0px;
+}
+
+#connectionBox{
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+#connection{
+    font-size: 12px;
+    width: 160px;
+    height: 36px;
+    border-radius: 16px;
+    font-family: "Space Age";
+    background: #ffffff;
+    margin: 16px;
+    border: none;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+#titleBox{
+    margin: auto;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 200px;
+}
+
+a{
+    text-decoration: none;
+}
+
+h1{
+    font-family: "Space Age";
+    color: white;
+    font-size: 120px;
+    margin-bottom: 0px;
+}
+
+#caption{
+    font-family: "Space Age";
+    font-size: 15px;
+    margin-top: 0px;
+    margin-right: 10%;
+    color: white;
+    align-self: flex-end;
+}
+#welcomeBox{
+    margin: auto;
+}
+
+#welcomeMsg{
+    font-family: "Sansation";
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;
+    color: #ffffff;
+}
+
+button{
+    border: none;
+    background: none;
+    padding: 0px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+#iconScroll{
+    font-size: 8em;
+    color: #ffffff;
+}
+
+.left{
+    width: 400px;
+    height: 600px;
+    background-color: #ffffff67;
+    margin-left: 0px;
+ }
+
+#jupiter{
+    background-image: url(../img/jupiterG.png);
+    background-size: cover;
+    height: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+#pluton{
+    background-image: url(../img/plutonG.png);
+    background-size: cover;
+    height: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+#mars{
+    background-image: url(../img/marsG.png);
+    background-size: cover;
+    height: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+#saturne{
+    background-image: url(../img/saturneG.png);
+    background-size: cover;
+    height: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+#uranus{
+    background-image: url(../img/uranusG.png);
+    background-size: cover;
+    height: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+#moon{
+    background-image: url(../img/moon.png);
+    background-size: cover;
+    height: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+ h4{
+    font-family: "Space Age";
+    font-size: 38px;
+    margin: 0px;
+    padding-top: 30px;
+
+ }
+
+ p{
+    padding-top: 30px;
+    font-family: "Sansation";
+ }
+
+ .booking{
+    font-family: "Space Age";
+    font-size: 18px;
+    background: #ffffff;
+    width: 200px;
+    height: 30px;
+    margin: 16px 50px;
+    border: none;
+    border-radius: 28px;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+
+#connection:Hover,
+.booking:Hover{  
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+#connection:Hover,   
+.booking:focus{
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+}

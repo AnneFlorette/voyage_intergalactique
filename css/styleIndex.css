@@ -1,0 +1,87 @@
+@font-face {
+    font-family: "Space Age";
+	src: url('space_age.ttf');
+}
+
+:focus{
+    outline: none;
+}
+
+
+body{
+    background-image: url(../img/univers_4.jpg);
+    background-size: cover;
+    height: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+button{
+    font-family: "Space Age";
+    font-size: 20px;
+    background: #ffffff;
+    width: 300px;
+    height: 60px;
+    margin: 16px;
+    border: none;
+    border-radius: 28px;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+button:Hover{  
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+
+ button:focus{
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+ }
+
+#connectionBox{
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+#connection{
+    font-size: 12px;
+    width: 160px;
+    height: 36px;
+    border-radius: 16px;
+}
+
+
+#titleBox{
+    margin: auto;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    font-family: "Space Age";
+    color: white;
+    font-size: 120px;
+    margin-bottom: 0px;
+}
+
+#caption{
+    font-family: "Space Age";
+    font-size: 15px;
+    margin-top: 0px;
+    margin-right: 10%;
+    color: white;
+    align-self: flex-end;
+}
+
+#buttonBox{
+    margin-top: 200px;
+    flex-direction: row;
+}
+
