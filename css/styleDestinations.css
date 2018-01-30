@@ -62,13 +62,13 @@ a{
 h1{
     font-family: "Space Age";
     color: white;
-    font-size: 120px;
+    font-size: 8em;
     margin-bottom: 0px;
 }
 
 #caption{
     font-family: "Space Age";
-    font-size: 15px;
+    font-size: 1em;
     margin-top: 0px;
     margin-right: 10%;
     color: white;
@@ -80,7 +80,7 @@ h1{
 
 #welcomeMsg{
     font-family: "Sansation";
-    font-size: 20px;
+    font-size: 1.5em;
     margin: 0px;
     padding: 0px;
     color: #ffffff;
@@ -173,7 +173,7 @@ button{
 
  h4{
     font-family: "Space Age";
-    font-size: 38px;
+    font-size: 3.5em;
     margin: 0px;
     padding-top: 30px;
 
@@ -186,7 +186,7 @@ button{
 
  .booking{
     font-family: "Space Age";
-    font-size: 18px;
+    font-size: 1em;
     background: #ffffff;
     width: 200px;
     height: 30px;
