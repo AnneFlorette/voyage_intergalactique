@@ -13,8 +13,6 @@
 
 body{
     background-image: url(../img/univers_4.jpg);
-    background-size: cover;
-    height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     text-align: center;
@@ -24,6 +22,7 @@ body{
 
 #front{
     margin: 0px;
+    height: 100vh;
 }
 
 #connectionBox{
@@ -99,7 +98,7 @@ button{
 
 .left{
     width: 400px;
-    height: 600px;
+    height: 100vh;
     background-color: #ffffff67;
     margin-left: 0px;
  }
@@ -107,55 +106,55 @@ button{
 #jupiter{
     background-image: url(../img/jupiterG.png);
     background-size: cover;
-    height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     text-align: center;
+    height: 100vh;
 }
 
 #pluton{
     background-image: url(../img/plutonG.png);
     background-size: cover;
-    height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     text-align: center;
+    height: 100vh;
 }
 
 #mars{
     background-image: url(../img/marsG.png);
     background-size: cover;
-    height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     text-align: center;
+    height: 100vh;
 }
 
 #saturne{
     background-image: url(../img/saturneG.png);
     background-size: cover;
-    height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     text-align: center;
+    height: 100vh;
 }
 
 #uranus{
     background-image: url(../img/uranusG.png);
     background-size: cover;
-    height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     text-align: center;
+    height: 100vh;
 }
 
 #moon{
     background-image: url(../img/moon.png);
     background-size: cover;
-    height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     text-align: center;
+    height: 100vh;
 }
 
  h4{
