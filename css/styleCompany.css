@@ -83,16 +83,37 @@ h1{
     align-self: flex-end;
 }
 
-#introBox{
-    background: #1b395f8f;
-    margin: auto;
-    width: 70vw;
+button{
+    border: none;
+    background: none;
+    padding: 0px;
+    margin-top: 50px;
+    cursor: pointer;
 }
 
-#intro{
+#scrollBox{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#scroll{
+    bottom: 5px;
+    align-self: flex-end;
+}
+
+#iconScroll{
+    font-size: 8em;
     color: #ffffff;
-    font-family: "Sansation";
-    font-size: 1.5em;
+}
+
+#city{
+    background-image: url(../img/city_2.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 100vh;
 }
 
 #ship{
@@ -103,3 +124,26 @@ h1{
     text-align: center;
     height: 100vh;
 }
+
+.left{
+    width: 30vw;
+    height: 100vh;
+    background-color: #ffffff67;
+    margin-left: 0px;
+ }
+
+ h4{
+    font-family: "Space Age";
+    font-size: 2em;
+    margin: 0px;
+    padding-top: 30px;
+
+ }
+
+ p{
+    padding-top: 10vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    font-family: "Sansation";
+    text-align: justify;
+ }
