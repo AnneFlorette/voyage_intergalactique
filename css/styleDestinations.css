@@ -91,6 +91,11 @@ button{
     cursor: pointer;
 }
 
+#scroll{
+    position: absolute;
+    bottom: 5px;
+}
+
 #iconScroll{
     font-size: 8em;
     color: #ffffff;
