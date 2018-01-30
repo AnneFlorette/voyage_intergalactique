@@ -24,6 +24,7 @@ body{
     right: 0;
 }
 
+#destination,
 #connection{
     font-size: 12px;
     width: 160px;
@@ -37,6 +38,7 @@ body{
     opacity: 0.80;
 }
 
+#destination:Hover,
 #connection:Hover{  
     color: white;
     background: #1b395f;
@@ -44,7 +46,8 @@ body{
     cursor: pointer;
 }
 
-#connection:Hover{
+#destination:focus,
+#connection:focus{
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
