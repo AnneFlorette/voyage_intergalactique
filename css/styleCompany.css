@@ -7,6 +7,10 @@
     src: url('Sansation_regular.ttf');
 }
 
+:focus{
+    outline: none;
+}
+
 body{
     background-image: url(../img/univers_7.jpg);
     background-size: cover;
