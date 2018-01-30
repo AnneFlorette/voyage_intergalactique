@@ -73,6 +73,7 @@ h1{
 }
 #welcomeBox{
     margin: auto;
+    margin-bottom: 10%;
 }
 
 #welcomeMsg{
@@ -91,9 +92,15 @@ button{
     cursor: pointer;
 }
 
+#scrollBox{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
 #scroll{
-    position: absolute;
     bottom: 5px;
+    align-self: flex-end;
 }
 
 #iconScroll{
