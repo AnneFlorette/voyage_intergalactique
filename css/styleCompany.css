@@ -1,0 +1,105 @@
+@font-face {
+    font-family: "Space Age";
+	src: url('space_age.ttf');
+}
+@font-face{
+    font-family: "Sansation";
+    src: url('Sansation_regular.ttf');
+}
+
+body{
+    background-image: url(../img/univers_7.jpg);
+    background-size: cover;
+    height: 100vh;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: 0px;
+    color: #000000;
+}
+
+#connectionBox{
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+#connection{
+    font-size: 12px;
+    width: 160px;
+    height: 36px;
+    border-radius: 16px;
+    font-family: "Space Age";
+    background: #ffffff;
+    margin: 16px;
+    border: none;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+#connection:Hover{  
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+
+#connection:Hover{
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+}
+
+#city{
+    margin: 0px;
+    height: 100vh;
+}
+
+#titleBox{
+    margin: auto;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 200px;
+}
+
+a{
+    text-decoration: none;
+}
+
+h1{
+    font-family: "Space Age";
+    color: #ffffff;
+    font-size: 120px;
+    margin-bottom: 0px;
+}
+
+#caption{
+    font-family: "Space Age";
+    font-size: 1em;
+    margin-top: 0px;
+    margin-right: 10%;
+    color: white;
+    align-self: flex-end;
+}
+
+#introBox{
+    background: #1b395f8f;
+    margin: auto;
+    width: 70vw;
+}
+
+#intro{
+    color: #ffffff;
+    font-family: "Sansation";
+    font-size: 1.5em;
+}
+
+#ship{
+    background-image: url(../img/space_ship.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 100vh;
+}
