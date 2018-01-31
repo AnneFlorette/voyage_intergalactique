@@ -22,8 +22,39 @@ body{
     margin: 0px;
 }
 
+nav{
+    background: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+ul{
+    margin-top: 0px;
+}
+
+li{
+    display: inline-block;
+    line-height: 3em;
+    color: #000000;
+    font-size: 12px;
+    width: 160px;
+    height: 36px;
+    border-radius: 16px;
+    font-family: "Space Age";
+    background: #ffffff;
+    margin: 16px;
+    border: none;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
 #titleBox{
     margin: auto;
+    margin-top: 10vh;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
 }
 
 h1{
@@ -45,17 +76,11 @@ a{
     color: white;
 }
 
+#logIn,
 #signUp{
     background-color: #1b395f8f;
     border-radius: 18px;
-    margin: 32px;
-    padding: 26px;
-}
-
-#logIn{
-    background-color: #1b395f8f;
-    border-radius: 18px;
-    margin: 32px;
+    margin: 0px 15px;
     padding: 26px;
 }
 
@@ -83,6 +108,7 @@ input{
     background: #ffffff7a;
     box-shadow: 2px 2px 5px #000000;
 }
+
 .submit{
     font-family: "Space Age";
     font-size: 14px;
@@ -96,13 +122,15 @@ input{
     opacity: 0.80;
 }
 
+li:Hover,
 .submit:Hover{  
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
     cursor: pointer;
 }
-    
+
+li:focus,
 .submit:focus{
     color: white;
     background: #1b395f;

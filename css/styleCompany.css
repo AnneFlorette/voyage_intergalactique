@@ -25,20 +25,26 @@ body {
 #front {
     margin: 0px;
     height: 100vh;
-    width: 99vw;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#connectionBox {
+nav{
+    background: none;
     position: fixed;
     top: 0;
     right: 0;
 }
 
-#destination,
-#connection {
+ul{
+    margin-top: 0px;
+}
+
+li{
+    display: inline-block;
+    line-height: 3em;
+    color: #000000;
     font-size: 12px;
     width: 160px;
     height: 36px;
@@ -51,16 +57,14 @@ body {
     opacity: 0.80;
 }
 
-#destination:Hover,
-#connection:Hover {
+li:Hover {
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
     cursor: pointer;
 }
 
-#destination:focus,
-#connection:focus {
+li:focus {
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
@@ -108,19 +112,18 @@ button {
     cursor: pointer;
 }
 
-#scrollBox {
+#scrollBox{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items:center;
 }
 
-#scroll {
+#scroll{
     bottom: 5px;
     align-self: flex-end;
-    margin-top: 30vh;
 }
 
-#iconScroll {
+#iconScroll{
     font-size: 8em;
     color: #ffffff;
 }

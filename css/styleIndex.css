@@ -18,6 +18,33 @@ body{
     margin: 0px;
 }
 
+nav{
+    background: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+ul{
+    margin-top: 0px;
+}
+
+li{
+    display: inline-block;
+    line-height: 3em;
+    color: #000000;
+    font-size: 12px;
+    width: 160px;
+    height: 36px;
+    border-radius: 16px;
+    font-family: "Space Age";
+    background: #ffffff;
+    margin: 16px;
+    border: none;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
 button{
     font-family: "Space Age";
     font-size: 20px;
@@ -31,6 +58,7 @@ button{
     opacity: 0.80;
 }
 
+li:Hover,
 button:Hover{  
     color: white;
     background: #1b395f;
@@ -38,6 +66,7 @@ button:Hover{
     cursor: pointer;
 }
 
+li:focus,
  button:focus{
     color: white;
     background: #1b395f;
