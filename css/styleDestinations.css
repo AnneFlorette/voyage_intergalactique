@@ -35,6 +35,10 @@ nav{
     right: 0;
 }
 
+ul{
+    margin-top: 0px;
+}
+
 li{
     display: inline-block;
     line-height: 3em;
