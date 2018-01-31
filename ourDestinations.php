@@ -28,7 +28,7 @@
             </p>
         </div>
         <div id="scrollBox">
-            <a href="#jupiter"><button id="scroll"><i id="iconScroll" class="material-icons">keyboard_arrow_down</i></button></a>
+            <a href="#first_planete"><button id="scroll"><i id="iconScroll" class="material-icons">keyboard_arrow_down</i></button></a>
         </div>
         
     </section>
