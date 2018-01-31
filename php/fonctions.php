@@ -34,11 +34,11 @@
     }
 
 //Ecris dans la bdd si identifiants allowed (inscription)
-    function writeLog($mail, $passCrypt, $last_name, $first_name){
+    function writeLog($mail, $passcrypt, $last_name, $first_name){
         $bdd = getPDO();
         $requete = $bdd->prepare('INSERT INTO users (user_mail, user_password, user_last_name, user_firt_name) VALUES (:mail, :passcrypt, :last_name, :first_name);');
         $requete-> bindParam(':mail', $mail);
-        $requete-> bindParam(':passCrypt', $passCrypt);    
+        $requete-> bindParam(':passCrypt', $passcrypt);    
         $requete-> bindParam(':last_name', $last_name);
         $requete-> bindParam(':first_name', $first_name);
         $requete->execute();      
