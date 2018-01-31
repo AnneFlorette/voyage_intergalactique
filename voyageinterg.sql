@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1
+-- http://www.phpmyadmin.net
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 30 jan. 2018 à 13:17
--- Version du serveur :  5.7.19
--- Version de PHP :  5.6.31
+-- Client :  localhost
+-- Généré le :  Mer 31 Janvier 2018 à 10:44
+-- Version du serveur :  5.7.11
+-- Version de PHP :  5.6.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,16 +23,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `travels`
+-- Structure de la table `have`
 --
 
-DROP TABLE IF EXISTS `travels`;
-CREATE TABLE IF NOT EXISTS `travels` (
-  `travel_id` int(11) NOT NULL AUTO_INCREMENT,
-  `places` int(11) DEFAULT NULL,
-  `travel_name` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`travel_id`)
+CREATE TABLE `have` (
+  `travel_ID` int(11) NOT NULL,
+  `user_ID` int(11) NOT NULL,
+  `history_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `travel`
+--
+
+CREATE TABLE `travel` (
+  `travel_ID` int(11) NOT NULL,
+  `travel_destination` char(25) DEFAULT NULL,
+  `travel_places` int(11) NOT NULL,
+  `travel_img_url` varchar(255) DEFAULT NULL,
+  `travel_description` varchar(255) DEFAULT NULL,
+  `travel_distance` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `travel`
+--
+
+INSERT INTO `travel` (`travel_ID`, `travel_destination`, `travel_places`, `travel_img_url`, `travel_description`, `travel_distance`) VALUES
+(1, 'The moon', 100, 'https://lh4.googleusercontent.com/UUQT7v2Eq8TY6SRy4-xGfhuKxPCVNBxXJulw24IDO24aS-oAJziraX72dqB82I-OSISUbktJ0AOwrhhIpSAS=w1366-h637-rw', 'Tintin objectif lune', 2),
+(2, 'Uranus', 150, 'https://lh3.googleusercontent.com/TDjfd7lXp0izfZZRZ7wVh5DksBfjqn0QaZbybIOSxG7MkSJfhfdXPcuXt8iu0M1UnT1D2_6nnr5SUG9z89o3=w1366-h637-rw', 'The greend emeral planete', 120),
+(3, 'Saturn', 150, 'https://lh4.googleusercontent.com/k_Loe2mpHxLHw0D_X83Z6OQ6jEzBM15lVQ-GnKthJefXObI67oFPhoTE8DicjsIYmYwhSSFHk2zhTIcJOUT1=w1366-h637-rw', 'the planet that do hula hoop', 96);
 
 -- --------------------------------------------------------
 
@@ -42,14 +62,12 @@ CREATE TABLE IF NOT EXISTS `travels` (
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `last_name` char(25) DEFAULT NULL,
-  `first_name` char(25) DEFAULT NULL,
-  `mail` varchar(25) DEFAULT NULL,
-  `password` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
+CREATE TABLE `users` (
+  `user_ID` int(11) NOT NULL,
+  `user_first_name` char(25) DEFAULT NULL,
+  `user_last_name` char(25) DEFAULT NULL,
+  `user_mail` varchar(25) DEFAULT NULL,
+  `user_password` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -58,29 +76,70 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Structure de la table `users_history`
 --
 
-DROP TABLE IF EXISTS `users_history`;
-CREATE TABLE IF NOT EXISTS `users_history` (
-  `travel_date` date DEFAULT NULL,
-  `reservation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `historic_id` int(11) NOT NULL AUTO_INCREMENT,
-  `travel_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`historic_id`),
-  KEY `FK_users_history_travel_id` (`travel_id`),
-  KEY `FK_users_history_user_id` (`user_id`)
+CREATE TABLE `users_history` (
+  `history_ID` int(11) NOT NULL,
+  `history_reservation_date` date NOT NULL,
+  `history_travel_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contraintes pour les tables déchargées
+-- Index pour les tables exportées
 --
 
 --
--- Contraintes pour la table `users_history`
+-- Index pour la table `have`
+--
+ALTER TABLE `have`
+  ADD PRIMARY KEY (`user_ID`,`history_ID`),
+  ADD KEY `FK_have_history_ID` (`history_ID`);
+
+--
+-- Index pour la table `travel`
+--
+ALTER TABLE `travel`
+  ADD PRIMARY KEY (`travel_ID`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_ID`);
+
+--
+-- Index pour la table `users_history`
 --
 ALTER TABLE `users_history`
-  ADD CONSTRAINT `FK_users_history_travel_id` FOREIGN KEY (`travel_id`) REFERENCES `travels` (`travel_id`),
-  ADD CONSTRAINT `FK_users_history_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
-COMMIT;
+  ADD PRIMARY KEY (`history_ID`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `travel`
+--
+ALTER TABLE `travel`
+  MODIFY `travel_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `users_history`
+--
+ALTER TABLE `users_history`
+  MODIFY `history_ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `have`
+--
+ALTER TABLE `have`
+  ADD CONSTRAINT `FK_have_history_ID` FOREIGN KEY (`history_ID`) REFERENCES `users_history` (`history_ID`),
+  ADD CONSTRAINT `FK_have_user_ID` FOREIGN KEY (`user_ID`) REFERENCES `users` (`user_ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

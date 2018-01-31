@@ -28,21 +28,14 @@ body{
     align-items: center;
 }
 
-nav{
-    background: none;
+#connectionBox{
     position: fixed;
     top: 0;
     right: 0;
 }
 
-ul{
-    margin-top: 0px;
-}
-
-li{
-    display: inline-block;
-    line-height: 3em;
-    color: #000000;
+#company,
+#connection{
     font-size: 12px;
     width: 160px;
     height: 36px;
@@ -53,7 +46,6 @@ li{
     border: none;
     box-shadow: 2px 3px 4px #000000;
     opacity: 0.80;
-
 }
 
 #titleBox{
@@ -126,53 +118,7 @@ button{
     margin-left: 0px;
  }
 
-#jupiter{
-    background-image: url(../img/jupiterG.png);
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    text-align: center;
-    height: 100vh;
-}
-
-#pluto{
-    background-image: url(../img/plutoG.png);
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    text-align: center;
-    height: 100vh;
-}
-
-#mars{
-    background-image: url(../img/marsG.png);
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    text-align: center;
-    height: 100vh;
-}
-
-#saturne{
-    background-image: url(../img/saturneG.png);
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    text-align: center;
-    height: 100vh;
-}
-
-#uranus{
-    background-image: url(../img/uranusG.png);
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    text-align: center;
-    height: 100vh;
-}
-
-#moon{
-    background-image: url(../img/moon.png);
+#planete{
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -207,14 +153,16 @@ button{
 }
 
 
-li:Hover,
+#company:Hover,
+#connection:Hover,
 .booking:Hover{  
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
     cursor: pointer;
 }
-li:focus, 
+#company:focus,
+#connection:focus,   
 .booking:focus{
     color: white;
     background: #1b395f;
