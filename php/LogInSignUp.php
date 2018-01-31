@@ -1,5 +1,5 @@
 <?php
-    include 'fonction.php';
+    include 'fonctions.php';
 
     const KEY = "chfporndjzysthvlzpdbj25vfhg";
     $allowedsignup = 1;
