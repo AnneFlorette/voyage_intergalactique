@@ -1,20 +1,20 @@
 @font-face {
     font-family: "Space Age";
-	src: url('space_age.ttf');
+    src: url('space_age.ttf');
 }
-@font-face{
+
+@font-face {
     font-family: "Sansation";
     src: url('Sansation_regular.ttf');
 }
 
-:focus{
+:focus {
     outline: none;
 }
 
-body{
-    background-image: url(../img/univers_7.jpg);
+body {
+    background-image: url(../img/univers_8.jpg);
     background-size: cover;
-    height: 100vh;
     background-attachment: fixed;
     background-repeat: no-repeat;
     text-align: center;
@@ -22,14 +22,23 @@ body{
     color: #000000;
 }
 
-#connectionBox{
+#front {
+    margin: 0px;
+    height: 100vh;
+    width: 99vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#connectionBox {
     position: fixed;
     top: 0;
     right: 0;
 }
 
 #destination,
-#connection{
+#connection {
     font-size: 12px;
     width: 160px;
     height: 36px;
@@ -43,7 +52,7 @@ body{
 }
 
 #destination:Hover,
-#connection:Hover{  
+#connection:Hover {
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
@@ -51,46 +60,47 @@ body{
 }
 
 #destination:focus,
-#connection:focus{
+#connection:focus {
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
 }
 
-#city{
+#city {
     margin: 0px;
     height: 100vh;
 }
 
-#titleBox{
+#titleBox {
     margin: auto;
     width: 60%;
     display: flex;
     flex-direction: column;
+    margin-top: 0px;
     margin-bottom: 200px;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-h1{
+h1 {
     font-family: "Space Age";
     color: #ffffff;
     font-size: 120px;
     margin-bottom: 0px;
 }
 
-#caption{
+#caption {
     font-family: "Space Age";
     font-size: 1em;
-    margin-top: 0px;
+    margin-top: -50px;
     margin-right: 10%;
     color: white;
     align-self: flex-end;
 }
 
-button{
+button {
     border: none;
     background: none;
     padding: 0px;
@@ -98,23 +108,24 @@ button{
     cursor: pointer;
 }
 
-#scrollBox{
+#scrollBox {
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
 }
 
-#scroll{
+#scroll {
     bottom: 5px;
     align-self: flex-end;
+    margin-top: 30vh;
 }
 
-#iconScroll{
+#iconScroll {
     font-size: 8em;
     color: #ffffff;
 }
 
-#city{
+#city {
     background-image: url(../img/city_2.jpg);
     background-size: cover;
     background-attachment: fixed;
@@ -123,7 +134,7 @@ button{
     height: 100vh;
 }
 
-#ship{
+#ship {
     background-image: url(../img/space_ship.jpg);
     background-size: cover;
     background-attachment: fixed;
@@ -132,25 +143,24 @@ button{
     height: 100vh;
 }
 
-.left{
+.left {
     width: 30vw;
     height: 100vh;
     background-color: #ffffff67;
     margin-left: 0px;
- }
+}
 
- h4{
+h4 {
     font-family: "Space Age";
     font-size: 2em;
     margin: 0px;
     padding-top: 30px;
+}
 
- }
-
- p{
+p {
     padding-top: 10vh;
     padding-left: 3vw;
     padding-right: 3vw;
     font-family: "Sansation";
     text-align: justify;
- }
+}
