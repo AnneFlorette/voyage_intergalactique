@@ -1,11 +1,8 @@
 <?php
 
-    try{
-        $bd_log = new PDO ("mysql:host=localhost;dbname=voyageinterg;charset=utf8", "root", "root");
-    } catch(Exception $err){
-        die("Debug: probleme de bdd");
-    }
+    include("fonctions.php");
 
+    $bd_log = getPDO();
     $travels = $bd_log -> query("SELECT * FROM travel") -> fetchall(PDO::FETCH_ASSOC);
 
     $index = 0;
