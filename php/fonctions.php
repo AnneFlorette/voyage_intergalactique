@@ -3,7 +3,12 @@
 
 //choppe la BDD
     function getPDO(){
-        return new PDO('mysql:host=localhost;dbname=voyageinterg;charset=utf8', 'root', '');
+        try{
+            return new PDO('mysql:host=localhost;dbname=voyageinterg;charset=utf8', 'root', '');
+        }
+        catch(Exception $err){
+            die("Debug: problème de bdd");
+        }
     }
 
 //il faudra peut etre enlever les '' autour de sha256
@@ -40,6 +45,7 @@
     }
 
 //Vérifie si le mail n'est pas déjà utilisé
+//si return isvalid = 1 le mail est inutilisé donc bon
     function verifInscription($mail){
         $bdd = getPDO();
         $isValid = 1;
