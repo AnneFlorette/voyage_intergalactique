@@ -28,14 +28,17 @@ body{
     align-items: center;
 }
 
-#connectionBox{
+nav{
+    background: none;
     position: fixed;
     top: 0;
     right: 0;
 }
 
-#company,
-#connection{
+li{
+    display: inline-block;
+    line-height: 3em;
+    color: #000000;
     font-size: 12px;
     width: 160px;
     height: 36px;
@@ -46,6 +49,7 @@ body{
     border: none;
     box-shadow: 2px 3px 4px #000000;
     opacity: 0.80;
+
 }
 
 #titleBox{
@@ -199,16 +203,14 @@ button{
 }
 
 
-#company:Hover,
-#connection:Hover,
+li:Hover,
 .booking:Hover{  
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
     cursor: pointer;
 }
-#company:focus,
-#connection:focus,   
+li:focus, 
 .booking:focus{
     color: white;
     background: #1b395f;
