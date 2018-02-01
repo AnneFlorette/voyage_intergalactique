@@ -21,15 +21,16 @@
 // return 1 = utilisateur existant et bon logs
     function verifConnexion($mail, $passwd){
         $bdd = getPDO();
-        $requete = $bdd->prepare('SELECT * FROM users WHERE user_mail = :mail AND user_password = :pass');
-        $requete-> bindParam(':mail', $mail);
-        $requete-> bindParam(':pass', $passwd);
-        $requete-> execute();
-        $verifmail = $requete->fetchall(PDO::FETCH_ASSOC); 
-        var_dump($verifmail);
-        if(count($verifmail) > 0){
+
+        var_dump($passwd);
+        $requete = $bdd -> prepare("SELECT * FROM users WHERE user_mail = :mail AND user_password = :pass");
+        $requete -> bindParam(":mail", $mail);
+        $requete -> bindParam(":pass", $passwd);
+        $requete -> execute();
+        $data = $requete -> fetchall(PDO::FETCH_ASSOC);
+        if ($data != null){
             return 1;
-        } else {
+        } else{
             return 2;
         }
     }
