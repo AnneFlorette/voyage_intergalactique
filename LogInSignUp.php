@@ -4,9 +4,9 @@
     $allowedsignup = 1;
 
 //verif inscription
-    if (isset($_POST['mail']) && isset($_POST['passwd']) && isset($_POST['last_name']) && isset($_POST['first_name'])) {
-        $mail = htmlspecialchars($_POST['mail']);
-        $passwd = htmlspecialchars($_POST['passwd']);
+    if (isset($_POST['mailsignup']) && isset($_POST['passwdsignup']) && isset($_POST['last_name']) && isset($_POST['first_name'])) {
+        $mail = htmlspecialchars($_POST['mailsignup']);
+        $passwd = htmlspecialchars($_POST['passwdsignup']);
         $last_name = htmlspecialchars($_POST['last_name']);
         $first_name = htmlspecialchars($_POST['first_name']);
 
@@ -17,6 +17,23 @@
             writeLog($mail, $passcrypt, $last_name, $first_name);
             setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
             //header('location: LogInSignUp.html');
+        }
+    }
+
+    $allowedlogin = 0;
+//verif connexion
+    if (isset($_POST['maillogin']) && isset($_POST['passwdlogin'])) {
+        $mail = htmlspecialchars($_POST['maillogin']);
+        $passwd = htmlspecialchars($_POST['passwdlogin']);
+        echo "<script>console.log( 'Debug Objects: ça marche1' );</script>";
+        $logcrypt = cryptage($mail, $passwd);
+        echo "<script>console.log( 'Debug Objects: ça marche10' );</script>";
+        $allowedlogin = verifConnexion($mail, $logcrypt);
+        if($allowedlogin == 1){
+            $name = getName($mail);
+            echo "<script>console.log( 'Debug Objects: ça marche100' );</script>";
+            $_SESSION['name'] = $name;
+            setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
         }
     }
 ?>
@@ -53,13 +70,13 @@
                 <br>
                 <input type="text" name="last_name">
                 <br>
-                <label for="mail">Email</label>
+                <label for="mailsignup">Email</label>
                 <br>
-                <input type="text" name="mail">
+                <input type="text" name="mailsignup">
                 <br>
-                <label for="passwd">Password</label>
+                <label for="passwdsignup">Password</label>
                 <br>
-                <input type="password" name="passwd">
+                <input type="password" name="passwdsignup">
                 <br>
                 <input type="submit" value="Sign Up" class="submit">
                 <br>
@@ -68,13 +85,13 @@
         <div id="logIn">
             <form action="" method="POST">
                 <h3>Log In</h3>
-                <label for="mail">Email</label>
+                <label for="maillogin">Email</label>
                 <br>
-                <input type="text" name="mail">
+                <input type="text" name="maillogin">
                 <br>
-                <label for="passwd">Password</label>
+                <label for="passwdlogin">Password</label>
                 <br>
-                <input type="password" name="passwd">
+                <input type="password" name="passwdlogin">
                 <br>
                 <input type="submit" value="Log In" class="submit">
                 <br>
