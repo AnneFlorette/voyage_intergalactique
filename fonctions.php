@@ -4,10 +4,10 @@
 //choppe la BDD
     function getPDO(){
         try{
-            return new PDO('mysql:host=localhost;dbname=voyageinterg;charset=utf8', 'root', '');
+            return new PDO('mysql:host=sql11.freesqldatabase.com;dbname=sql11218946;charset=utf8', 'sql11218946', 'E2JMCvThBA');
         }
         catch(Exception $err){
-            die("Debug: problème de bdd");
+            die("Debug: problème de bdd\n" . $err);
         }
     }
 
