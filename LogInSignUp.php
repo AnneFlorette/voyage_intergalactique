@@ -4,7 +4,10 @@
     $allowedsignup = 1;
 
 //verif inscription
-    if (isset($_POST['mailsignup']) && isset($_POST['passwdsignup']) && isset($_POST['last_name']) && isset($_POST['first_name'])) {
+    if (isset($_POST['mailsignup']) && htmlspecialchars($_POST['mailsignup']) != "" &&
+        isset($_POST['passwdsignup']) && htmlspecialchars($_POST['passwdsignup']) != "" &&
+        isset($_POST['last_name']) && htmlspecialchars($_POST['last_name']) != "" &&
+        isset($_POST['first_name']) htmlspecialchars($_POST['first_name']) != "") {
         $mail = htmlspecialchars($_POST['mailsignup']);
         $passwd = htmlspecialchars($_POST['passwdsignup']);
         $last_name = htmlspecialchars($_POST['last_name']);
@@ -22,7 +25,8 @@
 
     $allowedlogin = 0;
 //verif connexion
-    if (isset($_POST['maillogin']) && isset($_POST['passwdlogin'])) {
+    if (isset($_POST['maillogin']) && htmlspecialchars($_POST['maillogin']) != "" &&
+        isset($_POST['passwdlogin']) && htmlspecialchars($_POST['passwdlogin']) != "") {
         $mail = htmlspecialchars($_POST['maillogin']);
         $passwd = htmlspecialchars($_POST['passwdlogin']);
         echo "<script>console.log( 'Debug Objects: ça marche1' );</script>";
