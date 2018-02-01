@@ -19,8 +19,9 @@
         </nav>
         <div id="titleBox">
             <a href="index.php"><h1>Far Away</h1></a>
-            <p id="caption">Go deeper in Space</p>
+            <p id="caption">Go deeper in Space</p>   
         </div>
+        <img id="logo" src="img/logo_blanc.png" alt="Logo of the Far Away Company">
         <div id="scrollBox">
             <a href="#city"><button id="scroll"><i id="iconScroll" class="material-icons">keyboard_arrow_down</i></button></a>
         </div>

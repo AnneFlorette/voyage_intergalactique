@@ -112,10 +112,14 @@ button {
     cursor: pointer;
 }
 
+#logo{
+    width: 60px;
+}
+
 #scrollBox{
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
 }
 
 #scroll{
