@@ -35,10 +35,6 @@
 
 //Ecris dans la bdd si identifiants allowed (inscription)
     function writeLog($mail, $passcrypt, $last_name, $first_name){
-        var_dump($mail);
-        var_dump($passcrypt);
-        var_dump($last_name);
-        var_dump($first_name);
         $bdd = getPDO();
         $requete = $bdd->prepare('INSERT INTO users (user_mail, user_password, user_last_name, user_first_name) VALUES (:mail, :passcrypt, :last_name, :first_name)');
         $requete-> bindParam(':mail', $mail);
