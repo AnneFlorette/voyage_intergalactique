@@ -18,7 +18,6 @@
             setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
             //header('location: LogInSignUp.html');
         }
-
     }
 ?>
 
