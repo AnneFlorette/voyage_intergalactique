@@ -1,7 +1,6 @@
 <?php
     include 'fonctions.php';
 
-    const KEY = "chfporndjzysthvlzpdbj25vfhg";
     $allowedsignup = 1;
 
 //verif inscription
@@ -21,12 +20,7 @@
         }
 
     }
-
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -52,21 +46,21 @@
         <div id="signUp">
             <form action="" method="POST">
                 <h3>Sign Up</h3>
-                <label for="firstName">First Name</label>
+                <label for="first_name">First Name</label>
                 <br>
-                <input type="text" name="firstName" autofocus>
+                <input type="text" name="first_name" autofocus>
                 <br>
-                <label for="lastName">Last Name</label>
+                <label for="last_name">Last Name</label>
                 <br>
-                <input type="text" name="lastName">
+                <input type="text" name="last_name">
                 <br>
-                <label for="email">Email</label>
+                <label for="mail">Email</label>
                 <br>
-                <input type="text" name="email">
+                <input type="text" name="mail">
                 <br>
-                <label for="password">Password</label>
+                <label for="passwd">Password</label>
                 <br>
-                <input type="password" name="password">
+                <input type="password" name="passwd">
                 <br>
                 <input type="submit" value="Sign Up" class="submit">
                 <br>
@@ -75,13 +69,13 @@
         <div id="logIn">
             <form action="" method="POST">
                 <h3>Log In</h3>
-                <label for="email">Email</label>
+                <label for="mail">Email</label>
                 <br>
-                <input type="text" name="email">
+                <input type="text" name="mail">
                 <br>
-                <label for="password">Password</label>
+                <label for="passwd">Password</label>
                 <br>
-                <input type="password" name="password">
+                <input type="password" name="passwd">
                 <br>
                 <input type="submit" value="Log In" class="submit">
                 <br>
