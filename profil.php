@@ -10,8 +10,8 @@
 <body>
     <section id="top">
         <!-- Logo de la company -->
-        <div>    
-            <img src="" alt="Logo of the Far Away Company">
+        <div id="logo">    
+            <a href="index.php"><img src="img/logo_blanc.png" alt="Logo of the Far Away Company"></a>
         </div>
         <!-- Menu à droite -->
         <nav>
@@ -22,20 +22,23 @@
             </ul>
         </nav>
         <!-- Message de bienvenue à l'utilisateur (avec son $first_name) -->
-        <div>
-            <h3>Bienvenue <?php ?> ! </h3>
-        </div>
     </section>
-
-    <section id="informations">
-        <div>
-            <!-- <h5>Mettre le nom de l'utilisateur</h5> -->
+    <div>
+        <h3>Bienvenue <?php echo 'user' ?> ! </h3>
+    </div>
+    <section id="user">
+        <div id="information">
+            <h5>Mettre le nom de l'utilisateur</h5>
             <!-- Possiblité de changer les informations dans cette div -->
         </div>
     </section>
     <section id="myTrip">
-        <div id="futureTrip"></div>
-        <div id="pastTrip"></div>
+        <div id="futureTrip">
+            <h5>My Next Trips</h5>
+        </div>
+        <div id="pastTrip">
+            <h5>My Old Trips</h5>
+        </div>
     </section>
 
 </body>

@@ -20,7 +20,22 @@ body {
     background-repeat: no-repeat;
     text-align: center;
     margin: 0px;
-    color: #000000;
+    color: #ffffff;
+}
+
+#top{
+    display: flex;
+    flex-direction: row;
+}
+
+#logo{
+    margin: 0px;
+}
+
+img{
+    width: 10vh;
+    float: left;
+    margin: 3vh;
 }
 
 nav{
@@ -61,4 +76,47 @@ li:focus {
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
+}
+
+h3{
+    margin: auto;
+    font-family: "Space Age";
+    font-size: 2em;
+}
+
+#user{
+    margin: auto;
+    margin-top: 8vh; 
+    width: 50%;
+}
+
+#pastTrip,
+#futureTrip,
+#information{
+    background-color: #1b395f8f;
+    border-radius: 18px;
+    margin: 0px 15px;
+    padding: 5px;
+    font-family: "Sansation";
+}
+
+h5{
+    font-size: 1em;
+    margin: 5px;
+}
+
+#myTrip{
+    margin: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 96vw;
+}
+
+#futureTrip{
+    width: 40%
+}
+
+#pastTrip{
+    width: 40%
 }
