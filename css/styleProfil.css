@@ -1,0 +1,64 @@
+@font-face {
+    font-family: "Space Age";
+    src: url('space_age.ttf');
+}
+
+@font-face {
+    font-family: "Sansation";
+    src: url('Sansation_regular.ttf');
+}
+
+:focus {
+    outline: none;
+}
+
+body {
+    background-image: url(../img/univers_9.jpeg);
+    height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: 0px;
+    color: #000000;
+}
+
+nav{
+    background: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+ul{
+    margin-top: 0px;
+}
+
+li{
+    display: inline-block;
+    line-height: 3em;
+    color: #000000;
+    font-size: 12px;
+    width: 160px;
+    height: 36px;
+    border-radius: 16px;
+    font-family: "Space Age";
+    background: #ffffff;
+    margin: 16px;
+    border: none;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+li:Hover {
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+
+li:focus {
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+}
