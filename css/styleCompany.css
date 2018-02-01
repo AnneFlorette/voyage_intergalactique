@@ -81,7 +81,7 @@ li:focus {
     display: flex;
     flex-direction: column;
     margin-top: 0px;
-    margin-bottom: 200px;
+    margin-bottom: 20vh;
 }
 
 a {
@@ -113,7 +113,7 @@ button {
 }
 
 #logo{
-   width: 60px;
+   width: 10vw;
 }
 
 #scrollBox{
