@@ -7,7 +7,7 @@
     if (isset($_POST['mailsignup']) && htmlspecialchars($_POST['mailsignup']) != "" &&
         isset($_POST['passwdsignup']) && htmlspecialchars($_POST['passwdsignup']) != "" &&
         isset($_POST['last_name']) && htmlspecialchars($_POST['last_name']) != "" &&
-        isset($_POST['first_name']) htmlspecialchars($_POST['first_name']) != "") {
+        isset($_POST['first_name']) && htmlspecialchars($_POST['first_name']) != "") {
         $mail = htmlspecialchars($_POST['mailsignup']);
         $passwd = htmlspecialchars($_POST['passwdsignup']);
         $last_name = htmlspecialchars($_POST['last_name']);
@@ -68,19 +68,19 @@
                 <h3>Sign Up</h3>
                 <label for="first_name">First Name</label>
                 <br>
-                <input type="text" name="first_name" autofocus>
+                <input type="text" name="first_name" autofocus required>
                 <br>
                 <label for="last_name">Last Name</label>
                 <br>
-                <input type="text" name="last_name">
+                <input type="text" name="last_name" required>
                 <br>
                 <label for="mailsignup">Email</label>
                 <br>
-                <input type="text" name="mailsignup">
+                <input type="text" name="mailsignup" required>
                 <br>
                 <label for="passwdsignup">Password</label>
                 <br>
-                <input type="password" name="passwdsignup">
+                <input type="password" name="passwdsignup" required>
                 <br>
                 <input type="submit" value="Sign Up" class="submit">
                 <br>
@@ -91,11 +91,11 @@
                 <h3>Log In</h3>
                 <label for="maillogin">Email</label>
                 <br>
-                <input type="text" name="maillogin">
+                <input type="text" name="maillogin" required>
                 <br>
                 <label for="passwdlogin">Password</label>
                 <br>
-                <input type="password" name="passwdlogin">
+                <input type="password" name="passwdlogin" required>
                 <br>
                 <input type="submit" value="Log In" class="submit">
                 <br>
