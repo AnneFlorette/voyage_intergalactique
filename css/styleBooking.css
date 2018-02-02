@@ -1,0 +1,141 @@
+@font-face {
+    font-family: "Space Age";
+	src: url('space_age.ttf');
+   }
+@font-face{
+    font-family: "Sansation";
+    src: url('Sansation_regular.ttf');
+}
+
+:focus{
+    outline: none;
+}
+
+body{
+    background-image: url(../img/univers_8.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: 0px;
+    color: #ffffff;
+    font-family: "Sansation";
+}
+
+#top{
+    display: flex;
+    flex-direction: row;
+}
+
+#logo{
+    margin: 0px;
+}
+
+img{
+    width: 10vh;
+    float: left;
+    margin: 3vh;
+}
+
+
+nav{
+    background: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+ul{
+    margin-top: 0px;
+}
+
+li{
+    display: inline-block;
+    line-height: 3em;
+    color: #000000;
+    font-size: 12px;
+    width: 160px;
+    height: 36px;
+    border-radius: 16px;
+    font-family: "Space Age";
+    background: #ffffff;
+    margin: 16px;
+    border: none;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+#submit:Hover,
+li:Hover {
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+
+#submit:focus,
+li:focus {
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+}
+
+h1{
+    font-family: "Space Age";
+    font-size: 3vw;
+}
+
+#content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: white;
+}
+
+#resume,
+#booking{
+    background-color: #1b395f8f;
+    border-radius: 18px;
+    margin: 0px 15px;
+    padding: 26px;
+}
+
+#resume{
+    width: 50%;
+}
+
+#booking{
+    width: 30%;
+}
+
+h3{
+    margin-top: 0px;
+}
+
+select,
+input{
+    margin: 6px;
+    padding: 3px;
+    height: 20px;
+    width: 200px;
+    border-radius: 6px;
+    font-size: 12px;
+    border: none;
+    background: #ffffff7a;
+    box-shadow: 2px 2px 5px #000000;
+    font-family: "Sansation";
+}
+
+#submit{
+    font-family: "Space Age";
+    font-size: 1em;
+    background: #ffffff;
+    width: 200px;
+    height: 30px;
+    margin: 16px 50px;
+    border: none;
+    border-radius: 28px;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
