@@ -137,4 +137,8 @@ li:focus,
     box-shadow: 2px 3px 4px #ffffff6b;
 }
 
-
+input:invalid{
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+}

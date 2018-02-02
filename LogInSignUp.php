@@ -7,7 +7,8 @@
     if (isset($_POST['mailsignup']) && htmlspecialchars($_POST['mailsignup']) != "" &&
         isset($_POST['passwdsignup']) && htmlspecialchars($_POST['passwdsignup']) != "" &&
         isset($_POST['last_name']) && htmlspecialchars($_POST['last_name']) != "" &&
-        isset($_POST['first_name']) && htmlspecialchars($_POST['first_name']) != "") {
+        isset($_POST['first_name']) && htmlspecialchars($_POST['first_name']) != "" &&
+        htmlspecialchars($_POST['passwdsignupVerif']) == htmlspecialchars($_POST['passwdsignup'])) {
         $mail = htmlspecialchars($_POST['mailsignup']);
         $passwd = htmlspecialchars($_POST['passwdsignup']);
         $last_name = htmlspecialchars($_POST['last_name']);
@@ -76,11 +77,15 @@
                 <br>
                 <label for="mailsignup">Email</label>
                 <br>
-                <input type="text" name="mailsignup" required>
+                <input type="email" name="mailsignup" required>
                 <br>
                 <label for="passwdsignup">Password</label>
                 <br>
                 <input type="password" name="passwdsignup" required>
+                <br>
+                <label for="passwdsignupVerif">Password Check</label>
+                <br>
+                <input type="password" name="passwdsignupVerif" required>
                 <br>
                 <input type="submit" value="Sign Up" class="submit">
                 <br>
@@ -91,7 +96,7 @@
                 <h3>Log In</h3>
                 <label for="maillogin">Email</label>
                 <br>
-                <input type="text" name="maillogin" required>
+                <input type="email" name="maillogin" required>
                 <br>
                 <label for="passwdlogin">Password</label>
                 <br>
