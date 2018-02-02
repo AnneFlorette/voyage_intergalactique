@@ -1,3 +1,10 @@
+<?php
+
+include fonctions.php;
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
