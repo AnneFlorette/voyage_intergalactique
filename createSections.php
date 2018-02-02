@@ -14,7 +14,6 @@
         }
         $str .= "   ><div class='left'><h4>" . $travel['travel_destination'] . "</h4>
                     <p>" . $travel['travel_description'] . "</p>
-                    <p>Number of places: " . $travel['travel_places'] . "</p>
                     <button class='booking'>Book this trip</button>
                     </div>
                     </section>";
