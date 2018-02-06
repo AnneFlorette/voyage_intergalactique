@@ -3,7 +3,7 @@
     include("fonctions.php");
 
     $bd_log = getPDO();
-    $travels = $bd_log -> query("SELECT * FROM travel") -> fetchall(PDO::FETCH_ASSOC);
+    $travels = $bd_log -> query("SELECT * FROM TRAVELPRES") -> fetchall(PDO::FETCH_ASSOC);
 
     $index = 0;
     foreach($travels as $travel){
@@ -12,8 +12,9 @@
         if ($index === 0){
             $str .= "id=first_planete";
         }
-        $str .= "   ><div class='left'><h4>" . $travel['travel_destination'] . "</h4>
-                    <p>" . $travel['travel_description'] . "</p>
+        $str .= "   ><div class='left'><h4>" . $travel['travelpres_destination'] . "</h4>
+                    <p>" . $travel['travelpres_description'] . "</p>
+                    <p>" . $travel['travelpres_description'] . "</p>
                     <button class='booking'>Book this trip</button>
                     </div>
                     </section>";

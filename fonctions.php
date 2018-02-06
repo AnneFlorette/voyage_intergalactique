@@ -4,7 +4,7 @@
 //choppe la BDD
     function getPDO(){
         try{
-            return new PDO('mysql:host=sql11.freesqldatabase.com;dbname=sql11218946;charset=utf8', 'sql11218946', 'E2JMCvThBA');
+            return new PDO('mysql:host=sql11.freesqldatabase.com;dbname=sql11219823;charset=utf8', 'sql11219823', 'gt54QLxKBh');
         }
         catch(Exception $err){
             die("Debug: problème de bdd\n" . $err);
