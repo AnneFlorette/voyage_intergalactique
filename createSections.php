@@ -8,13 +8,13 @@
     $index = 0;
     foreach($travels as $travel){
         $str = "";
-        $str .= "  <section class='planete' style='background-image: url(". $travel['travel_img_url'] .");' ";
+        $str .= "  <section class='planete' style='background-image: url(". $travel['travelpres_img_url'] .");' ";
         if ($index === 0){
             $str .= "id=first_planete";
         }
         $str .= "   ><div class='left'><h4>" . $travel['travelpres_destination'] . "</h4>
                     <p>" . $travel['travelpres_description'] . "</p>
-                    <p>" . $travel['travelpres_description'] . "</p>
+                    <p>" . $travel['travelpres_destination_time'] . "</p>
                     <button class='booking'>Book this trip</button>
                     </div>
                     </section>";
