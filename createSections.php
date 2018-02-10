@@ -14,7 +14,7 @@
         }
         $str .= "   ><div class='left'><h4>" . $travel['travelpres_destination'] . "</h4>
                     <p>" . $travel['travelpres_description'] . "</p>
-                    <p>" . $travel['travelpres_destination_time'] . "</p>
+                    <p>" . $travel['travelpres_destination_time'] . "H</p>
                     <button class='booking'>Book this trip</button>
                     </div>
                     </section>";

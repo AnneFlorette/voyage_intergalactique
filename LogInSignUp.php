@@ -30,13 +30,10 @@
         isset($_POST['passwdlogin']) && htmlspecialchars($_POST['passwdlogin']) != "") {
         $mail = htmlspecialchars($_POST['maillogin']);
         $passwd = htmlspecialchars($_POST['passwdlogin']);
-        echo "<script>console.log( 'Debug Objects: ça marche1' );</script>";
         $logcrypt = cryptage($mail, $passwd);
-        echo "<script>console.log( 'Debug Objects: ça marche10' );</script>";
         $allowedlogin = verifConnexion($mail, $logcrypt);
         if($allowedlogin == 1){
             $name = getName($mail);
-            echo "<script>console.log( 'Debug Objects: ça marche100' );</script>";
             $_SESSION['name'] = $name;
             setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
         }

@@ -22,8 +22,10 @@
     function verifConnexion($mail, $passwd){
         $bdd = getPDO();
 
-        var_dump($passwd);
-        $requete = $bdd -> prepare("SELECT * FROM users WHERE user_mail = :mail AND user_password = :pass");
+        echo "<script>console.log( 'Debug Objects:" . $passwd . "' );</script>";
+
+
+        $requete = $bdd -> prepare("SELECT * FROM USERS WHERE user_mail = :mail AND user_password = :pass");
         $requete -> bindParam(":mail", $mail);
         $requete -> bindParam(":pass", $passwd);
         $requete -> execute();
@@ -38,7 +40,7 @@
 //Ecris dans la bdd si identifiants allowed (inscription)
     function writeLog($mail, $passcrypt, $last_name, $first_name){
         $bdd = getPDO();
-        $requete = $bdd->prepare('INSERT INTO users (user_mail, user_password, user_last_name, user_first_name) VALUES (:mail, :passcrypt, :last_name, :first_name)');
+        $requete = $bdd->prepare('INSERT INTO USERS (user_mail, user_password, user_last_name, user_first_name) VALUES (:mail, :passcrypt, :last_name, :first_name)');
         $requete-> bindParam(':mail', $mail);
         $requete-> bindParam(':passcrypt', $passcrypt);    
         $requete-> bindParam(':last_name', $last_name);
@@ -50,7 +52,7 @@
 //si return isvalid = 1 le mail est inutilisé donc bon
     function verifInscription($mail){
         $bdd = getPDO();
-        $mailtemp = $bdd->query('SELECT user_mail FROM users');
+        $mailtemp = $bdd->query('SELECT user_mail FROM USERS');
         $verifmail = $mailtemp->fetchAll(PDO::FETCH_ASSOC);  
         foreach($verifmail as $value){
             if($mail == $value['user_mail']){
@@ -63,7 +65,7 @@
 
     function getName($mail){
         $bdd = getPDO();
-        $name = $bdd->prepare('SELECT (user_last_name, user_first_name) FROM users WHERE mail = :mail');
+        $name = $bdd->prepare('SELECT (user_last_name, user_first_name) FROM USERS WHERE mail = :mail');
         $name-> bindParam(':mail', $mail);
         $name-> execute();
         $data = $name-> fetch(PDO::FETCH_ASSOC);

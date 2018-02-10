@@ -1,10 +1,5 @@
-<?php
+<?php include('fonctions.php') ?>
 
-include fonctions.php;
-
-
-
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
