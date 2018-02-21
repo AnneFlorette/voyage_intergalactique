@@ -21,10 +21,6 @@
 // return true = utilisateur existant et bon logs
     function verifConnexion($mail, $passwd){
         $bdd = getPDO();
-
-        echo "<script>console.log( 'Debug Objects:" . $passwd . "' );</script>";
-
-
         $requete = $bdd -> prepare("SELECT * FROM USERS WHERE user_mail = :mail AND user_password = :pass");
         $requete -> bindParam(":mail", $mail);
         $requete -> bindParam(":pass", $passwd);
@@ -40,25 +36,25 @@
 //Ecris dans la bdd si identifiants allowed (inscription)
     function writeLog($mail, $passCrypt, $lastName, $firstName){
         $bdd = getPDO();
-        $requete = $bdd->prepare('INSERT INTO USERS (user_mail, user_password, user_last_name, user_first_name) VALUES (:mail, :passcrypt, :last_name, :first_name)');
+        $requete = $bdd -> prepare('INSERT INTO USERS (user_mail, user_password, user_last_name, user_first_name) VALUES (:mail, :passcrypt, :last_name, :first_name)');
         $requete-> bindParam(':mail', $mail);
         $requete-> bindParam(':passcrypt', $passCrypt);    
         $requete-> bindParam(':last_name', $lastName);
         $requete-> bindParam(':first_name', $firstName);
-        $requete-> execute();      
+        $requete-> execute();
     }
 
 //Vérifie si le mail n'est pas déjà utilisé
 //si return isvalid = true le mail est inutilisé donc bon
     function verifInscription($mail){
         $bdd = getPDO();
-        $mailTemp = $bdd->query('SELECT user_mail FROM USERS');
-        $verifMail = $mailTemp->fetchAll(PDO::FETCH_ASSOC);  
-        foreach($verifMail as $value){
-            if($mail == $value['user_mail']){
-                return false;
-            }               
-        }
+        $request = $bdd->prepare("SELECT user_mail FROM USERS WHERE mail = :mail");
+        $request -> bindParam(":mail", $mail);
+        $request -> execute();
+        $verifMail = $request->fetchAll(PDO::FETCH_ASSOC);  
+        if($verifMail != null){
+            return false;
+        }               
         return true;
     }
 

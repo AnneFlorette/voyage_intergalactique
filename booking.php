@@ -1,6 +1,6 @@
 <?php 
     include 'functions.php';
-    session_start(); 
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
             <a href="index.php"><img src="img/logo_blanc.png" alt="Logo of the Far Away Company"></a>
         </div>
         <?php
-            changeNav(true, $_SESSION['ID']);
+            changeNav(checkSession($_SESSION['ID']), $_SESSION['ID']);
         ?>
     </section>
     <h1>Welcome aboard !</h1>

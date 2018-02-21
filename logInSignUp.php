@@ -1,6 +1,7 @@
 <?php
     include 'functions.php';
     session_start();
+    $_SESSION['ID'] = null;
 
     $allowedSignUp = true;
 
@@ -20,7 +21,7 @@
         if ($allowedSignUp == true){
             $passCrypt = cryptage($mail, $passwd);
             writeLog($mail, $passCrypt, $lastName, $firstName);
-            setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
+            //setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
             //header('location: LogInSignUp.html');
         }
     }
@@ -35,6 +36,7 @@
         $allowedLogin = verifConnexion($mail, $logCrypt);
         if($allowedLogin == true){
             $ID = getID($mail);
+            var_dump("coucou je suis un test");
             $_SESSION['ID'] = $ID;
             setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
         }
