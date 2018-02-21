@@ -13,7 +13,7 @@
         <nav>
             <ul>
                 <a href="index.php"><li id="home">Home</li></a>
-                <a href="ourdestinations.php"><li id="destination">Our destinations</li></a>
+                <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
                 <a href="logInSignUp.php"><li id="log">Log In/Sign Up</li></a>
             </ul>
         </nav>

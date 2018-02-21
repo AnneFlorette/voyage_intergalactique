@@ -15,8 +15,8 @@
         <nav>
             <ul>
                 <a href="index.php"><li id="home">Home</li></a>
-                <a href="ourdestinations.php"><li id="destination">Our destinations</li></a>
-                <a href="ourcompany.php"><li id="company">Our company</li></a>
+                <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
+                <a href="ourCompany.php"><li id="company">Our Company</li></a>
                 <a href="logInSignUp.php"><li id="log">Log In/Sign Up</li></a>
             </ul>
         </nav>
@@ -27,25 +27,25 @@
         <div id="resume">
             <h3>Name of the planet</h3>
             <br>
-            <div id="trip resume">Trip's resume</div>
-            <div id="trip info"> availables places <br> date of trip</div>
+            <div id="tripResume">Trip's resume</div>
+            <div id="tripInfo"> availables places <br> date of trip</div>
             <div id="opinion">User's Opinion</div>
         </div>
         <div id="booking">
             <h3>Book a trip</h3>
             <br>
             <form action="" method="POST">
-                <label for="nbadults">Number of adults : </label>
+                <label for="nbAdults">Number of adults : </label>
                 <br>
-                <input type="number" name="nbadults" required>
+                <input type="number" name="nbAdults" required>
                 <br>           
-                <label for="nbchildren">Number of children : </label>
+                <label for="nbChildren">Number of children : </label>
                 <br>
-                <input type="number" name="nbchildren" required>
+                <input type="number" name="nbChildren" required>
                 <br>
-                <label for="tripchose">Chose your trip : </label>
+                <label for="tripChose">Chose your trip : </label>
                 <br>
-                <select name="tripdate" id="tripdate" required> 
+                <select name="tripDate" id="tripDate" required> 
                     <option value="tripID"> Date of the trip in database </option>
                 </select>
                 <br>

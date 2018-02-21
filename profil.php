@@ -1,4 +1,4 @@
-<?php include('fonctions.php') ?>
+<?php include('functions.php') ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,14 +19,14 @@
         <nav>
             <ul>
                 <a href="index.php"><li id="home">Home</li></a>
-                <a href="ourdestinations.php"><li id="destination">Our destinations</li></a>
-                <a href="ourcompany.php"><li id="log">Our company</li></a>
+                <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
+                <a href="ourCompany.php"><li id="log">Our Company</li></a>
             </ul>
         </nav>
         <!-- Message de bienvenue à l'utilisateur (avec son $first_name) -->
     </section>
     <div>
-        <h3>Bienvenue <?php echo 'user' ?> ! </h3>
+        <h3>Welcome <?php echo 'user' ?> ! </h3>
     </div>
     <section id="user">
         <div id="information">

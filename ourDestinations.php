@@ -14,7 +14,7 @@
         <nav>
             <ul>
                 <a href="index.php"><li id="home">Home</li></a>
-                <a href="ourcompany.php"><li id="company">Our company</li></a>
+                <a href="ourCompany.php"><li id="company">Our Company</li></a>
                 <a href="logInSignUp.php"><li id="log">Log In/Sign Up</li></a>
             </ul>
         </nav>
@@ -28,7 +28,7 @@
             </p>
         </div>
         <div id="scrollBox">
-            <a href="#first_planete"><button id="scroll"><i id="iconScroll" class="material-icons">keyboard_arrow_down</i></button></a>
+            <a href="#firstPlanete"><button id="scroll"><i id="iconScroll" class="material-icons">keyboard_arrow_down</i></button></a>
         </div>
         
     </section>

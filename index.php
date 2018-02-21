@@ -19,8 +19,8 @@
         <p id="caption">Go deeper in Space</p>
     </div>
     <div id="buttonBox">
-        <a href="ourdestinations.php"><button id="discoverTrip">Our Destinations</button></a>
-        <a href="ourcompany.php"><button id="ourCompany">Our company</button></a>
+        <a href="ourDestinations.php"><button id="discoverTrip">Our Destinations</button></a>
+        <a href="ourCompany.php"><button id="ourCompany">Our Company</button></a>
     </div>
     
 </body>
