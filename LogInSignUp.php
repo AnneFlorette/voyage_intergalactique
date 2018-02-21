@@ -1,7 +1,7 @@
 <?php
     include 'fonctions.php';
 
-    $allowedsignup = 1;
+    $allowedsignup = true;
 
 //verif inscription
     if (isset($_POST['mailsignup']) && htmlspecialchars($_POST['mailsignup']) != "" &&
@@ -16,7 +16,7 @@
 
         $allowedsignup = verifInscription($mail);
 
-        if ($allowedsignup == 1){
+        if ($allowedsignup == true){
             $passcrypt = cryptage($mail, $passwd);
             writeLog($mail, $passcrypt, $last_name, $first_name);
             setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
@@ -24,7 +24,7 @@
         }
     }
 
-    $allowedlogin = 0;
+    $allowedlogin = false;
 //verif connexion
     if (isset($_POST['maillogin']) && htmlspecialchars($_POST['maillogin']) != "" &&
         isset($_POST['passwdlogin']) && htmlspecialchars($_POST['passwdlogin']) != "") {
@@ -32,7 +32,7 @@
         $passwd = htmlspecialchars($_POST['passwdlogin']);
         $logcrypt = cryptage($mail, $passwd);
         $allowedlogin = verifConnexion($mail, $logcrypt);
-        if($allowedlogin == 1){
+        if($allowedlogin == true){
             $name = getName($mail);
             $_SESSION['name'] = $name;
             setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);

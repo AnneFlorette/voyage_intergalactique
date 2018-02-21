@@ -4,7 +4,7 @@
 //choppe la BDD
     function getPDO(){
         try{
-            return new PDO('mysql:host=sql11.freesqldatabase.com;dbname=sql11219823;charset=utf8', 'sql11219823', 'gt54QLxKBh');
+            return new PDO('mysql:host=sql11.freesqldatabase.com;dbname=id4821353_faraway;charset=utf8', 'id4821353_farawayintergalactique', 'Farawayinter');
         }
         catch(Exception $err){
             die("Debug: problème de bdd\n" . $err);
@@ -31,9 +31,9 @@
         $requete -> execute();
         $data = $requete -> fetchall(PDO::FETCH_ASSOC);
         if ($data != null){
-            return 1;
+            return true;
         } else{
-            return 2;
+            return false;
         }
     }
 
@@ -56,10 +56,10 @@
         $verifmail = $mailtemp->fetchAll(PDO::FETCH_ASSOC);  
         foreach($verifmail as $value){
             if($mail == $value['user_mail']){
-                return 2;
+                return false;
             }               
         }
-        return 1;
+        return true;
     }
 
 
