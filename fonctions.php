@@ -4,7 +4,7 @@
 //choppe la BDD
     function getPDO(){
         try{
-            return new PDO('mysql:host=sql11.freesqldatabase.com;dbname=id4821353_faraway;charset=utf8', 'id4821353_farawayintergalactique', 'Farawayinter');
+            return new PDO('mysql:host=localhost;dbname=id4821353_faraway;charset=utf8', 'id4821353_farawayintergalactique', 'Farawayinter');
         }
         catch(Exception $err){
             die("Debug: problème de bdd\n" . $err);
@@ -18,7 +18,7 @@
     }
 
 //Vérifie que l'email existe et que le mot de passe correspond
-// return 1 = utilisateur existant et bon logs
+// return true = utilisateur existant et bon logs
     function verifConnexion($mail, $passwd){
         $bdd = getPDO();
 
@@ -61,7 +61,6 @@
         }
         return true;
     }
-
 
     function getName($mail){
         $bdd = getPDO();
