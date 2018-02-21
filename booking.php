@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+    include 'functions.php';
+    session_start(); 
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,14 +17,9 @@
         <div id="logo">    
             <a href="index.php"><img src="img/logo_blanc.png" alt="Logo of the Far Away Company"></a>
         </div>
-        <nav>
-            <ul>
-                <a href="index.php"><li id="home">Home</li></a>
-                <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
-                <a href="ourCompany.php"><li id="company">Our Company</li></a>
-                <a href="logInSignUp.php"><li id="log">Log In/Sign Up</li></a>
-            </ul>
-        </nav>
+        <?php
+            changeNav(true, $_SESSION['ID']);
+        ?>
     </section>
     <h1>Welcome aboard !</h1>
     <section id="content">

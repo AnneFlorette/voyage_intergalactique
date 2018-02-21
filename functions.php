@@ -63,17 +63,17 @@
     }
 
 //retourne le nom dans la bdd
-    function getName($mail){
+    function getFirstName($ID){
         $bdd = getPDO();
-        $name = $bdd->prepare('SELECT (user_last_name, user_first_name) FROM USERS WHERE user_mail = :mail');
-        $name-> bindParam(':mail', $mail);
+        $name = $bdd->prepare('SELECT user_first_name FROM USERS WHERE user_ID = :ID');
+        $name-> bindParam(':ID', $ID);
         $name-> execute();
         $data = $name-> fetch(PDO::FETCH_ASSOC);
-        $nameTemp = $data['user_last_name']. ' ' .$data['user_first_name'];
+        $nameTemp = $data['user_first_name'];
         return $nameTemp;
     }
 
-
+//retourne l'ID de l'utilisateur
     function getID($mail){
         $bdd = getPDO();
         $ID = $bdd->prepare('SELECT user_ID FROM USERS WHERE user_mail = :mail');
@@ -82,5 +82,44 @@
         $data = $ID-> fetch(PDO::FETCH_ASSOC);
         $IDTemp = $data['user_ID'];
         return $IDTemp;
+    }
+
+//vérification Session en cours
+    function checkSession($ID){
+        if($ID == null){
+            return false;
+        }
+        return true;
+    }
+
+
+    function changeNav($bool, $ID){
+        if($bool){
+            $firstName = getFirstName($ID);
+            echo '  <nav>
+                        <ul>
+                            <a href="index.php"><li id="home">Home</li></a>
+                            <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
+                            <a href="ourCompany.php"><li id="company">Our Company</li></a>
+                            <li id="profil">' .$firstName. '
+                                <ul id="subNav">
+                                    <li class="subItem">Profil</li>
+                                    <li class="subItem">Log Out</li>
+                                </ul>
+                            </li>
+                        </ul> 
+                    </nav>
+            ';
+        }else{
+            echo '  <nav>
+                        <ul>
+                            <a href="index.php"><li id="home">Home</li></a>
+                            <a href="ourDestinations.php"><li id="log">Our Destinations</li></a>
+                            <a href="ourCompany.php"><li id="company">Our Company</li></a>
+                            <a href="logInSignUp.php"><li id="log">Log In / Sign Up</li></a>
+                        </ul>
+                    </nav>
+            ';
+        }
     }
 ?>
