@@ -49,7 +49,7 @@
     }
 
 //Vérifie si le mail n'est pas déjà utilisé
-//si return isvalid = 1 le mail est inutilisé donc bon
+//si return isvalid = true le mail est inutilisé donc bon
     function verifInscription($mail){
         $bdd = getPDO();
         $mailTemp = $bdd->query('SELECT user_mail FROM USERS');
@@ -62,13 +62,25 @@
         return true;
     }
 
+//retourne le nom dans la bdd
     function getName($mail){
         $bdd = getPDO();
-        $name = $bdd->prepare('SELECT (user_last_name, user_first_name) FROM USERS WHERE mail = :mail');
+        $name = $bdd->prepare('SELECT (user_last_name, user_first_name) FROM USERS WHERE user_mail = :mail');
         $name-> bindParam(':mail', $mail);
         $name-> execute();
         $data = $name-> fetch(PDO::FETCH_ASSOC);
         $nameTemp = $data['user_last_name']. ' ' .$data['user_first_name'];
         return $nameTemp;
+    }
+
+
+    function getID($mail){
+        $bdd = getPDO();
+        $ID = $bdd->prepare('SELECT user_ID FROM USERS WHERE user_mail = :mail');
+        $ID-> bindParam(':mail', $mail);
+        $ID-> execute();
+        $data = $ID-> fetch(PDO::FETCH_ASSOC);
+        $IDTemp = $data['user_ID'];
+        return $IDTemp;
     }
 ?>
