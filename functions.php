@@ -162,7 +162,7 @@ include 'configBdd.php';
            $str .= "   ><div class='left'><h4>" . $travel['travelpres_destination'] . "</h4>
                        <p>" . $travel['travelpres_description'] . "</p>
                        <p>" . $travel['travelpres_destination_time'] . "H</p>
-                       <button class='booking'>Book this trip</button>
+                       <button onclick=\"window.location.href='booking.php'\" class='booking'>Book this trip</button>
                        </div>
                        </section>";
            echo $str;
