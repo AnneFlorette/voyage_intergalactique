@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+    include 'functions.php';
+    session_start(); 
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -13,13 +16,11 @@
 </head>
 <body>
     <section id="front">
-        <nav>
-            <ul>
-                <a href="index.php"><li id="home">Home</li></a>
-                <a href="ourCompany.php"><li id="company">Our Company</li></a>
-                <a href="logInSignUp.php"><li id="log">Log In/Sign Up</li></a>
-            </ul>
-        </nav>
+        
+        <?php 
+            changeNav();
+        ?>  
+
         <div id="titleBox">
             <a href="index.php"><h1>Far Away</h1></a>
             <p id="caption">Go deeper in Space</p>
@@ -35,7 +36,7 @@
         
     </section>
 
-    <?php include('createSections.php') ?>
+    <?php createSections(); ?>
 
 </body>
 </html>

@@ -1,10 +1,14 @@
 <?php
 
+include 'configBdd.php';
+
     const KEY = "chfporndjzysthvlzpdbj25vfhg";
 //choppe la BDD
     function getPDO(){
+        global $login;
+        global $pass;
         try{
-            return new PDO('mysql:host=localhost;dbname=id4821353_faraway;charset=utf8', 'id4821353_farawayintergalactique', 'Farawayinter');
+            return new PDO('mysql:host=localhost;dbname=bdd_faraway;charset=utf8', $login, $pass);
         }
         catch(Exception $err){
             die("Debug: problème de bdd\n" . $err);
@@ -35,12 +39,12 @@
 
 //Ecris dans la bdd si identifiants allowed (inscription)
     function writeLog($mail, $passCrypt, $lastName, $firstName){
-        $bdd = getPDO();
-        $requete = $bdd -> prepare('INSERT INTO USERS (user_mail, user_password, user_last_name, user_first_name) VALUES (:mail, :passcrypt, :last_name, :first_name)');
+        $bdd = getPDO();    
+        $requete = $bdd-> prepare("INSERT INTO USERS (user_mail, user_password, user_first_name, user_last_name) VALUES (:mail, :passcrypt, :first_name, :last_name)");
         $requete-> bindParam(':mail', $mail);
         $requete-> bindParam(':passcrypt', $passCrypt);    
-        $requete-> bindParam(':last_name', $lastName);
         $requete-> bindParam(':first_name', $firstName);
+        $requete-> bindParam(':last_name', $lastName);
         $requete-> execute();
     }
 
@@ -81,17 +85,17 @@
     }
 
 //vérification Session en cours
-    function checkSession($ID){
-        if($ID == null){
-            return false;
+    function checkSession(){
+        if(isset($_SESSION['ID']) && $_SESSION['ID'] !== ''){
+            return true;
         }
-        return true;
+        return false;
     }
 
-
-    function changeNav($bool, $ID){
-        if($bool){
-            $firstName = getFirstName($ID);
+//change le menu dynamiquement 
+    function changeNav(){
+        if(checkSession()){
+            $firstName = getFirstName($_SESSION['ID']);
             echo '  <nav>
                         <ul>
                             <a href="index.php"><li id="home">Home</li></a>
@@ -99,8 +103,8 @@
                             <a href="ourCompany.php"><li id="company">Our Company</li></a>
                             <li id="profil">' .$firstName. '
                                 <ul id="subNav">
-                                    <li class="subItem">Profil</li>
-                                    <li class="subItem">Log Out</li>
+                                    <a href="profil.php"><li class="subItem">Profil</li></a>
+                                    <a href="logOut.php"><li class="subItem">Log Out</li></a>
                                 </ul>
                             </li>
                         </ul> 
@@ -118,4 +122,50 @@
             ';
         }
     }
+
+    function changeNavIndex(){
+        if(checkSession()){
+            $firstName = getFirstName($_SESSION['ID']);
+            echo '  <nav>
+                        <ul>
+                            <li id="profil">' .$firstName. '
+                                <ul id="subNav">
+                                    <a href="profil.php"><li class="subItem">Profil</li></a>
+                                    <a href="logOut.php"><li class="subItem">Log Out</li></a>
+                                </ul>
+                            </li>
+                        </ul> 
+                    </nav>
+            ';
+        }else{
+            echo '  <nav>
+                        <ul>
+                            <a href="logInSignUp.php"><li id="log">Log In / Sign Up</li></a>
+                        </ul>
+                    </nav>
+            ';
+        }
+    }
+
+//Création de sections pour la page ourDestinations.php
+    function createSections(){
+        $bd_log = getPDO();
+       $travels = $bd_log -> query("SELECT * FROM TRAVELPRES") -> fetchall(PDO::FETCH_ASSOC);
+
+       $index = 0;
+       foreach($travels as $travel){
+           $str = "";
+           $str .= "  <section class='planete' style='background-image: url(". $travel['travelpres_img_url'] .");' ";
+           if ($index === 0){
+               $str .= "id=firstPlanete";
+           }
+           $str .= "   ><div class='left'><h4>" . $travel['travelpres_destination'] . "</h4>
+                       <p>" . $travel['travelpres_description'] . "</p>
+                       <p>" . $travel['travelpres_destination_time'] . "H</p>
+                       <button class='booking'>Book this trip</button>
+                       </div>
+                       </section>";
+           echo $str;
+       }
+   }
 ?>

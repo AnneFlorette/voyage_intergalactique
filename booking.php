@@ -18,7 +18,7 @@
                 <a href="index.php"><img src="img/logo_blanc.png" alt="Logo of the Far Away Company"></a>
             </div>
             <?php
-                changeNav(checkSession($_SESSION['ID']), $_SESSION['ID']);
+                changeNav();
             ?>
         </section>
         <h1>Welcome aboard !</h1>

@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+    include 'functions.php';
+    session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,11 +14,9 @@
     <title>Far Away</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <a href="logInSignUp.php"><li id="log">Log In/Sign Up</li></a>
-        </ul>
-    </nav>
+    <?php
+        changeNavIndex();
+    ?>
     <div id="titleBox">
         <h1>Far Away</h1>
         <p id="caption">Go deeper in Space</p>

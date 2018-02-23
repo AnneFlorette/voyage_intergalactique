@@ -1,5 +1,5 @@
 <?php 
-    include('functions.php') 
+    include 'functions.php'; 
     session_start();
 ?>
 
@@ -19,13 +19,9 @@
             <a href="index.php"><img src="img/logo_blanc.png" alt="Logo of the Far Away Company"></a>
         </div>
         <!-- Menu à droite -->
-        <nav>
-            <ul>
-                <a href="index.php"><li id="home">Home</li></a>
-                <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
-                <a href="ourCompany.php"><li id="log">Our Company</li></a>
-            </ul>
-        </nav>
+        <?php 
+            changeNav();
+        ?>
         <!-- Message de bienvenue à l'utilisateur (avec son $first_name) -->
     </section>
     <div>

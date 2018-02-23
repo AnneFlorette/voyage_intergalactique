@@ -21,7 +21,7 @@
         if ($allowedSignUp == true){
             $passCrypt = cryptage($mail, $passwd);
             writeLog($mail, $passCrypt, $lastName, $firstName);
-            //header('location: LogInSignUp.html');
+            header('location: profil.php');
         }
     }
 
@@ -37,6 +37,7 @@
             $ID = getID($mail);
             $_SESSION['ID'] = $ID;
             setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
+            header('location: profil.php');
         }
     }
 ?>
@@ -51,13 +52,10 @@
     <title>Log In - Sign Up</title>
 </head>
 <body>
-        <nav>
-            <ul>
-                <a href="index.php"><li id="home">Home</li></a>
-                <a href="ourCompany.php"><li id="company">Our Company</li></a>
-                <a href="ourDestinations.php"><li id="log">Our Destinations</li></a>
-            </ul>
-        </nav>
+    <!-- Création du menu dynamiquement -->
+    <?php 
+        changeNav();
+    ?>
         <div id="titleBox">
             <a href="index.php"><h1>Far Away</h1></a>
         </div>

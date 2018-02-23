@@ -11,7 +11,7 @@
     outline: none;
 }
 
-body{
+body {
     background-image: url(../img/univers_4.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -20,7 +20,7 @@ body{
     color: #000000;
 }
 
-#front{
+#front {
     margin: 0px;
     height: 100vh;
     display: flex;
@@ -28,19 +28,24 @@ body{
     align-items: center;
 }
 
-nav{
+nav {
     background: none;
     position: fixed;
-    top: 0;
+    top: 1em;
     right: 0;
 }
 
-ul{
-    margin-top: 0px;
+a {
+    text-decoration: none;
 }
 
-li{
-    display: inline-block;
+ul {
+    margin-top: 0px;
+    display: flex;
+}
+
+li {
+    list-style: none;
     line-height: 3em;
     color: #000000;
     font-size: 12px;
@@ -49,23 +54,26 @@ li{
     border-radius: 16px;
     font-family: "Space Age";
     background: #ffffff;
-    margin: 16px;
+    margin: 0 16px;
     border: none;
     box-shadow: 2px 3px 4px #000000;
     opacity: 0.80;
 }
 
-li:Hover {
-    color: white;
-    background: #1b395f;
-    box-shadow: 2px 3px 4px #ffffff6b;
-    cursor: pointer;
+#subNav {
+    display: none;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
 }
 
-li:focus {
-    color: white;
-    background: #1b395f;
-    box-shadow: 2px 3px 4px #ffffff6b;
+#profil:hover #subNav {
+    display: flex;
+    flex-direction: column;
+}
+
+.subItem {
+    margin: 16px 16px 0 0;
 }
 
 #titleBox{
@@ -74,10 +82,6 @@ li:focus {
     display: flex;
     flex-direction: column;
     margin-bottom: 200px;
-}
-
-a{
-    text-decoration: none;
 }
 
 h1{
