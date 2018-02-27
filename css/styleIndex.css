@@ -7,8 +7,8 @@
     outline: none;
 }
 
-html, body {
-    margin: 0;
+html {
+    margin: 0px;
     height: 100%;
     overflow: hidden
 }
@@ -18,7 +18,7 @@ body{
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    width: 95vw;
+    width: 100%;
     text-align: center;
     margin: 0px;
 }
@@ -74,7 +74,7 @@ li {
 button{
     font-family: "Space Age";
     font-size: 20px;
-    background: #ffffff;
+    background-color: #ffffff88;
     width: 300px;
     height: 60px;
     margin: 16px;
@@ -132,12 +132,14 @@ h1{
     font-family: "Space Age";
     font-size: 15px;
     margin-top: 0px;
-    margin-right: 10%;
+    margin-right: 25%;
     color: white;
     align-self: flex-end;
 }
 
 #buttonBox{
+    width: 100%;
+    margin: auto;
     margin-top: 20vh;
     flex-direction: row;
 }
