@@ -39,20 +39,22 @@
                 <!-- PopUp pour modifier les informations -->
                 <div id="popUp">
                     <div class="popUp_block">
-                        <button><i id="clear" class="material-icons">clear</i></button>
-                        <label for="firstName">First Name</label>
-                        <br>
-                        <input type="text" name="firstName" class="input" autofocus required>
-                        <br>
-                        <label for="lastName">Last Name</label>
-                        <br>
-                        <input type="text" name="lastName" class="input" required>
-                        <br>
-                        <label for="mailSignUp">Email</label>
-                        <br>
-                        <input type="email" name="mailSignUp" class="input" required>
-                        <br>
-                        <input type="submit" value="Send Modifications">
+                        <button id="btnClear"><i id="clear" class="material-icons">clear</i></button>
+                        <form action="" method="POST">
+                            <label for="firstName">First Name</label>
+                            <br>
+                            <input type="text" name="firstName" class="input" value="<?php echo getFirstName($_SESSION['ID']) ?>" autofocus required>
+                            <br>
+                            <label for="lastName">Last Name</label>
+                            <br>
+                            <input type="text" name="lastName" class="input" value="<?php echo getLastName($_SESSION['ID']) ?>" required>
+                            <br>
+                            <label for="mailSignUp">Email</label>
+                            <br>
+                            <input type="email" name="mailSignUp" class="input" value="<?php echo getMail($_SESSION['ID']) ?>" required>
+                            <br>
+                            <input id="submit" type="submit" value="Send Modifications">
+                        </form>
                     </div>
                 </div>
         </div>
@@ -67,16 +69,16 @@
     </section>
 
     <script>
-        const btnPopUp = document.getElementById('btnPopUp').addEventListener('click', displayPopUp, false)
-        const btnClear = document.getElementbyId('clear').addEventListener('click', clearPopUp, false)
         const popUp = document.getElementById('popUp')
+        const btnPopUp = document.getElementById('btnPopUp').addEventListener('click', displayPopUp, false)
+        const btnClear = document.getElementById('btnClear').addEventListener('click', clearPopUp, false)
         
         function displayPopUp(){
             popUp.style.display = 'block'
         }
 
         function clearPopUp(){
-            popUp.style.display= 'none'
+            popUp.style.display = 'none'
         }
     </script>
 
