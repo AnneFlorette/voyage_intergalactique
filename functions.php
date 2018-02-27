@@ -73,6 +73,28 @@ include 'configBdd.php';
         return $nameTemp;
     }
 
+//retourne le nom dans la bdd
+    function getLastName($ID){
+        $bdd = getPDO();
+        $name = $bdd->prepare('SELECT user_last_name FROM USERS WHERE user_ID = :ID');
+        $name-> bindParam(':ID', $ID);
+        $name-> execute();
+        $data = $name-> fetch(PDO::FETCH_ASSOC);
+        $nameTemp = $data['user_last_name'];
+        return $nameTemp;
+    }
+
+//retourne le nom dans la bdd
+    function getMail($ID){
+        $bdd = getPDO();
+        $name = $bdd->prepare('SELECT user_mail FROM USERS WHERE user_ID = :ID');
+        $name-> bindParam(':ID', $ID);
+        $name-> execute();
+        $data = $name-> fetch(PDO::FETCH_ASSOC);
+        $mailTemp = $data['user_mail'];
+        return $mailTemp;
+    }
+
 //retourne l'ID de l'utilisateur
     function getID($mail){
         $bdd = getPDO();
