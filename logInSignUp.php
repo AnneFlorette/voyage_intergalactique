@@ -21,7 +21,7 @@
         if ($allowedSignUp == true){
             $passCrypt = cryptage($mail, $passwd);
             writeLog($mail, $passCrypt, $lastName, $firstName);
-            header('location: profil.php');
+            header('location: logInSignUp.php');
         }
     }
 

@@ -1,9 +1,11 @@
 html {
-    background-color: #000;
+    background-image: url(../img/univers_6.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     width: 100vw;
   }
   body{
-    /* height: 100%; */
     max-width: 95vw;
     top: 0px;
     bottom: 0px;
