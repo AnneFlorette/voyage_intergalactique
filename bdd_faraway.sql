@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1
+-- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Mar 27 Février 2018 à 10:37
--- Version du serveur :  5.7.14
--- Version de PHP :  7.0.10
+-- Client :  localhost
+-- Généré le :  Mar 27 Février 2018 à 11:06
+-- Version du serveur :  5.7.11
+-- Version de PHP :  5.6.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,30 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `bdd_faraway`
+-- Base de données :  `test`
 --
-
--- --------------------------------------------------------
-
---
--- Structure de la table `book`
---
-
-CREATE TABLE `book` (
-  `user_ID` int(11) NOT NULL,
-  `userbooking_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `relation2`
---
-
-CREATE TABLE `relation2` (
-  `userbooking_ID` int(11) NOT NULL,
-  `travel_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -54,7 +32,8 @@ CREATE TABLE `travel` (
   `travel_depart_date` date DEFAULT NULL,
   `travel_total_places` int(11) NOT NULL,
   `travel_remain_places` int(11) NOT NULL,
-  `travel_spaceship_type` char(25) NOT NULL
+  `travel_spaceship_type` char(25) NOT NULL,
+  `travelpres_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -68,7 +47,7 @@ CREATE TABLE `travelpres` (
   `travelpres_destination` char(25) DEFAULT NULL,
   `travelpres_img_url` varchar(255) DEFAULT NULL,
   `travelpres_description` varchar(255) DEFAULT NULL,
-  `travelpres_destination_time` int(11) DEFAULT NULL,
+  `travelpres_destination_time` time DEFAULT NULL,
   `travelpres_nbr_travel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -95,18 +74,9 @@ CREATE TABLE `users` (
   `user_first_name` char(25) DEFAULT NULL,
   `user_last_name` char(25) DEFAULT NULL,
   `user_mail` varchar(25) DEFAULT NULL,
-  `user_password` varchar(64) DEFAULT NULL,
+  `user_password` varchar(50) DEFAULT NULL,
   `user_admin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `users`
---
-
-INSERT INTO `users` (`user_ID`, `user_first_name`, `user_last_name`, `user_mail`, `user_password`, `user_admin`) VALUES
-(3, 'Bradley', 'Pirate', 'bradley@pirate.net', 'fafc3808dc42fb43186af445629a806f25baab5dc4f76e9a648525a4bb095156', NULL),
-(4, 'Bertille', 'Crochu', 'Bertillecrochu@gmail.com', '15697ac8af6ad06ccc7b92a69f681c8341f8e6805c4f212489a15767886547f3', NULL),
-(5, 'hugo', 'mouchel', 'azyuiop@gmail.com', '632a5f25a7702e48b8eb53c26f6b738d1673e661ed73a07fb2cf994326295d4f', NULL);
 
 -- --------------------------------------------------------
 
@@ -117,7 +87,9 @@ INSERT INTO `users` (`user_ID`, `user_first_name`, `user_last_name`, `user_mail`
 CREATE TABLE `usersbooking` (
   `userbooking_ID` int(11) NOT NULL,
   `userbooking_booking_date` date NOT NULL,
-  `userbooking_nbr_places` int(11) NOT NULL
+  `userbooking_nbr_places` int(11) NOT NULL,
+  `user_ID` int(11) NOT NULL,
+  `travel_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -125,24 +97,11 @@ CREATE TABLE `usersbooking` (
 --
 
 --
--- Index pour la table `book`
---
-ALTER TABLE `book`
-  ADD PRIMARY KEY (`user_ID`,`userbooking_ID`),
-  ADD KEY `FK_book_userbooking_ID` (`userbooking_ID`);
-
---
--- Index pour la table `relation2`
---
-ALTER TABLE `relation2`
-  ADD PRIMARY KEY (`userbooking_ID`,`travel_ID`),
-  ADD KEY `FK_relation2_travel_ID` (`travel_ID`);
-
---
 -- Index pour la table `travel`
 --
 ALTER TABLE `travel`
-  ADD PRIMARY KEY (`travel_ID`);
+  ADD PRIMARY KEY (`travel_ID`),
+  ADD KEY `FK_TRAVEL_travelpres_ID` (`travelpres_ID`);
 
 --
 -- Index pour la table `travelpres`
@@ -160,7 +119,9 @@ ALTER TABLE `users`
 -- Index pour la table `usersbooking`
 --
 ALTER TABLE `usersbooking`
-  ADD PRIMARY KEY (`userbooking_ID`);
+  ADD PRIMARY KEY (`userbooking_ID`),
+  ADD KEY `FK_USERSBOOKING_user_ID` (`user_ID`),
+  ADD KEY `FK_USERSBOOKING_travel_ID` (`travel_ID`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -175,12 +136,12 @@ ALTER TABLE `travel`
 -- AUTO_INCREMENT pour la table `travelpres`
 --
 ALTER TABLE `travelpres`
-  MODIFY `travelpres_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `travelpres_ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `usersbooking`
 --
@@ -191,18 +152,17 @@ ALTER TABLE `usersbooking`
 --
 
 --
--- Contraintes pour la table `book`
+-- Contraintes pour la table `travel`
 --
-ALTER TABLE `book`
-  ADD CONSTRAINT `FK_book_user_ID` FOREIGN KEY (`user_ID`) REFERENCES `users` (`user_ID`),
-  ADD CONSTRAINT `FK_book_userbooking_ID` FOREIGN KEY (`userbooking_ID`) REFERENCES `usersbooking` (`userbooking_ID`);
+ALTER TABLE `travel`
+  ADD CONSTRAINT `FK_TRAVEL_travelpres_ID` FOREIGN KEY (`travelpres_ID`) REFERENCES `travelpres` (`travelpres_ID`);
 
 --
--- Contraintes pour la table `relation2`
+-- Contraintes pour la table `usersbooking`
 --
-ALTER TABLE `relation2`
-  ADD CONSTRAINT `FK_relation2_travel_ID` FOREIGN KEY (`travel_ID`) REFERENCES `travel` (`travel_ID`),
-  ADD CONSTRAINT `FK_relation2_userbooking_ID` FOREIGN KEY (`userbooking_ID`) REFERENCES `usersbooking` (`userbooking_ID`);
+ALTER TABLE `usersbooking`
+  ADD CONSTRAINT `FK_USERSBOOKING_travel_ID` FOREIGN KEY (`travel_ID`) REFERENCES `travel` (`travel_ID`),
+  ADD CONSTRAINT `FK_USERSBOOKING_user_ID` FOREIGN KEY (`user_ID`) REFERENCES `users` (`user_ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
