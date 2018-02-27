@@ -45,7 +45,10 @@
         <div class="left">
             <h4>Our space ship</h4>
             <p id= "intro"> 
-                hello world! 
+                Our Space ship is equipped with the best innovative technologies in the galaxy. During your trip you will find everything you need because Far Away will provide you the comfort you deserve.
+                <br>
+                <br>
+                We do our best to make sure that your journey will be incredible and unforgettable. Staff members will be at your disposal through the entire trip.
             </p>
         </div> 
     </section>

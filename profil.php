@@ -25,7 +25,7 @@
         <!-- Message de bienvenue à l'utilisateur (avec son $first_name) -->
     </section>
     <div>
-        <h3>Welcome <?php echo 'user' ?> ! </h3>
+        <h3>Welcome <?php echo getFirstName($_SESSION['ID']) ?> ! </h3>
     </div>
     <section id="user">
         <div id="information">
