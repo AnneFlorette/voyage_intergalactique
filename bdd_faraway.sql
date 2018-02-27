@@ -74,7 +74,7 @@ CREATE TABLE `users` (
   `user_first_name` char(25) DEFAULT NULL,
   `user_last_name` char(25) DEFAULT NULL,
   `user_mail` varchar(25) DEFAULT NULL,
-  `user_password` varchar(50) DEFAULT NULL,
+  `user_password` varchar(64) DEFAULT NULL,
   `user_admin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
