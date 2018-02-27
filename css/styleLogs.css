@@ -126,12 +126,30 @@ h3{
 }
 
 form{
+    text-align: left;
 }
 
 label{
 }
 
-input{
+.input{
+    border: none;
+    width: 100%;
+    border-bottom: solid #ffffff 1px;
+    box-shadow: 0 4px 2px -2px #ffffff6b;
+    background-color: transparent;
+    color: #ffffff;
+    margin-bottom: 1em;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+    -webkit-transition-delay: 99999s;
+}
+
+/* input{
     margin: 6px;
     padding: 3px;
     height: 20px;
@@ -141,12 +159,12 @@ input{
     border: none;
     background: #ffffff7a;
     box-shadow: 2px 2px 5px #000000;
-}
+} */
 
 .submit{
     font-family: "Space Age";
     font-size: 14px;
-    background: #ffffff;
+    background-color: #ffffff;
     width: 120px;
     height: 30px;
     margin: 16px 50px;
@@ -166,12 +184,6 @@ li:Hover,
 
 li:focus,
 .submit:focus{
-    color: white;
-    background: #1b395f;
-    box-shadow: 2px 3px 4px #ffffff6b;
-}
-
-input:invalid{
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;

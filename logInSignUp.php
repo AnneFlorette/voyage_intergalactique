@@ -65,23 +65,23 @@
                 <h3>Sign Up</h3>
                 <label for="firstName">First Name</label>
                 <br>
-                <input type="text" name="firstName" autofocus required>
+                <input type="text" name="firstName" class="input" autofocus required>
                 <br>
                 <label for="lastName">Last Name</label>
                 <br>
-                <input type="text" name="lastName" required>
+                <input type="text" name="lastName" class="input" required>
                 <br>
                 <label for="mailSignUp">Email</label>
                 <br>
-                <input type="email" name="mailSignUp" required>
+                <input type="email" name="mailSignUp" class="input" required>
                 <br>
                 <label for="passwdSignUp">Password</label>
                 <br>
-                <input type="password" name="passwdSignUp" required>
+                <input type="password" name="passwdSignUp" class="input" required>
                 <br>
                 <label for="passwdSignUpVerif">Password Check</label>
                 <br>
-                <input type="password" name="passwdSignUpVerif" required>
+                <input type="password" name="passwdSignUpVerif" class="input" required>
                 <br>
                 <input type="submit" value="Sign Up" class="submit">
                 <br>
@@ -92,11 +92,11 @@
                 <h3>Log In</h3>
                 <label for="mailLogIn">Email</label>
                 <br>
-                <input type="email" name="mailLogIn" required>
+                <input type="email" name="mailLogIn" class="input" required>
                 <br>
                 <label for="passwdLogIn">Password</label>
                 <br>
-                <input type="password" name="passwdLogIn" required>
+                <input type="password" name="passwdLogIn" class="input" required>
                 <br>
                 <input type="submit" value="Log In" class="submit">
                 <br>
