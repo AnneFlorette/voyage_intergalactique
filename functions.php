@@ -16,8 +16,8 @@ include 'configBdd.php';
     }
 
 //il faudra peut etre enlever les '' autour de sha256
-    function cryptage($mail, $passwd){
-        $passCrypt = $mail.KEY.KEY.$passwd.KEY;
+    function cryptage($passwd){
+        $passCrypt = $passwd.KEY.KEY.$passwd.KEY;
         return hash('sha256', $passCrypt, false);
     }
 
