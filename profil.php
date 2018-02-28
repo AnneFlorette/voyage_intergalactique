@@ -18,7 +18,15 @@
 
 
     // Changement mot de passe
-
+        if  ((isset($_POST['currentPwd']) && $_POST['currentPwd'] != "") &&
+            (isset($_POST['newPwd']) && $_POST['newPwd'] != "") &&
+            (isset($_POST['checkNewPwd']) && $_POST['checkNewPwd'] != "")){
+            if  ((verifPwd($_SESSION['ID'], $_POST['currentPwd']) == true) && 
+                (htmlspecialchars($_POST['newPwd']) == htmlspecialchars($_POST['checkNewPwd']))){
+                $newPwd = htmlspecialchars($_POST['newPwd']);
+                modifPwd($_SESSION['ID'], $newPwd);
+            }
+        }
     // Suppression du compte
     if(isset($_POST['delete']) && $_POST['delete'] == "YES"){
         deleteAccount($_SESSION['ID']);
