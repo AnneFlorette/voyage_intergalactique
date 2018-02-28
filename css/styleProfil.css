@@ -55,7 +55,9 @@ ul {
     display: flex;
 }
 
-#btnPopUp,
+#btnPopUpInfo,
+#btnPopUpPassword,
+#btnPopUpDeleteAccount,
 #submit,
 li {
     list-style: none;
@@ -73,12 +75,16 @@ li {
     opacity: 0.80;
 }
 
-#btnPopUp,
+#btnPopUpInfo,
+#btnPopUpPassword,
+#btnPopUpDeleteAccount,
 #submit{
     width: 250px;
 }
 
-#btnPopUp:hover,
+#btnPopUpInfo:hover,
+#btnPopUpPassword:hover,
+#btnPopUpDeleteAccount:hover,
 #submit:hover,
 li:hover {
     color: white;
@@ -87,7 +93,9 @@ li:hover {
     cursor: pointer;
 }
 
-#btnPopUp:focus,
+#btnPopUpInfo:focus,
+#btnPopUpPassword:focus,
+#btnPopUpDeleteAccount:focus,
 #submit:focus,
 li:focus {
     color: white;
@@ -119,10 +127,20 @@ h3{
 #user{
     margin: auto;
     margin-top: 8vh; 
-    width: 50%;
+    width: 70%;
 }
 
-#popUp{
+#buttonBox{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around; 
+
+}
+
+#popUpInfo,
+#popUpPassword,
+#popUpDeleteAccount{
     display: none;
     position: fixed;
     top:0; right:0; bottom:0; left:0;
@@ -141,26 +159,18 @@ h3{
     border-radius: 10px;
 }
 
-#btnClear{
-    background-color: #dddcdc;
-    border-radius: 50%;
+#clearInfo,
+#clearPassword,
+#clearDeleteAccount{
     border: none;
-    margin: 0px;
-    width: 35px;
-    height: 35px;
     position : absolute;
     top : 0;
     right: 0;
-    display: flex;
-    align-items: center;
-}
-
-
-#clear{
-    color: #000000;
-    background-color: #dddcdc;
+    color: #ffffff;
+    background-color: transparent;
     margin: auto;
-    font-size: 18px;
+    font-size: 26px;
+    cursor: pointer;
 }
 
 #pastTrip,

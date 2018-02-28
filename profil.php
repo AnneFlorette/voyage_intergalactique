@@ -35,11 +35,16 @@
                 <p>First Name : <?php echo getFirstName($_SESSION['ID']) ?></p>
                 <p>Last Name : <?php echo getLastName($_SESSION['ID']) ?></p>
                 <p>Mail : <?php echo getMail($_SESSION['ID']) ?></p>
-                <button id="btnPopUp">Modify informations</button>
+                <div id="buttonBox">
+                    <button id="btnPopUpInfo">Modify informations</button>
+                    <button id="btnPopUpPassword">Modify password</button>
+                    <button id="btnPopUpDeleteAccount">Delete account</button>
+                </div>
+                
                 <!-- PopUp pour modifier les informations -->
-                <div id="popUp">
+                <div id="popUpInfo">
                     <div class="popUp_block">
-                        <button id="btnClear"><i id="clear" class="material-icons">clear</i></button>
+                        <i id="clearInfo" class="material-icons">clear</i>
                         <form action="" method="POST">
                             <label for="firstName">First Name</label>
                             <br>
@@ -57,6 +62,26 @@
                         </form>
                     </div>
                 </div>
+                <div id="popUpPassword">
+                    <div class="popUp_block">
+                        <i id="clearPassword" class="material-icons">clear</i>
+                        <form action="" method="POST">
+                            <label for="password">Password</label>
+                            <br>
+                            <input type="text" name="password" class="input" autofocus required>
+                            <br>
+                            <input id="submit" type="submit" value="Send Modifications">
+                        </form>
+                    </div>
+                </div>
+                <div id="popUpDeleteAccount">
+                    <div class="popUp_block">
+                        <i id="clearDeleteAccount" class="material-icons">clear</i>
+                        <form action="" method="POST">
+                            <p>Warning ! You're about to delete your account. Are you sure </p>
+                        </form>
+                    </div>
+                </div>
         </div>
     </section>
     <section id="myTrip">
@@ -69,15 +94,28 @@
     </section>
 
     <script>
-        const popUp = document.getElementById('popUp')
-        const btnPopUp = document.getElementById('btnPopUp').addEventListener('click', displayPopUp, false)
-        const btnClear = document.getElementById('btnClear').addEventListener('click', clearPopUp, false)
+        const popUpInfo = document.getElementById('popUpInfo')
+        const popUpPassword = document.getElementById('popUpPassword')
+        const popUpDeleteAccount = document.getElementById('popUpDeleteAccount')
+        const btnPopUpInfo = document.getElementById('btnPopUpInfo')
+        const btnPopUpPassword = document.getElementById('btnPopUpPassword')
+        const btnPopUpDeleteAccount = document.getElementById('btnPopUpDeleteAccount')
+        const iconClearInfo = document.getElementById('clearInfo')
+        const iconClearPassword = document.getElementById('clearPassword')
+        const iconClearDeleteAccount = document.getElementById('clearDeleteAccount')
         
-        function displayPopUp(){
+        btnPopUpInfo.addEventListener('click', function() {displayPopUp(popUpInfo)}, false)
+        btnPopUpPassword.addEventListener('click', function() {displayPopUp(popUpPassword)}, false)
+        btnPopUpDeleteAccount.addEventListener('click', function() {displayPopUp(popUpDeleteAccount)}, false)
+        iconClearInfo.addEventListener('click', function() {clearPopUp(popUpInfo)}, false)
+        iconClearPassword.addEventListener('click', function() {clearPopUp(popUpPassword)}, false)
+        iconClearDeleteAccount.addEventListener('click', function() {clearPopUp(popUpDeleteAccount)}, false)
+        
+        function displayPopUp(popUp){
             popUp.style.display = 'block'
         }
 
-        function clearPopUp(){
+        function clearPopUp(popUp){
             popUp.style.display = 'none'
         }
     </script>
