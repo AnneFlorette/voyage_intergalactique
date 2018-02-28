@@ -1,6 +1,31 @@
 <?php 
     include 'functions.php'; 
     session_start();
+
+    // Changement d'informations
+    if  ((isset($_POST['firstName']) && $_POST['firstName'] != "") &&
+        (isset($_POST['lastName']) && $_POST['lastName'] != "") &&
+        (isset($_POST['mail']) && $_POST['mail'] != "")){
+            $firstName = htmlspecialchars($_POST['firstName']);
+            $lastName = htmlspecialchars($_POST['lastName']);
+            $mail = htmlspecialchars($_POST['mail']);
+
+            modifData(($_SESSION['ID']), $firstName, $lastName, $mail);
+            echo "<script>popUpInfo.style.display = 'none'</script>";
+            echo'<meta http-equiv="refresh" content="0; URL=profil.php">';
+        }
+
+
+
+    // Changement mot de passe
+
+    // Suppression du compte
+    if(isset($_POST['delete']) && $_POST['delete'] == "YES"){
+        deleteAccount($_SESSION['ID']);
+        echo'<meta http-equiv="refresh" content="0; URL=logOut.php">';
+    } else if(isset($_POST['notDelete']) && $_POST['notDelete'] == "NO"){
+        echo "<script>popUpDeleteAccount.style.display = 'none'</script>";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -48,15 +73,15 @@
                         <form action="" method="POST">
                             <label for="firstName">First Name</label>
                             <br>
-                            <input type="text" name="firstName" class="input" value="<?php echo getFirstName($_SESSION['ID']) ?>" autofocus required>
+                            <input type="text" name="firstName" class="input" value="<?php echo getFirstName($_SESSION['ID']) ?>" max="40" autofocus required>
                             <br>
                             <label for="lastName">Last Name</label>
                             <br>
-                            <input type="text" name="lastName" class="input" value="<?php echo getLastName($_SESSION['ID']) ?>" required>
+                            <input type="text" name="lastName" class="input" value="<?php echo getLastName($_SESSION['ID']) ?>" max="40" required>
                             <br>
-                            <label for="mailSignUp">Email</label>
+                            <label for="mail">Email</label>
                             <br>
-                            <input type="email" name="mailSignUp" class="input" value="<?php echo getMail($_SESSION['ID']) ?>" required>
+                            <input type="email" name="mail" class="input" value="<?php echo getMail($_SESSION['ID']) ?>" max="64" required>
                             <br>
                             <input id="submit" type="submit" value="Send Modifications">
                         </form>
@@ -87,6 +112,8 @@
                         <i id="clearDeleteAccount" class="material-icons">clear</i>
                         <form action="" method="POST">
                             <p>Warning ! You're about to delete your account. Are you sure ?</p>
+                            <input type="submit" class="btnYesNo" name="delete" value="YES">
+                            <input type="submit" class="btnYesNo" name="notDelete" value="NO">
                         </form>
                     </div>
                 </div>

@@ -95,7 +95,7 @@ include 'configBdd.php';
 //suppression du compte
     function deleteAccount($ID){
         $bdd = getPDO();
-        $request = $bdd -> prepare("DELETE * FROM USERS WHERE user_ID = :ID");
+        $request = $bdd -> prepare("DELETE FROM USERS WHERE user_ID = :ID");
         $request -> bindParam(":ID", $ID);
         $request -> execute();
     }

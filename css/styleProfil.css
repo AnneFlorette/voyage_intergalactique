@@ -55,6 +55,7 @@ ul {
     display: flex;
 }
 
+.btnYesNo,
 #btnPopUpInfo,
 #btnPopUpPassword,
 #btnPopUpDeleteAccount,
@@ -75,6 +76,10 @@ li {
     opacity: 0.80;
 }
 
+.btnYesNo{
+    width: 60px;
+}
+
 #btnPopUpInfo,
 #btnPopUpPassword,
 #btnPopUpDeleteAccount,
@@ -82,6 +87,7 @@ li {
     width: 250px;
 }
 
+.btnYesNo:hover,
 #btnPopUpInfo:hover,
 #btnPopUpPassword:hover,
 #btnPopUpDeleteAccount:hover,
@@ -93,6 +99,7 @@ li:hover {
     cursor: pointer;
 }
 
+.btnYesNo:focus,
 #btnPopUpInfo:focus,
 #btnPopUpPassword:focus,
 #btnPopUpDeleteAccount:focus,
