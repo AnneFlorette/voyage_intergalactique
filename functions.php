@@ -233,11 +233,11 @@ include 'configBdd.php';
                $str .= "id=firstPlanete";
            }
            $str .= "   ><div class='left'><h4>" . $travel['travelpres_destination'] . "</h4>
-                       <p>" . $travel['travelpres_description'] . "</p>
-                       <p>" . $travel['travelpres_destination_time'] . "H</p>
-                       <button onclick=\"window.location.href='booking.php'\" class='booking'>Book this trip</button>
-                       </div>
-                       </section>";
+                        <p>" . $travel['travelpres_description'] . "</p>
+                        <p>" . $travel['travelpres_destination_time'] . "H</p>
+                        <a href= 'booking.php?ID=".$travel['travelpres_ID']."'><button class='booking'>Book this trip</button></a>
+                        </div>
+                        </section>";
            echo $str;
        }
    }
