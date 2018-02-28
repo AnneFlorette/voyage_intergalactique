@@ -3,7 +3,7 @@
 include 'configBdd.php';
 
     const KEY = "chfporndjzysthvlzpdbj25vfhg";
-//choppe la BDD
+//retourne la Base de données
     function getPDO(){
         global $login;
         global $pass;
@@ -15,15 +15,96 @@ include 'configBdd.php';
         }
     }
 
-//il faudra peut etre enlever les '' autour de sha256
+//Crypte le mot de passe grâce à un clé (KEY) et le Sha256
     function cryptage($passwd){
         $passCrypt = $passwd.KEY.KEY.$passwd.KEY;
         return hash('sha256', $passCrypt, false);
     }
 
+//retourne le 'First Name' de l'utilisateur à partir de son ID
+    function getFirstName($ID){
+        $bdd = getPDO();
+        $name = $bdd->prepare("SELECT user_first_name FROM USERS WHERE user_ID = :ID");
+        $name-> bindParam(':ID', $ID);
+        $name-> execute();
+        $data = $name-> fetch(PDO::FETCH_ASSOC);
+        $nameTemp = $data['user_first_name'];
+        return $nameTemp;
+    }
 
-//Vérifie que l'email existe et que le mot de passe correspond
-// return true = utilisateur existant et bon logs
+//retourne le 'Last Name' de l'utilisateur à partir de son ID
+    function getLastName($ID){
+        $bdd = getPDO();
+        $name = $bdd->prepare("SELECT user_last_name FROM USERS WHERE user_ID = :ID");
+        $name-> bindParam(':ID', $ID);
+        $name-> execute();
+        $data = $name-> fetch(PDO::FETCH_ASSOC);
+        $nameTemp = $data['user_last_name'];
+        return $nameTemp;
+    }
+
+//retourne le mail de l'utilisateur à partir de son ID
+    function getMail($ID){
+        $bdd = getPDO();
+        $name = $bdd->prepare("SELECT user_mail FROM USERS WHERE user_ID = :ID");
+        $name-> bindParam(':ID', $ID);
+        $name-> execute();
+        $data = $name-> fetch(PDO::FETCH_ASSOC);
+        $mailTemp = $data['user_mail'];
+        return $mailTemp;
+    }
+
+//Lors de la connexion, l'utilisateur démarre une session start
+//grâce au mail qu'il entre, on retourne son ID qui sera retenu dans le tableau $_SESSION
+    function getID($mail){
+        $bdd = getPDO();
+        $ID = $bdd->prepare("SELECT user_ID FROM USERS WHERE user_mail = :mail");
+        $ID-> bindParam(':mail', $mail);
+        $ID-> execute();
+        $data = $ID-> fetch(PDO::FETCH_ASSOC);
+        $IDTemp = $data['user_ID'];
+        return $IDTemp;
+    }
+
+////retourne le 'password' de l'utilisateur à partir de son ID
+    function getMdp($ID){
+        $bdd = getPDO();
+        $request = $bdd -> prepare("SELECT user_password FROM USERS WHERE user_ID = :ID");
+        $request -> bindParam(":ID", $ID);
+        $request -> execute();
+        $data = $request -> fetch(PDO::FETCH_ASSOC);
+        $pwdTemp = $data['user_password'];
+        return $pwdTemp;
+    }
+
+//Vérifie si le mail n'est pas déjà utilisé
+//return true si le mail n'est pas encore utilisé
+    function verifInscription($mail){
+        $bdd = getPDO();
+        $request = $bdd -> prepare("SELECT user_mail FROM USERS WHERE mail = :mail");
+        $request -> bindParam(":mail", $mail);
+        $request -> execute();
+        $verifMail = $request->fetchAll(PDO::FETCH_ASSOC);  
+        if($verifMail != null){
+            return false;
+        }               
+        return true;
+    }
+
+//Lorsque l'inscription est valide (bon mail, mêmes mots de passe, chaque champ saisi) 
+//On insert les données dans la base de données.
+    function writeLog($mail, $passCrypt, $lastName, $firstName){
+        $bdd = getPDO();    
+        $request = $bdd-> prepare("INSERT INTO USERS (user_mail, user_password, user_first_name, user_last_name) VALUES (:mail, :passcrypt, :first_name, :last_name)");
+        $request-> bindParam(':mail', $mail);
+        $request-> bindParam(':passcrypt', $passCrypt);    
+        $request-> bindParam(':first_name', $firstName);
+        $request-> bindParam(':last_name', $lastName);
+        $request-> execute();
+    }
+
+// Vérifie que le mail existe et que le mot de passe correspond
+// return true si les logs entrés sont les bons
     function verifConnexion($mail, $passwd){
         $bdd = getPDO();
         $request = $bdd -> prepare("SELECT * FROM USERS WHERE user_mail = :mail AND user_password = :pass");
@@ -38,32 +119,9 @@ include 'configBdd.php';
         }
     }
 
-//Ecris dans la bdd si identifiants allowed (inscription)
-    function writeLog($mail, $passCrypt, $lastName, $firstName){
-        $bdd = getPDO();    
-        $request = $bdd-> prepare("INSERT INTO USERS (user_mail, user_password, user_first_name, user_last_name) VALUES (:mail, :passcrypt, :first_name, :last_name)");
-        $request-> bindParam(':mail', $mail);
-        $request-> bindParam(':passcrypt', $passCrypt);    
-        $request-> bindParam(':first_name', $firstName);
-        $request-> bindParam(':last_name', $lastName);
-        $request-> execute();
-    }
 
-//Vérifie si le mail n'est pas déjà utilisé
-//si return isvalid = true le mail est inutilisé donc bon
-    function verifInscription($mail){
-        $bdd = getPDO();
-        $request = $bdd -> prepare("SELECT user_mail FROM USERS WHERE mail = :mail");
-        $request -> bindParam(":mail", $mail);
-        $request -> execute();
-        $verifMail = $request->fetchAll(PDO::FETCH_ASSOC);  
-        if($verifMail != null){
-            return false;
-        }               
-        return true;
-    }
-
-//modification des données
+//Dans la page profil, modification des informations (First Name, Last Name et le mail)
+//On les modifie dans la base de données
     function modifData($ID, $firstName, $lastName, $mail){
         $bdd = getPDO();
         $request = $bdd -> prepare("UPDATE USERS SET user_first_name = :firstName, user_last_name = :lastName, user_mail = :mail WHERE user_ID = :ID");
@@ -74,7 +132,10 @@ include 'configBdd.php';
         $request -> execute();
     }
 
-//vérification mdp
+//Modification du mot de passe.
+//On vérifie que le mot de passe crypté dans la base de données est le même que celui qu'on donne en argument
+//Utilisé dans la page profil pour modifier le mot de passe
+//on vérifie d'abord si 'currentPwd' est bien le même que celui dans la base de données
     function verifPwd($ID, $mdp){
         $mdpVerif = getMdp($ID);
         $mdpCheck = cryptage($mdp);
@@ -84,8 +145,9 @@ include 'configBdd.php';
         return false;
     }
 
-
-//modification mdp
+//Page profil pour la modification du mot de passe
+//Après la vérification du mot de passe actuel
+//l'utilisateur va entrer son nouveau mot de passe et on l'insert dans la base de données
     function modifPwd($ID, $mdp){
         $bdd = getPDO();
         $request = $bdd -> prepare("UPDATE USERS SET user_password = :mdp WHERE user_ID = :ID");
@@ -94,7 +156,8 @@ include 'configBdd.php';
         $request -> execute();
     }
 
-//suppression du compte
+//Page Profil, il peut supprimer son compte
+//Permet de supprimer le compte de l'utilisateur à partir de son ID
     function deleteAccount($ID){
         $bdd = getPDO();
         $request = $bdd -> prepare("DELETE FROM USERS WHERE user_ID = :ID");
@@ -102,62 +165,8 @@ include 'configBdd.php';
         $request -> execute();
     }
 
-//retourne le nom dans la bdd
-    function getFirstName($ID){
-        $bdd = getPDO();
-        $name = $bdd->prepare("SELECT user_first_name FROM USERS WHERE user_ID = :ID");
-        $name-> bindParam(':ID', $ID);
-        $name-> execute();
-        $data = $name-> fetch(PDO::FETCH_ASSOC);
-        $nameTemp = $data['user_first_name'];
-        return $nameTemp;
-    }
-
-//retourne le nom dans la bdd
-    function getLastName($ID){
-        $bdd = getPDO();
-        $name = $bdd->prepare("SELECT user_last_name FROM USERS WHERE user_ID = :ID");
-        $name-> bindParam(':ID', $ID);
-        $name-> execute();
-        $data = $name-> fetch(PDO::FETCH_ASSOC);
-        $nameTemp = $data['user_last_name'];
-        return $nameTemp;
-    }
-
-//retourne le nom dans la bdd
-    function getMail($ID){
-        $bdd = getPDO();
-        $name = $bdd->prepare("SELECT user_mail FROM USERS WHERE user_ID = :ID");
-        $name-> bindParam(':ID', $ID);
-        $name-> execute();
-        $data = $name-> fetch(PDO::FETCH_ASSOC);
-        $mailTemp = $data['user_mail'];
-        return $mailTemp;
-    }
-
-//retourne l'ID de l'utilisateur
-    function getID($mail){
-        $bdd = getPDO();
-        $ID = $bdd->prepare("SELECT user_ID FROM USERS WHERE user_mail = :mail");
-        $ID-> bindParam(':mail', $mail);
-        $ID-> execute();
-        $data = $ID-> fetch(PDO::FETCH_ASSOC);
-        $IDTemp = $data['user_ID'];
-        return $IDTemp;
-    }
-
-//retourne le mdp de l'utilisateur
-    function getMdp($ID){
-        $bdd = getPDO();
-        $request = $bdd -> prepare("SELECT user_password FROM USERS WHERE user_ID = :ID");
-        $request -> bindParam(":ID", $ID);
-        $request -> execute();
-        $data = $request -> fetch(PDO::FETCH_ASSOC);
-        $mdpTemp = $data['user_password'];
-        return $mdpTemp;
-    }
-
-//vérification Session en cours
+//Vérifie s'il y a une session active (quelqu'un de connecté)
+//return true si une session est bien active
     function checkSession(){
         if(isset($_SESSION['ID']) && $_SESSION['ID'] !== ''){
             return true;
@@ -165,7 +174,10 @@ include 'configBdd.php';
         return false;
     }
 
-//change le menu dynamiquement 
+//Vérifie qu'une session est active
+//Si oui, la navbar propose d'accéder à son profil et de se déconnecter
+//Si non, navbar proposant de se connecter ou s'inscrire
+//POUR TOUTES LES PAGES SAUF L'INDEX
     function changeNav(){
         if(checkSession()){
             $firstName = getFirstName($_SESSION['ID']);
@@ -196,7 +208,10 @@ include 'configBdd.php';
         }
     }
 
-//change menu de l'index
+//Vérifie qu'une session est active
+//Si oui, la navbar propose d'accéder à son profil et de se déconnecter
+//Si non, navbar proposant de se connecter ou s'inscrire
+//UNIQUEMENT POUR L'INDEX
     function changeNavIndex(){
         if(checkSession()){
             $firstName = getFirstName($_SESSION['ID']);
@@ -221,7 +236,9 @@ include 'configBdd.php';
         }
     }
 
-//Création de sections pour la page ourDestinations.php
+
+//ourDestinations.php
+//Création des sections (travel_pres) pour présenter chaque planète dynamiquement
     function createSections(){
         $bd_log = getPDO();
        $travels = $bd_log -> query("SELECT * FROM TRAVELPRES") -> fetchall(PDO::FETCH_ASSOC);
