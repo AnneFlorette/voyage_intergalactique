@@ -1,5 +1,5 @@
 <?php
-    include 'functions.php';
+    include 'functionsAdmin.php';
     session_start();
     $_SESSION['ID'] = "";
 

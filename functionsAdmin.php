@@ -61,4 +61,29 @@
         $IDTemp = $data['user_ID'];
         return $IDTemp;
     }
+
+//création d'une destination
+    function createDestination($destination, $img, $description){
+        $bdd = getPDO();
+        $request = $bdd -> prepare("INSERT INTO TRAVELPRES (travelpres_destination, travelpres_img_url, travelpres_description) VALUES (:destination, :img_url, :descriptions)");
+        $request -> bindParam(":destination",$destination);
+        $request -> bindParam(":img_url",$img);
+        $request -> bindParam(":descriptions",$description);
+        $request -> execute();
+    }
+
+//création d'un nouveau voyage
+    function createTravel($destination, $departTime, $totalPlaces, $remainPlaces, $spaceshipType, $totalTime, $travelPresID){
+        $bdd = getPDO();
+        $request = $bdd -> prepare("INSERT INTO TRAVEL (travel_destination, travel_depart_date, travel_total_places, travel_remain_places, travel_spaceship_type, travel_total_time, travelpres_ID) 
+        VALUES (:destination, :depart_time, :total_places, :remain_places, :spaceship_type, :total_time, :travelpres_ID)");
+        $request -> bindParam(":destination", $destination);
+        $request -> bindParam(":depart_time", $departTime);
+        $request -> bindParam(":total_places", $totalPlaces);
+        $request -> bindParam(":remain_places", $remainPlaces);
+        $request -> bindParam(":spaceship_type", $spaceshipType);
+        $request -> bindParam(":total_time", $totalTime);
+        $request -> bindParam(":travelpres_ID", $travelPresID);
+        $request -> execute();
+    }
 ?>
