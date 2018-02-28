@@ -21,15 +21,16 @@ include 'configBdd.php';
         return hash('sha256', $passCrypt, false);
     }
 
+
 //Vérifie que l'email existe et que le mot de passe correspond
 // return true = utilisateur existant et bon logs
     function verifConnexion($mail, $passwd){
         $bdd = getPDO();
-        $requete = $bdd -> prepare("SELECT * FROM USERS WHERE user_mail = :mail AND user_password = :pass");
-        $requete -> bindParam(":mail", $mail);
-        $requete -> bindParam(":pass", $passwd);
-        $requete -> execute();
-        $data = $requete -> fetchall(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare("SELECT * FROM USERS WHERE user_mail = :mail AND user_password = :pass");
+        $request -> bindParam(":mail", $mail);
+        $request -> bindParam(":pass", $passwd);
+        $request -> execute();
+        $data = $request -> fetchall(PDO::FETCH_ASSOC);
         if ($data != null){
             return true;
         } else{
@@ -40,12 +41,12 @@ include 'configBdd.php';
 //Ecris dans la bdd si identifiants allowed (inscription)
     function writeLog($mail, $passCrypt, $lastName, $firstName){
         $bdd = getPDO();    
-        $requete = $bdd-> prepare("INSERT INTO USERS (user_mail, user_password, user_first_name, user_last_name) VALUES (:mail, :passcrypt, :first_name, :last_name)");
-        $requete-> bindParam(':mail', $mail);
-        $requete-> bindParam(':passcrypt', $passCrypt);    
-        $requete-> bindParam(':first_name', $firstName);
-        $requete-> bindParam(':last_name', $lastName);
-        $requete-> execute();
+        $request = $bdd-> prepare("INSERT INTO USERS (user_mail, user_password, user_first_name, user_last_name) VALUES (:mail, :passcrypt, :first_name, :last_name)");
+        $request-> bindParam(':mail', $mail);
+        $request-> bindParam(':passcrypt', $passCrypt);    
+        $request-> bindParam(':first_name', $firstName);
+        $request-> bindParam(':last_name', $lastName);
+        $request-> execute();
     }
 
 //Vérifie si le mail n'est pas déjà utilisé
