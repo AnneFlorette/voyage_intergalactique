@@ -21,10 +21,8 @@
         if  ((isset($_POST['currentPwd']) && $_POST['currentPwd'] != "") &&
             (isset($_POST['newPwd']) && $_POST['newPwd'] != "") &&
             (isset($_POST['checkNewPwd']) && $_POST['checkNewPwd'] != "")){
-                var_dump('deug1');
             if  ((verifPwd($_SESSION['ID'], $_POST['currentPwd']) == true) && 
                 (htmlspecialchars($_POST['newPwd']) == htmlspecialchars($_POST['checkNewPwd']))){
-                    var_dump('deug2');
                 $newPwd = htmlspecialchars($_POST['newPwd']);
                 $password = cryptage($newPwd);
                 modifPwd($_SESSION['ID'], $password);
