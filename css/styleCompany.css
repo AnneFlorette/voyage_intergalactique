@@ -20,6 +20,7 @@ body {
     text-align: center;
     margin: 0px;
     color: #000000;
+    overflow-x: hidden;
 }
 
 #front {

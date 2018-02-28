@@ -56,13 +56,8 @@
 
     <section id="ourTeam">
         <div class="left">
-            <h4>Our space ship</h4>
-            <p id= "intro"> 
-                Our Space ship is equipped with the best innovative technologies in the galaxy. During your trip you will find everything you need because Far Away will provide you the comfort you deserve.
-                <br>
-                <br>
-                We do our best to make sure that your journey will be incredible and unforgettable. Staff members will be at your disposal through the entire trip.
-            </p>
+            <h4>Our team</h4>
+            <p id= "intro">A beautiful band of losers</p>
         </div>
         <div id="container">
             <ul class="wrapper">
@@ -70,13 +65,13 @@
                     <div class="star"></div>
                 </div>
                 <div class="anneflo">
-                    <div class="planet"></div>
+                    <div class="planet" id="Anne-Flore"></div>
                 </div>
                 <div class="cyrille">
-                    <div class="planet"><div class="spin"></div></div>
+                    <div class="planet" id="Cyrille"><div class="spin"></div></div>
                 </div>
                 <div class="hugo">
-                    <div class="planet"></div>
+                    <div class="planet" id="Hugo"></div>
                 </div>
             </ul>
         </div>

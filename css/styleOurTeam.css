@@ -112,3 +112,15 @@
     background-image: url(../img/hugoHead.png);
     animation: anti-spin 20s infinite linear;
   }
+  /* Hoverring animation */
+  .planet:hover {
+    width: 150px;
+    height: 150px;
+  }
+  .planet:hover:after{
+    color: black;
+    font-size: 30px;
+    content: attr(id);
+    
+  }
+
