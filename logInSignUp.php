@@ -19,7 +19,7 @@
         $allowedSignUp = verifInscription($mail);
 
         if ($allowedSignUp == true){
-            $passCrypt = cryptage($mail, $passwd);
+            $passCrypt = cryptage($passwd);
             writeLog($mail, $passCrypt, $lastName, $firstName);
             header('location: logInSignUp.php');
         }
@@ -31,7 +31,7 @@
         isset($_POST['passwdLogIn']) && htmlspecialchars($_POST['passwdLogIn']) != "") {
         $mail = htmlspecialchars($_POST['mailLogIn']);
         $passwd = htmlspecialchars($_POST['passwdLogIn']);
-        $logCrypt = cryptage($mail, $passwd);
+        $logCrypt = cryptage($passwd);
         $allowedLogin = verifConnexion($mail, $logCrypt);
         if($allowedLogin == true){
             $ID = getID($mail);
