@@ -66,9 +66,17 @@
                     <div class="popUp_block">
                         <i id="clearPassword" class="material-icons">clear</i>
                         <form action="" method="POST">
-                            <label for="password">Password</label>
+                            <label for="currentPwd">Current Password</label>
                             <br>
-                            <input type="text" name="password" class="input" autofocus required>
+                            <input type="password" name="currentPwd" class="input" autofocus required>
+                            <br>
+                            <label for="newPwd">New Password</label>
+                            <br>
+                            <input type="password" name="newPwd" class="input" min="8" max="20" required>
+                            <br>
+                            <label for="checkNewPwd">Check New Password</label>
+                            <br>
+                            <input type="password" name="checkNewPwd" class="input" min="8" max="20" required>
                             <br>
                             <input id="submit" type="submit" value="Send Modifications">
                         </form>
@@ -78,7 +86,7 @@
                     <div class="popUp_block">
                         <i id="clearDeleteAccount" class="material-icons">clear</i>
                         <form action="" method="POST">
-                            <p>Warning ! You're about to delete your account. Are you sure </p>
+                            <p>Warning ! You're about to delete your account. Are you sure ?</p>
                         </form>
                     </div>
                 </div>
