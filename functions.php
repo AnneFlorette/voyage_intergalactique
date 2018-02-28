@@ -52,7 +52,7 @@ include 'configBdd.php';
 //si return isvalid = true le mail est inutilisé donc bon
     function verifInscription($mail){
         $bdd = getPDO();
-        $request = $bdd->prepare("SELECT user_mail FROM USERS WHERE mail = :mail");
+        $request = $bdd -> prepare("SELECT user_mail FROM USERS WHERE mail = :mail");
         $request -> bindParam(":mail", $mail);
         $request -> execute();
         $verifMail = $request->fetchAll(PDO::FETCH_ASSOC);  
@@ -62,10 +62,48 @@ include 'configBdd.php';
         return true;
     }
 
+//modification des données
+    function modifData($ID, $firstName, $lastName, $mail){
+        $bdd = getPDO();
+        $request = $bdd -> prepare("UPDATE USERS SET user_first_name = :firstName, user_last_name = :lastName, user_mail = :mail WHERE user_ID = :ID");
+        $request -> bindParam(":firstName", $firstName);
+        $request -> bindParam(":lastName", $lastName);
+        $request -> bindParam(":mail", $mail);
+        $request -> bindParam(":ID", $ID);
+        $request -> execute();
+    }
+
+//vérification mdp
+    function verifMdp($ID, $mdp){
+        $mdpVerif = getMdp($ID);
+        if($mdp == $mdpVerif){
+            return true;
+        }
+        return false;
+    }
+
+
+//modification mdp
+    function modifMdp($ID, $mdp){
+        $bdd = getPDO();
+        $request = $bdd -> prepare("UPDATE USERS SET user_password = :mdp WHERE user_ID = :ID");
+        $request -> bindParam(":mdp", $mdp);
+        $request -> bindParam(":ID", $ID);
+        $request -> execute();
+    }
+
+//suppression du compte
+    function deleteAccount($ID){
+        $bdd = getPDO();
+        $request = $bdd -> prepare("DELETE * FROM USERS WHERE user_ID = :ID");
+        $request -> bindParam(":ID", $ID);
+        $request -> execute();
+    }
+
 //retourne le nom dans la bdd
     function getFirstName($ID){
         $bdd = getPDO();
-        $name = $bdd->prepare('SELECT user_first_name FROM USERS WHERE user_ID = :ID');
+        $name = $bdd->prepare("SELECT user_first_name FROM USERS WHERE user_ID = :ID");
         $name-> bindParam(':ID', $ID);
         $name-> execute();
         $data = $name-> fetch(PDO::FETCH_ASSOC);
@@ -76,7 +114,7 @@ include 'configBdd.php';
 //retourne le nom dans la bdd
     function getLastName($ID){
         $bdd = getPDO();
-        $name = $bdd->prepare('SELECT user_last_name FROM USERS WHERE user_ID = :ID');
+        $name = $bdd->prepare("SELECT user_last_name FROM USERS WHERE user_ID = :ID");
         $name-> bindParam(':ID', $ID);
         $name-> execute();
         $data = $name-> fetch(PDO::FETCH_ASSOC);
@@ -87,7 +125,7 @@ include 'configBdd.php';
 //retourne le nom dans la bdd
     function getMail($ID){
         $bdd = getPDO();
-        $name = $bdd->prepare('SELECT user_mail FROM USERS WHERE user_ID = :ID');
+        $name = $bdd->prepare("SELECT user_mail FROM USERS WHERE user_ID = :ID");
         $name-> bindParam(':ID', $ID);
         $name-> execute();
         $data = $name-> fetch(PDO::FETCH_ASSOC);
@@ -98,12 +136,23 @@ include 'configBdd.php';
 //retourne l'ID de l'utilisateur
     function getID($mail){
         $bdd = getPDO();
-        $ID = $bdd->prepare('SELECT user_ID FROM USERS WHERE user_mail = :mail');
+        $ID = $bdd->prepare("SELECT user_ID FROM USERS WHERE user_mail = :mail");
         $ID-> bindParam(':mail', $mail);
         $ID-> execute();
         $data = $ID-> fetch(PDO::FETCH_ASSOC);
         $IDTemp = $data['user_ID'];
         return $IDTemp;
+    }
+
+//retourne le mdp de l'utilisateur
+    function getMdp($ID){
+        $bdd = getPDO();
+        $request = $bdd -> prepare("SELECT user_password FROM USERS WHERE user_ID = :ID");
+        $request -> bindParam(":ID", $ID);
+        $request -> execute();
+        $data = $request -> fetch(PDO::FETCH_ASSOC);
+        $mdpTemp = $data['user_password'];
+        return $mdpTemp;
     }
 
 //vérification Session en cours
@@ -145,6 +194,7 @@ include 'configBdd.php';
         }
     }
 
+//change menu de l'index
     function changeNavIndex(){
         if(checkSession()){
             $firstName = getFirstName($_SESSION['ID']);
