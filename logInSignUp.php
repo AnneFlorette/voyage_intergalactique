@@ -81,7 +81,7 @@
                 <br>
                 <label for="passwdSignUpVerif">Password Check</label>
                 <br>
-                <input type="password" name="passwdSignUpVerif" class="input" required>
+                <input type="password" name="passwdSignUpVerif" class="input" min="8" max="20" required>
                 <br>
                 <input type="submit" value="Sign Up" class="submit">
                 <br>
