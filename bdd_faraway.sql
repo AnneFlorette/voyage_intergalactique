@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.5.4.1
 -- http://www.phpmyadmin.net
 --
@@ -60,8 +60,8 @@ INSERT INTO `travelpres` (`travelpres_ID`, `travelpres_destination`, `travelpres
 (2, 'Uranus', 'img/uranusG.png', 'The coaster planete', 120, 150),
 (3, 'Saturn', 'img/saturnG.png', 'The planete that do hula hoop', 144, 200),
 (4, 'Neptune', 'img/neptuneG.png', 'The deep blue planete', 144, 100),
-(5, 'Pluto', 'img/plutoG.png', 'The exo-planete where live the violent queen Anne Florette', 168, 100),
-(6, 'Mars', 'img/marsG.png', 'The red planete', 78, 200);
+(5, 'Pluto', 'img/plutoG.png', 'The exo-planete where live the violent queen Anne Florette', 144, 100),
+(6, 'Mars', 'img/marsG.png', 'The red planete', 144, 200);
 
 -- --------------------------------------------------------
 
@@ -71,9 +71,9 @@ INSERT INTO `travelpres` (`travelpres_ID`, `travelpres_destination`, `travelpres
 
 CREATE TABLE `users` (
   `user_ID` int(11) NOT NULL,
-  `user_first_name` char(25) DEFAULT NULL,
-  `user_last_name` char(25) DEFAULT NULL,
-  `user_mail` varchar(25) DEFAULT NULL,
+  `user_first_name` char(40) DEFAULT NULL,
+  `user_last_name` char(40) DEFAULT NULL,
+  `user_mail` varchar(64) DEFAULT NULL,
   `user_password` varchar(64) DEFAULT NULL,
   `user_admin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

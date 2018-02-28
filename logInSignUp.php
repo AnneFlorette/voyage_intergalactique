@@ -65,19 +65,19 @@
                 <h3>Sign Up</h3>
                 <label for="firstName">First Name</label>
                 <br>
-                <input type="text" name="firstName" class="input" autofocus required>
+                <input type="text" name="firstName" class="input" autofocus max="40" required>
                 <br>
                 <label for="lastName">Last Name</label>
                 <br>
-                <input type="text" name="lastName" class="input" required>
+                <input type="text" name="lastName" class="input" max="40" required>
                 <br>
                 <label for="mailSignUp">Email</label>
                 <br>
-                <input type="email" name="mailSignUp" class="input" required>
+                <input type="email" name="mailSignUp" class="input" max="64" required>
                 <br>
                 <label for="passwdSignUp">Password</label>
                 <br>
-                <input type="password" name="passwdSignUp" class="input" required>
+                <input type="password" name="passwdSignUp" class="input" min="8" max="20" required>
                 <br>
                 <label for="passwdSignUpVerif">Password Check</label>
                 <br>
