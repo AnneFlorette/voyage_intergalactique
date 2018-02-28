@@ -76,7 +76,8 @@ include 'configBdd.php';
 //vérification mdp
     function verifPwd($ID, $mdp){
         $mdpVerif = getMdp($ID);
-        if($mdp == $mdpVerif){
+        $mdpCheck = cryptage($mdp);
+        if($mdpCheck == $mdpVerif){
             return true;
         }
         return false;
@@ -86,6 +87,7 @@ include 'configBdd.php';
 //modification mdp
     function modifPwd($ID, $mdp){
         $bdd = getPDO();
+        var_dump('deug3');
         $request = $bdd -> prepare("UPDATE USERS SET user_password = :mdp WHERE user_ID = :ID");
         $request -> bindParam(":mdp", $mdp);
         $request -> bindParam(":ID", $ID);
