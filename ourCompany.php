@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/styleCompany.css">
+    <link rel="stylesheet" href="css/styleOurTeam.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Our company</title>
 </head>
@@ -52,5 +53,34 @@
             </p>
         </div> 
     </section>
+
+    <section id="ourTeam">
+        <div class="left">
+            <h4>Our space ship</h4>
+            <p id= "intro"> 
+                Our Space ship is equipped with the best innovative technologies in the galaxy. During your trip you will find everything you need because Far Away will provide you the comfort you deserve.
+                <br>
+                <br>
+                We do our best to make sure that your journey will be incredible and unforgettable. Staff members will be at your disposal through the entire trip.
+            </p>
+        </div>
+        <div id="container">
+            <ul class="wrapper">
+                <div class="logo">
+                    <div class="star"></div>
+                </div>
+                <div class="anneflo">
+                    <div class="planet"></div>
+                </div>
+                <div class="cyrille">
+                    <div class="planet"><div class="spin"></div></div>
+                </div>
+                <div class="hugo">
+                    <div class="planet"></div>
+                </div>
+            </ul>
+        </div>
+    </section>
+
 </body>
 </html>

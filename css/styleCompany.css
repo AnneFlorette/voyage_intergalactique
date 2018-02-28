@@ -168,6 +168,16 @@ button {
     height: 100vh;
 }
 
+#ourTeam {
+    background-image: url(../img/univers_9.jpeg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+}
+
 .left {
     width: 30vw;
     height: 100vh;

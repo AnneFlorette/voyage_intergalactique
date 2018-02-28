@@ -23,13 +23,16 @@
             </div>
         </div>
         <div class="earth">
-            <div class="planet"><div class="shadow"></div></div>
+            <div class="planet"
+            ><div class="shadow"></div></div>
         </div>
         <div class="mars">
-            <div class="planet"><div class="shadow"></div></div>
+            <div class="planet">
+            <div class="shadow"></div></div>
         </div>
         <div class="jupiter">
-            <div class="planet"><div class="shadow"></div></div>
+            <div class="planet">
+            <div class="shadow"></div></div>
         </div>
     </ul>
 </body>
