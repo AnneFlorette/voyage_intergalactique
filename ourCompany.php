@@ -65,13 +65,16 @@
                     <div class="star"></div>
                 </div>
                 <div class="anneflo">
-                    <div class="planet" id="Anne-Flore"></div>
+                    <div class="text"><div class="name">Anne Flore</div></div>
+                    <div class="planet"></div>
                 </div>
                 <div class="cyrille">
-                    <div class="planet" id="Cyrille"><div class="spin"></div></div>
+                <div class="text"><div class="name">Cyrille</div></div>
+                    <div class="planet"></div>
                 </div>
                 <div class="hugo">
-                    <div class="planet" id="Hugo"></div>
+                <div class="text"><div class="name">Hugo</div></div>
+                    <div class="planet"></div>
                 </div>
             </ul>
         </div>

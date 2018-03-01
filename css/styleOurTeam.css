@@ -1,126 +1,162 @@
-  @keyframes spinlogo {
-    0% { transform: rotate(0); }
-    100%   { transform: rotate(-360deg); }
-  }
-  @keyframes orbitanneflo {
-    0% { z-index:2; transform: rotateY(0); }
-    49% { z-index:2; }
-    50% { z-index:-2; }
-    99% { z-index:-2; }
-    100%   { z-index:2; transform: rotateY(360deg); }
-  }
-  @keyframes orbitcyrille {
-    0% { z-index:3; transform: rotateY(0); }
-    49% { z-index:3; }
-    50% { z-index:-3; }
-    99% { z-index:-3; }
-    100%   { z-index:3; transform: rotateY(360deg); }
-  }
-  @keyframes orbithugo {
-    0% { z-index:4; transform: rotateY(0); }
-    49% {z-index:4;}
-    50% {z-index:-4;}
-    99% {z-index:-4;}
-    100%   { z-index:4; transform: rotateY(360deg);}
-  }
-  /* Keep planet image flat */
-  @keyframes anti-spin {
-    from { transform: rotateY(0) rotate(0deg); }
-    to   { transform: rotateY(-360deg) rotate(360deg); }
-  }
-  
-  #container{
-    margin: auto;
-    margin-top: 25vh;
-  }
+@keyframes spinlogo {
+  0% { transform: rotate(0); }
+  100%   { transform: rotate(-360deg); }
+}
+@keyframes orbitanneflo {
+  0% { z-index:2; transform: rotateY(0); }
+  49% { z-index:2; }
+  50% { z-index:-2; }
+  99% { z-index:-2; }
+  100%   { z-index:2; transform: rotateY(360deg); }
+}
+@keyframes orbitcyrille {
+  0% { z-index:3; transform: rotateY(0); }
+  49% { z-index:3; }
+  50% { z-index:-3; }
+  99% { z-index:-3; }
+  100%   { z-index:3; transform: rotateY(360deg); }
+}
+@keyframes orbithugo {
+  0% { z-index:4; transform: rotateY(0); }
+  49% {z-index:4;}
+  50% {z-index:-4;}
+  99% {z-index:-4;}
+  100%   { z-index:4; transform: rotateY(360deg);}
+}
+/* Keep planet image flat */
+@keyframes anti-spin-planet {
+  from { transform: rotateY(0) rotate(0deg); }
+  to   { transform: rotateY(-360deg) rotate(360deg); }
+}
+@keyframes anti-spin-text {
+  from { transform: rotateY(0); }
+  to   { transform: rotateY(-360deg); }
+}
 
-  /* scene wrapper */
-  .wrapper{
-    position:relative;
-    margin: 0 auto;
-    display:block;
-    perspective: 1000px;
-    perspective-origin: 60% 50%;
-    transform: rotate(-10deg);
-    padding: 0px;
-  }
-  .wrapper > div {
-    position: relative;
-    margin: 0 auto;
-    transform-style: preserve-3d;
-    height: 0px;
-  }
-  .logo {
-    width: 250px;
-    position: absolute;
-    top: 0px;
-    z-index: 1;
-    height: 125px !important;
-  }
-  .logo .star {
-    width: 250px;
-    height: 250px;
-    background: url(../img/logo_blanc_without_texte.png) no-repeat;
-    background-size: cover;
-    border-radius: 250px;
-    margin: 0 auto;
-    animation: spinlogo 40s infinite linear;
-  }
-  .planet {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    animation-iteration-count: infinite;
-    overflow:hidden;
-  }
-  .anneflo {
-    position: absolute;
-    width: 400px;
-    z-index:2;
-    animation: orbitanneflo 12s infinite linear;
-    top: -7.5px; /*half of planets height to keep orbits in line*/
-  }
-  .anneflo .planet {
-    width:96px;
-    height:96px;
-    background-image: url(../img/annefloHead.png);
-    animation: anti-spin 12s infinite linear;
-  }
-  .cyrille {
-    position: absolute;
-    width: 550px;
-    z-index:3;
-    animation: orbitcyrille 15s infinite linear;
-    top: -19px;
-  }
-  .cyrille .planet {
-    width:96px;
-    height:96px;
-    background-image: url(../img/cyrilleHead.png);
-    animation: anti-spin 15s infinite linear;
-  }
-  .hugo {
-    position: absolute;
-    width: 700px;
-    z-index:4;
-    animation: orbithugo 20s infinite linear;
-    top: -20px;
-  }
-  .hugo .planet {
-    width:96px;
-    height:96px;
-    background-image: url(../img/hugoHead.png);
-    animation: anti-spin 20s infinite linear;
-  }
-  /* Hoverring animation */
-  .planet:hover {
-    width: 150px;
-    height: 150px;
-  }
-  .planet:hover:after{
-    color: black;
-    font-size: 30px;
-    content: attr(id);
-    
-  }
+#container{
+  margin: auto;
+  margin-top: 25vh;
+}
 
+/* scene wrapper */
+.wrapper{
+  position:relative;
+  margin: 0 auto;
+  display:block;
+  perspective: 1000px;
+  perspective-origin: 60% 50%;
+  transform: rotate(-10deg);
+  padding: 0px;
+}
+.wrapper > div {
+  position: relative;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  height: 0px;
+}
+.logo {
+  width: 250px;
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  height: 125px !important;
+}
+.logo .star {
+  width: 250px;
+  height: 250px;
+  background: url(../img/logo_noir_without_texte.png);
+  background-size: cover;
+  border-radius: 250px;
+  margin: 0 auto;
+  animation: spinlogo 40s infinite linear;
+}
+.planet {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  animation-iteration-count: infinite;
+}
+.text{
+  width:144px;
+  height:40px;
+  margin-bottom: 4px;
+  background-image: url(../img/blankHead.png);
+  display: flex;
+  visibility: hidden;
+}
+.name{
+  font-size: 21px;
+  color: rgb(255, 255, 255);  
+}
+
+.anneflo {
+  position: absolute;
+  width: 400px;
+  z-index:2;
+  animation: orbitanneflo 10s infinite linear;
+  top: -7.5px; /*half of planets height to keep orbits in line*/
+}
+.anneflo .planet {
+  width:96px;
+  height:96px;
+  background-image: url(../img/annefloHead.png);
+  animation: anti-spin-planet 10s infinite linear;
+}
+.anneflo .text {
+  animation: anti-spin-text 10s infinite linear;
+}
+.cyrille {
+  position: absolute;
+  width: 550px;
+  z-index:2;
+  animation: orbitanneflo 15s infinite linear;
+  top: -7.5px; /*half of planets height to keep orbits in line*/
+}
+.cyrille .planet {
+  width:96px;
+  height:96px;
+  background-image: url(../img/cyrilleHead.png);
+  animation: anti-spin-planet 15s infinite linear;
+}
+.cyrille .text {
+  animation: anti-spin-text 15s infinite linear;
+}
+.hugo {
+  position: absolute;
+  width: 700px;
+  z-index:2;
+  animation: orbitanneflo 20s infinite linear;
+  top: -7.5px; /*half of planets height to keep orbits in line*/
+}
+.hugo .planet {
+  width:96px;
+  height:96px;
+  background-image: url(../img/hugoHead.png);
+  animation: anti-spin-planet 20s infinite linear;
+}
+.hugo .text {
+  animation: anti-spin-text 20s infinite linear;
+}
+
+/* Hoverring animation */
+.anneflo:hover .planet{
+  width: 150px;
+  height: 150px;
+}
+.anneflo:hover .text{
+  visibility: visible;
+}
+.cyrille:hover .planet{
+  width: 150px;
+  height: 150px;
+}
+.cyrille:hover .text{
+  visibility: visible;
+}
+.hugo:hover .planet{
+  width: 150px;
+  height: 150px;
+}
+.hugo:hover .text{
+  visibility: visible;
+}
