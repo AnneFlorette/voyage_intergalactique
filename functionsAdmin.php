@@ -73,16 +73,16 @@
     }
 
 //création d'un nouveau voyage
-    function createTravel($destination, $departTime, $totalPlaces, $remainPlaces, $spaceshipType, $totalTime, $travelPresID){
+// le deuxieme total places est pour remain places car voyage neuf donc toutes les places sont libres
+    function createTravel($destination, $departDate, $totalTime, $totalPlaces, $spaceshipType, $travelPresID){
         $bdd = getPDO();
-        $request = $bdd -> prepare("INSERT INTO TRAVEL (travel_destination, travel_depart_date, travel_total_places, travel_remain_places, travel_spaceship_type, travel_total_time, travelpres_ID) 
-        VALUES (:destination, :depart_time, :total_places, :remain_places, :spaceship_type, :total_time, :travelpres_ID)");
+        $request = $bdd -> prepare("INSERT INTO TRAVEL (travel_destination, travel_depart_date, travel_total_time, travel_total_places, travel_remain_places, travel_spaceship_type, travelpres_ID) 
+        VALUES (:destination, :depart_date, :total_time, :total_places, :total_places, :spaceship_type, :travelpres_ID)");
         $request -> bindParam(":destination", $destination);
-        $request -> bindParam(":depart_time", $departTime);
-        $request -> bindParam(":total_places", $totalPlaces);
-        $request -> bindParam(":remain_places", $remainPlaces);
-        $request -> bindParam(":spaceship_type", $spaceshipType);
+        $request -> bindParam(":depart_date", $departDate);
         $request -> bindParam(":total_time", $totalTime);
+        $request -> bindParam(":total_places", $totalPlaces);
+        $request -> bindParam(":spaceship_type", $spaceshipType);
         $request -> bindParam(":travelpres_ID", $travelPresID);
         $request -> execute();
     }
