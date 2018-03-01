@@ -18,15 +18,13 @@
             (isset($_POST['depart_date']) && $_POST['depart_date'] != "") &&
             (isset($_POST['total_time']) && $_POST['total_time'] != "") &&
             (isset($_POST['total_places']) && $_POST['total_places'] != "") &&
-            (isset($_POST['spaceship_type']) && $_POST['spaceship_type'] != "") &&
-            (isset($_POST['travelpres_ID']) && $_POST['travelpres_ID'] != "")){
-                $destination = htmlspecialchars($_POST['destination']);
-                $departTime = htmlspecialchars($_POST['depart_time']);
+            (isset($_POST['spaceship_type']) && $_POST['spaceship_type'] != "")){
+                $destinationID = htmlspecialchars($_POST['destinations']);
+                $departTime = htmlspecialchars($_POST['depart_date']);
                 $totalPlaces = htmlspecialchars($_POST['total_places']);
                 $spaceshipType = htmlspecialchars($_POST['spaceship_type']);
                 $totalTime = htmlspecialchars($_POST['total_time']);
-                $travelpresID = htmlspecialchars($_POST['travelpres_ID']);
-                createTravel($destination, $departTime, $totalPlaces, $spaceshipType, $totalTime, $travelpresID);
+                createTravel($destinationID, $departTime, $totalPlaces, $spaceshipType, $totalTime);
             }
 //affichage de différentes stats
 
@@ -75,23 +73,19 @@
             <br>
             <label for="depart_date">Date of departure</label>
             <br>
-            <input type="file" name="depart_date" class="input" max="40" required>
+            <input type="date" name="depart_date" class="input" max="40" required>
             <br>
             <label for="total_time">Time of the travel</label>
             <br>
-            <input name="total_time" class="textarea" maxlength="500" required></textarea>
+            <input type="number" name="total_time" required>
             <br>
             <label for="total_places">Total places aboard</label>
             <br>
-            <input type="text" name="total_places" class="input" autofocus max="40" required>
-            <br>>
+            <input type="number" name="total_places" class="input" autofocus max="40" required>
+            <br>
             <label for="spaceship_type">Spaceship type</label>
             <br>
             <input type="text" name="spaceship_type" class="input" autofocus max="40" required>
-            <br>
-            <label for="travelpres_ID">Name of the destination</label>
-            <br>
-            <input type="text" name="travelpres_ID" class="input" autofocus max="40" required>
             <br>
             <input type="submit" value="Envoyer">
             <br>
