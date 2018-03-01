@@ -20,11 +20,12 @@
             (isset($_POST['total_places']) && $_POST['total_places'] != "") &&
             (isset($_POST['spaceship_type']) && $_POST['spaceship_type'] != "")){
                 $destinationID = htmlspecialchars($_POST['destinations']);
-                $departTime = htmlspecialchars($_POST['depart_date']);
+                $departDate = htmlspecialchars($_POST['depart_date']);
                 $totalPlaces = htmlspecialchars($_POST['total_places']);
                 $spaceshipType = htmlspecialchars($_POST['spaceship_type']);
                 $totalTime = htmlspecialchars($_POST['total_time']);
-                createTravel($destinationID, $departTime, $totalPlaces, $spaceshipType, $totalTime);
+                createTravel($destinationID, $departDate, $totalTime, $totalPlaces, $spaceshipType);
+                var_dump($departDate);
             }
 //affichage de différentes stats
 
@@ -73,7 +74,7 @@
             <br>
             <label for="depart_date">Date of departure</label>
             <br>
-            <input type="date" name="depart_date" class="input" max="40" required>
+            <input type="date" name="depart_date" class="input" required>
             <br>
             <label for="total_time">Time of the travel</label>
             <br>
@@ -81,11 +82,11 @@
             <br>
             <label for="total_places">Total places aboard</label>
             <br>
-            <input type="number" name="total_places" class="input" autofocus max="40" required>
+            <input type="number" name="total_places" class="input" required>
             <br>
             <label for="spaceship_type">Spaceship type</label>
             <br>
-            <input type="text" name="spaceship_type" class="input" autofocus max="40" required>
+            <input type="text" name="spaceship_type" class="input" max="25" required>
             <br>
             <input type="submit" value="Envoyer">
             <br>
