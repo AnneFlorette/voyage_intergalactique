@@ -20,6 +20,7 @@ body {
     text-align: center;
     margin: 0px;
     color: #000000;
+    overflow-x: hidden;
 }
 
 #front {
@@ -105,7 +106,6 @@ li:focus {
     margin-bottom: 20vh;
 }
 
-
 h1 {
     font-family: "Space Age";
     color: #ffffff;
@@ -166,6 +166,16 @@ button {
     background-repeat: no-repeat;
     text-align: center;
     height: 100vh;
+}
+
+#ourTeam {
+    background-image: url(../img/univers_9.jpeg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 100vh;
+    display: flex;
 }
 
 .left {

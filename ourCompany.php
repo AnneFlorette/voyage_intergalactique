@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/styleCompany.css">
+    <link rel="stylesheet" href="css/styleOurTeam.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Our company</title>
 </head>
@@ -52,5 +53,32 @@
             </p>
         </div> 
     </section>
+
+    <section id="ourTeam">
+        <div class="left">
+            <h4>Our team</h4>
+            <p id= "intro">A beautiful band of losers</p>
+        </div>
+        <div id="container">
+            <ul class="wrapper">
+                <div class="logo">
+                    <div class="star"></div>
+                </div>
+                <div class="anneflo">
+                    <div class="text"><div class="name">Anne Flore</div></div>
+                    <div class="planet"></div>
+                </div>
+                <div class="cyrille">
+                <div class="text"><div class="name">Cyrille</div></div>
+                    <div class="planet"></div>
+                </div>
+                <div class="hugo">
+                <div class="text"><div class="name">Hugo</div></div>
+                    <div class="planet"></div>
+                </div>
+            </ul>
+        </div>
+    </section>
+
 </body>
 </html>
