@@ -25,7 +25,6 @@
                 $spaceshipType = htmlspecialchars($_POST['spaceship_type']);
                 $totalTime = htmlspecialchars($_POST['total_time']);
                 createTravel($destinationID, $departDate, $totalTime, $totalPlaces, $spaceshipType);
-                var_dump($departDate);
             }
 //affichage de différentes stats
 
