@@ -30,12 +30,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/styleAdminConnexion.css">
+    <title>Far Away Admin</title>
 </head>
 <body>
+    <h3>Connectez vous</h3>
     <div id="logIn">
             <form action="" method="POST">
-                <h3>Log In</h3>
+                <h4>Log In</h4>
                 <label for="mailLogIn">Email</label>
                 <br>
                 <input type="email" name="mailLogIn" class="input" required>
@@ -44,7 +46,7 @@
                 <br>
                 <input type="password" name="passwdLogIn" class="input" required>
                 <br>
-                <input type="submit" value="Log In" class="submit">
+                <input type="submit" value="Log In" id="submit">
                 <br>
             </form>          
         </div>

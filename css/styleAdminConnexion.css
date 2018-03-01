@@ -1,0 +1,85 @@
+@font-face {
+    font-family: "Space Age";
+	src: url('space_age.ttf');
+   }
+@font-face{
+    font-family: "Sansation";
+    src: url('Sansation_regular.ttf');
+}
+
+:focus{
+    outline: none;
+}
+
+body{
+    background-image: url(../img/univers_4.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: 0px;
+    color: #ffffff;
+    font-family: "Sansation";
+}
+
+h3{
+    font-family: "space Age";
+    font-size: 40px;
+    margin: 30px;
+}
+
+#logIn{
+    width: 25%;
+    margin: 15px auto;
+    padding: 10px;
+    border-radius: 18px;
+    background-color: #1b395f8e;
+}
+
+h4{
+    font-family: "space Age";
+    font-size: 28px; 
+    margin: 10px;
+    margin-bottom: 20px;
+}
+
+.input{
+    border: none;
+    width: 80%;
+    border-bottom: solid #ffffff 1px;
+    box-shadow: 0 4px 2px -2px #ffffff6b;
+    background-color: transparent;
+    color: #ffffff;
+    margin-bottom: 1em;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+    -webkit-transition-delay: 99999s;
+}
+
+#submit{
+    font-family: "Space Age";
+    font-size: 1em;
+    color: #ffffff;
+    background: transparent;
+    width: 80%;
+    height: 30px;
+    margin: auto;
+    margin-top: 1em;
+    border: none;
+    border-radius: 28px;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+#submit:Hover{
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+
+#submit:focus{
+    box-shadow: 2px 3px 4px #ffffff6b;
+}
