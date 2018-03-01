@@ -86,4 +86,15 @@
         $request -> bindParam(":travelpres_ID", $travelPresID);
         $request -> execute();
     }
+
+//création du select pour creation nouveau voyage
+    function createOption(){
+        $bdd = getPDO();
+        $travels = $bdd->query('SELECT travelpres_ID, travelpres_destination FROM TRAVELPRES')->fetchall(PDO::FETCH_ASSOC);
+        foreach ($travels as $travel){
+            $str = "";
+            $str .= '<option value="'.$travel['travelpres_ID'].'">'.$travel['travelpres_destination'].'</option>';
+            echo $str;
+        }
+    }
 ?>

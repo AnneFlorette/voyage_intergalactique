@@ -14,7 +14,7 @@
         }
 
 //création nouveau voyage
-        if ((isset($_POST['destination']) && $_POST['destination'] != "") &&
+        if ((isset($_POST['destinations']) && $_POST['destinations'] != "") &&
             (isset($_POST['depart_date']) && $_POST['depart_date'] != "") &&
             (isset($_POST['total_time']) && $_POST['total_time'] != "") &&
             (isset($_POST['total_places']) && $_POST['total_places'] != "") &&
@@ -67,7 +67,11 @@
             <h3>Create a new trip</h3>
             <label for="destinations">Name of the destination</label>
             <br>
-            <select name="destinations" id=""></select>
+            <select name="destinations" id="destinationSelect">
+                <?php
+                    createOption();
+                ?>
+            </select>
             <br>
             <label for="depart_date">Date of departure</label>
             <br>
