@@ -14,7 +14,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Our company</title>
 </head>
+
+
 <body>
+    <script type="text/javascript" src="teamMate.js"></script>
+
     <section id="front">
 
         <?php 
@@ -58,21 +62,22 @@
         <div class="left">
             <h4>Our team</h4>
             <p id= "intro">A beautiful band of losers</p>
+            <div id="teamMate"></div>
         </div>
         <div id="container">
             <ul class="wrapper">
                 <div class="logo">
                     <div class="star"></div>
                 </div>
-                <div class="anneflo">
+                <div class="anneflo" onclick="testFunction('Anne Flore')">
                     <div class="text"><div class="name">Anne Flore</div></div>
                     <div class="planet"></div>
                 </div>
-                <div class="cyrille">
+                <div class="cyrille" onclick="testFunction('Cyrille')">
                 <div class="text"><div class="name">Cyrille</div></div>
                     <div class="planet"></div>
                 </div>
-                <div class="hugo">
+                <div class="hugo" onclick="testFunction('Hugo')">
                 <div class="text"><div class="name">Hugo</div></div>
                     <div class="planet"></div>
                 </div>
