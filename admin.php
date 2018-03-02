@@ -65,7 +65,7 @@
             <br>
             <textarea rows="8" cols="70" name="description" class="textarea" maxlength="500" required></textarea>
             <br>
-            <input type="submit" value="Envoyer">
+            <input type="submit" value="Send">
             <br>
         </form>
     </div>
@@ -97,7 +97,7 @@
             <input type="text" name="spaceship_type" class="input" max="25" required>
             <br>
             <br>
-            <input type="submit" value="Envoyer">
+            <input type="submit" value="Send">
             <br>
         </form>  
     </div>
@@ -109,13 +109,13 @@
                 <input type="text" name="search" class="input" max="40">
                 <br>
                 <br>
-                <input type="submit" value="Envoyer">
+                <input type="submit" value="Send" id="sendUsers">
                 <br>
         </form>
         <?php
             if(isset($_POST['search'])){
                 $search = htmlspecialchars($_POST['search']);
-                echo '<table>';
+                echo '<table id="table">';
                 searchUsers($search);
                 echo '</table>';
             }
@@ -131,21 +131,27 @@
         </div>
     </div>
     <script>
-        const nbRow = document.getElementByTagName('table').getElementsByTagName('tr').lenght
-        console.log(nbRow)
+        const sendUsers = document.getElementById('sendUsers')
         const popUp = document.getElementById('popUp')
         const btnYes = document.getElementById('yes')
+        let nbRow = 0
 
-        for(i = 0; i < nbRow; i++){
-            document.getElementsByClassName('delete')[i].addEventListener('click', display, false)
-        }
-        
-        
         function display() {
             let btnDeleteValue = document.getElementsByClassName('delete').value
             popUp.style.display = 'block'
             btnYes.value = btnDeleteValue
         }
+        
+        sendUsers.addEventListener('click', function() {
+            nbRow = document.getElementById('table').rows.length
+            return nbRow
+        }, false)
+
+        for(i = 0; i < nbRow; i++){
+            document.getElementsByClassName('delete')[i].addEventListener('click', display, false)
+        }
+        
+
         
     </script>
 </body>
