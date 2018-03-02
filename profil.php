@@ -28,7 +28,7 @@
                 modifPwd($_SESSION['ID'], $password);
             }
         }
-    // Suppression du compte
+// Suppression du compte
     if(isset($_POST['delete']) && $_POST['delete'] == "YES"){
         deleteAccount($_SESSION['ID']);
         echo'<meta http-equiv="refresh" content="0; URL=logOut.php">';

@@ -101,4 +101,33 @@
             echo $str;
         }
     }
+
+// recherche des users
+    function searchUsers($lastName){
+        $bdd = getPDO();
+        if($lastName != ""){
+            $usersTemp = $bdd -> prepare('SELECT user_ID, user_first_name, user_last_name, user_mail FROM USERS WHERE user_last_name = :lastName AND user_admin != 1');
+            $usersTemp -> bindParam("lastName", $lastName);
+            $usersTemp -> execute();
+        } else{
+            $usersTemp = $bdd -> query('SELECT user_ID, user_first_name, user_last_name, user_mail FROM USERS WHERE user_admin != 1');
+        }
+        $users = $usersTemp -> fetchall(PDO::FETCH_ASSOC);
+        foreach ($users as $user){
+            $str = "";
+            $str .= '<tr><td>'.$user['user_first_name']
+            .'</td><td>'.$user['user_last_name']
+            .'</td><td>'.$user['user_mail']
+            .'</td><td><button value="'.$user['user_ID'].'" class="delete"><i class="material-icons">delete</i></button></td></tr>';
+            echo $str;
+        }
+    }
+
+//Permet de supprimer le compte de l'utilisateur à partir de son ID
+    function deleteAccount($ID){
+        $bdd = getPDO();
+        $request = $bdd -> prepare("DELETE FROM USERS WHERE user_ID = :ID");
+        $request -> bindParam(":ID", $ID);
+        $request -> execute();
+    }
 ?>

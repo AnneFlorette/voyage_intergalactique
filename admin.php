@@ -14,22 +14,29 @@
         }
 
 //création nouveau voyage
-        if ((isset($_POST['destinations']) && $_POST['destinations'] != "") &&
-            (isset($_POST['depart_date']) && $_POST['depart_date'] != "") &&
-            (isset($_POST['total_time']) && $_POST['total_time'] != "") &&
-            (isset($_POST['total_places']) && $_POST['total_places'] != "") &&
-            (isset($_POST['spaceship_type']) && $_POST['spaceship_type'] != "")){
-                $destinationID = htmlspecialchars($_POST['destinations']);
-                $departDate = htmlspecialchars($_POST['depart_date']);
-                $totalPlaces = htmlspecialchars($_POST['total_places']);
-                $spaceshipType = htmlspecialchars($_POST['spaceship_type']);
-                $totalTime = htmlspecialchars($_POST['total_time']);
-                createTravel($destinationID, $departDate, $totalTime, $totalPlaces, $spaceshipType);
-            }
-//affichage de différentes stats
+    if ((isset($_POST['destinations']) && $_POST['destinations'] != "") &&
+        (isset($_POST['depart_date']) && $_POST['depart_date'] != "") &&
+        (isset($_POST['total_time']) && $_POST['total_time'] != "") &&
+        (isset($_POST['total_places']) && $_POST['total_places'] != "") &&
+        (isset($_POST['spaceship_type']) && $_POST['spaceship_type'] != "")){
+            $destinationID = htmlspecialchars($_POST['destinations']);
+            $departDate = htmlspecialchars($_POST['depart_date']);
+            $totalPlaces = htmlspecialchars($_POST['total_places']);
+            $spaceshipType = htmlspecialchars($_POST['spaceship_type']);
+            $totalTime = htmlspecialchars($_POST['total_time']);
+            createTravel($destinationID, $departDate, $totalTime, $totalPlaces, $spaceshipType);
+        }
+//affichage des 10 prochains vols
 
-//gestion des utilisateurs
-
+// Suppression du compte
+    if(isset($_POST['delete']) && $_POST['delete'] != ""){
+        $ID = htmlspecialchars($_POST['delete']);
+        deleteAccount($ID);
+        echo'<meta http-equiv="refresh" content="0; URL=admin.php">';
+    } else if(isset($_POST['notDelete'])) {
+        echo "<script>popUp.style.display = 'none'</script>";
+    }
+        
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +45,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/styleAdmin.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -87,9 +96,55 @@
             <br>
             <input type="text" name="spaceship_type" class="input" max="25" required>
             <br>
+            <br>
             <input type="submit" value="Envoyer">
             <br>
         </form>  
     </div>
+    <div>
+        <form action="" method="POST">
+            <h3>Search a user</h3>
+                <label for="search">Enter a user's last name</label>
+                <br>
+                <input type="text" name="search" class="input" max="40">
+                <br>
+                <br>
+                <input type="submit" value="Envoyer">
+                <br>
+                <?php
+                    if(isset($_POST['search'])){
+                        $search = htmlspecialchars($_POST['search']);
+                        echo '<table>';
+                        searchUsers($search);
+                        echo '</table>';
+                    }
+                ?>
+        </form>
+    </div>
+    <div id="popUp">
+        <div class="popUp_block">
+            <form action="" method="POST">
+                <p>Warning ! You're about to delete an account. Are you sure ?</p>
+                <button type="submit" id="yes" class="btnYesNo" name="delete" value="">YES</button>
+                <button type="submit" class="btnYesNo" name="notDelete" value="">NO</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        for(i = 0; i<3; i++){
+            document.getElementsByClassName('delete')[i].addEventListener('click', display, false)
+        }
+        
+        const popUp = document.getElementById('popUp')
+        const btnYes = document.getElementById('yes')
+        let btnDeleteValue = document.querySelector('.delete').value
+        // btnDelete.addEventListener('click', function() {display()}, false)
+        
+        function display() {
+            popUp.style.display = 'block'
+            btnYes.value = btnDeleteValue
+        }
+        
+    </script>
 </body>
 </html>

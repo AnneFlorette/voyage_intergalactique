@@ -1,0 +1,21 @@
+#popUp {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popUp_block {
+    background-color: #1b395f;
+    padding: 2em;
+    border: 2px solid #ddd;
+    position: relative;
+    margin: 12% auto;
+    width: 40%;
+    box-shadow: 2px 3px 4px #000000;
+    border-radius: 10px;
+}
