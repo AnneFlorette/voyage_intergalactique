@@ -111,14 +111,6 @@
                 <br>
                 <input type="submit" value="Envoyer">
                 <br>
-                <?php
-                    if(isset($_POST['search'])){
-                        $search = htmlspecialchars($_POST['search']);
-                        echo '<table>';
-                        searchUsers($search);
-                        echo '</table>';
-                    }
-                ?>
         </form>
         <?php
             if(isset($_POST['search'])){
