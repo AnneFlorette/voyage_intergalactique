@@ -42,15 +42,6 @@ CREATE TABLE IF NOT EXISTS `travel` (
   KEY `FK_TRAVEL_travelpres_ID` (`travelpres_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `travel`
---
-
-INSERT INTO `travel` (`travel_ID`, `travel_destination`, `travel_depart_date`, `travel_total_time`, `travel_total_places`, `travel_remain_places`, `travel_spaceship_type`, `travelpres_ID`) VALUES
-(1, 'Uranus', '2018-03-07', 15, 54, 54, 'aze', 2),
-(2, 'Uranus', '2018-03-07', 15, 54, 54, 'aze', 2),
-(3, 'Saturn', '2018-03-17', 15, 84, 84, 'coucou', 3);
-
 -- --------------------------------------------------------
 
 --
@@ -78,7 +69,6 @@ INSERT INTO `travelpres` (`travelpres_ID`, `travelpres_destination`, `travelpres
 (5, 'Pluto', 'img/plutoG.png', 'The exo-planete where live the violent queen Anne Florette'),
 (6, 'Mars', 'img/marsG.png', 'The red planete'),
 (10, 'Jupiter', 'img/jupiterG.png', 'Test test test'),
-(11, 'Jupiter', 'img/jupiterG.png', 'Test test test');
 
 -- --------------------------------------------------------
 
