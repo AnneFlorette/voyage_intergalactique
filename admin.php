@@ -131,15 +131,18 @@
         </div>
     </div>
     <script>
-        for(i = 0; i<3; i++){
+        const nbRow = document.getElementByTagName('table').getElementsByTagName('tr').lenght
+        console.log(nbRow)
+        const popUp = document.getElementById('popUp')
+        const btnYes = document.getElementById('yes')
+
+        for(i = 0; i < nbRow; i++){
             document.getElementsByClassName('delete')[i].addEventListener('click', display, false)
         }
         
-        const popUp = document.getElementById('popUp')
-        const btnYes = document.getElementById('yes')
-        let btnDeleteValue = document.querySelector('.delete').value
         
         function display() {
+            let btnDeleteValue = document.getElementsByClassName('delete').value
             popUp.style.display = 'block'
             btnYes.value = btnDeleteValue
         }
