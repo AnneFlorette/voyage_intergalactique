@@ -120,6 +120,14 @@
                     }
                 ?>
         </form>
+        <?php
+            if(isset($_POST['search'])){
+                $search = htmlspecialchars($_POST['search']);
+                echo '<table>';
+                searchUsers($search);
+                echo '</table>';
+            }
+        ?> 
     </div>
     <div id="popUp">
         <div class="popUp_block">
@@ -138,7 +146,6 @@
         const popUp = document.getElementById('popUp')
         const btnYes = document.getElementById('yes')
         let btnDeleteValue = document.querySelector('.delete').value
-        // btnDelete.addEventListener('click', function() {display()}, false)
         
         function display() {
             popUp.style.display = 'block'
