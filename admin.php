@@ -131,6 +131,7 @@
 
         function display() {
             let btnDeleteValue = document.getElementsByClassName('delete').value
+            console.log(document.getElementsByClassName('delete').value)
             popUp.style.display = 'block'
             btnYes.value = btnDeleteValue
         }
@@ -141,7 +142,7 @@
 
         sendUsers.addEventListener('click', countRow, false)         
         for(i = 0; i < countRow(); i++){
-            document.getElementsByClassName('delete')[i].addEventListener('click', display, false)
+            document.getElementsByClassName('delete')[i].addEventListener('click', function() {display()}, false)
         }
         
     </script>
@@ -150,7 +151,7 @@
     if(isset($_POST['delete']) && $_POST['delete'] != ""){
         $ID = htmlspecialchars($_POST['delete']);
         deleteAccount($ID);
-        echo '<meta http-equiv="refresh" content="0; URL=admin.php">';
+        //echo '<meta http-equiv="refresh" content="0; URL=admin.php">';
     } else if(isset($_POST['notDelete'])) {
         echo "<script>popUp.style.display = 'none'</script>";
     }
