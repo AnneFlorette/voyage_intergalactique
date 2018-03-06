@@ -28,14 +28,7 @@
         }
 //affichage des 10 prochains vols
 
-// Suppression du compte
-    if(isset($_POST['delete']) && $_POST['delete'] != ""){
-        $ID = htmlspecialchars($_POST['delete']);
-        deleteAccount($ID);
-        echo'<meta http-equiv="refresh" content="0; URL=admin.php">';
-    } else if(isset($_POST['notDelete'])) {
-        echo "<script>popUp.style.display = 'none'</script>";
-    }
+
         
 ?>
 
@@ -143,7 +136,7 @@
         }
         
         sendUsers.addEventListener('click', function() {
-            nbRow = document.getElementById('table').rows.length
+            nbRow = document.getElementByTagName('tr').length
             return nbRow
         }, false)
 
@@ -151,8 +144,16 @@
             document.getElementsByClassName('delete')[i].addEventListener('click', display, false)
         }
         
-
-        
     </script>
+    <?php
+// Suppression du compte
+    if(isset($_POST['delete']) && $_POST['delete'] != ""){
+        $ID = htmlspecialchars($_POST['delete']);
+        deleteAccount($ID);
+        header('Refresh:0');
+    } else if(isset($_POST['notDelete'])) {
+        echo "<script>popUp.style.display = 'none'</script>";
+    }
+    ?>
 </body>
 </html>
