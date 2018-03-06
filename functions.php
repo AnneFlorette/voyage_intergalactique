@@ -258,4 +258,41 @@ include 'configBdd.php';
             echo $str;
         }
    }
+
+//retourne l'ID de la destination stocké dans l'url
+    function getIDDestination(){
+       $IDDestination = $_GET['ID'];
+       return $IDDestination;
+    }
+
+//retourne la description de la destination
+    function getTripDescription($ID){
+        $bdd = getPDO();
+        $descriptionTemp = $bdd -> prepare('SELECT travelpres_description FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $descriptionTemp -> bindParam(':ID', $ID);
+        $descriptionTemp -> execute();
+        $description = $descriptionTemp -> fetch(PDO::FETCH_ASSOC);
+        return $descritpion;
+    }
+
+//retourne l'image de la destination
+    function getTripImage($ID){
+        $bdd = getPDO();
+        $imageTemp = $bdd -> prepare('SELECT travelpres_img_url FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $imageTemp -> bindParam(':ID', $ID);
+        $imageTemp -> execute();
+        $image = $imageTemp -> fetch(PDO::FETCH_ASSOC);
+        return $image;
+    }
+
+//retourne le nom de la destination
+    function getTripName($ID){
+        $bdd = getPDO();
+        $nameTemp = $bdd -> prepare('SELECT travelpres_destination FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $nameTemp -> bindParam(':ID', $ID);
+        $nameTemp -> execute();
+        $name = $nameTemp -> fetch(PDO::FETCH_ASSOC);
+        return $name;
+    }
+
 ?>
