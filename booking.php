@@ -25,15 +25,25 @@
         <section id="content">
             
             <div id="resume">
-                <h3>Name of the planet</h3>
-                <br>
-                <div id="tripResume">Trip's resume</div>
-                <div id="tripInfo"> availables places <br> date of trip</div>
-                <div id="opinion">User's Opinion</div>
+                <h3><?php echo getTripName(getIDDestination()) ?></h3>
+                <div id="tripResume">
+                    <h4>Trip's description</h4>
+                    <p><?php echo getTripDescription(getIDDestination()) ?></p>
+                </div>
+                <div id="tripInfo">
+                    <table>
+                    <tr>
+                    <th>travel's ID</th>
+                    <th>Date</th>
+                    <th>Available Places</th>
+                    <th>Travel's time</th>
+                    </tr>
+                    <?php echo getNextTrip(getIDDestination());?>
+                    </table>
+                </div>
             </div>
             <div id="booking">
                 <h3>Book a trip</h3>
-                <br>
                 <form action="" method="POST">
                     <label for="nbAdults">Number of adults : </label>
                     <br>
@@ -46,7 +56,7 @@
                     <label for="tripChose">Chose your trip : </label>
                     <br>
                     <select name="tripDate" id="tripDate" required> 
-                        <option value="tripID"> Date of the trip in database </option>
+                        <?php echo getTripOptions(getIDDestination()); ?>
                     </select>
                     <br>
                     <input id="submit" type="submit" value="Book This Trip">

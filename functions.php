@@ -272,7 +272,7 @@ include 'configBdd.php';
         $descriptionTemp -> bindParam(':ID', $ID);
         $descriptionTemp -> execute();
         $description = $descriptionTemp -> fetch(PDO::FETCH_ASSOC);
-        return $descritpion;
+        return $description['travelpres_description'];
     }
 
 //retourne l'image de la destination
@@ -292,7 +292,38 @@ include 'configBdd.php';
         $nameTemp -> bindParam(':ID', $ID);
         $nameTemp -> execute();
         $name = $nameTemp -> fetch(PDO::FETCH_ASSOC);
-        return $name;
+        return $name['travelpres_destination'];
+    }
+
+//retourne le tableau des prochains vols par l'ID de la destination
+    function getNextTrip($ID){
+        $bdd = getPDO();
+        $infoTemp = $bdd -> prepare('SELECT travel_ID ,travel_depart_date, travel_total_time, travel_remain_places FROM TRAVEL WHERE travelpres_ID = :ID');
+        $infoTemp -> bindParam(':ID', $ID);
+        $infoTemp -> execute();
+        $infos = $infoTemp -> fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($infos as $info){
+            $str = '';
+            $str .= '<tr><td>'.$info['travel_ID'].'</td>
+                    <td>'.$info['travel_depart_date'].'</td>
+                    <td>'.$info['travel_remain_places'].'</td>
+                    <td>'.$info['travel_total_time'].' days </td></tr>';
+        } 
+        return $str;
+    }
+
+    function getTripOptions($IDDestination){
+        $bdd = getPDO();
+        $optionInfos = $bdd -> prepare('SELECT travel_ID, travel_depart_date FROM TRAVEL WHERE travelpres_ID = :ID');
+        $optionInfos -> bindParam(':ID', $IDDestination);
+        $optionInfos -> execute();
+        $options = $optionInfos -> fetchAll(PDO::FETCH_ASSOC);
+        foreach($options as $option){
+            $str = '';
+            $str .= '<option value="'.$option['travel_ID'].'">'.$option['travel_ID'].', '.$option['travel_depart_date'].'</option>';
+        }
+        return $str;
     }
 
 ?>
