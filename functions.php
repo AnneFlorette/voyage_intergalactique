@@ -309,8 +309,9 @@ include 'configBdd.php';
                     <td>'.$info['travel_depart_date'].'</td>
                     <td>'.$info['travel_remain_places'].'</td>
                     <td>'.$info['travel_total_time'].' days </td></tr>';
+
+            echo $str;
         } 
-        return $str;
     }
 
     function getTripOptions($IDDestination){
@@ -322,8 +323,17 @@ include 'configBdd.php';
         foreach($options as $option){
             $str = '';
             $str .= '<option value="'.$option['travel_ID'].'">'.$option['travel_ID'].', '.$option['travel_depart_date'].'</option>';
+            echo $str;
         }
-        return $str;
+    }
+
+    function getImageDestinations($IDDestination){
+        $bdd = getPDO();
+        $imgDestination = $bdd -> prepare('SELECT travelpres_img_url FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $imgDestination -> bindParam(':ID', $IDDestination);
+        $imgDestination -> execute();
+        $imgURL = $imgDestination -> fetch(PDO::FETCH_ASSOC);
+        echo 'background="'.$imgURL['travelpres_img_url'].'"';
     }
 
 ?>

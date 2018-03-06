@@ -12,7 +12,6 @@
 }
 
 body{
-    background-image: url(../img/univers_8.jpg);
     height: 100vh;
     background-size: cover;
     background-attachment: fixed;
@@ -146,10 +145,26 @@ h1{
 
 #resume{
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tripInfo{
+    padding: 10px;
+    overflow: auto;
+    max-height: 50%;
+}
+
+th, td, tr{
+    padding: 10px;
 }
 
 #booking{
     width: 30%;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 h3{
