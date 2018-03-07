@@ -298,20 +298,21 @@ include 'configBdd.php';
 //retourne le tableau des prochains vols par l'ID de la destination
     function getNextTrip($ID){
         $bdd = getPDO();
-        $infoTemp = $bdd -> prepare('SELECT travel_ID ,travel_depart_date, travel_total_time, travel_remain_places FROM TRAVEL WHERE travelpres_ID = :ID');
+        $infoTemp = $bdd -> prepare('SELECT t1.travel_ID ,t1.travel_depart_date, t2.travelpres_days, t1.travel_remain_places FROM TRAVEL t1 JOIN TRAVELPRES t2 WHERE t2.travelpres_ID = :ID');
         $infoTemp -> bindParam(':ID', $ID);
         $infoTemp -> execute();
         $infos = $infoTemp -> fetchAll(PDO::FETCH_ASSOC);
-
+        
         foreach($infos as $info){
             $str = '';
             $str .= '<tr><td>'.$info['travel_ID'].'</td>
                     <td>'.$info['travel_depart_date'].'</td>
                     <td>'.$info['travel_remain_places'].'</td>
-                    <td>'.$info['travel_total_time'].' days </td></tr>';
-
+                    <td>'.$info['travelpres_days'].' days </td></tr>';
+            
             echo $str;
         } 
+        
     }
 
     function getTripOptions($IDDestination){

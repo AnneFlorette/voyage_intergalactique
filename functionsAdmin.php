@@ -63,30 +63,32 @@
     }
 
 //création d'une destination
-    function createDestination($destination, $img, $description){
+    function createDestination($destination, $img, $description, $travelTime, $adultPrice, $childPrice){
+        var_dump($destination, $img, $description, $travelTime, $adultPrice, $childPrice);
         $bdd = getPDO();
-        $request = $bdd -> prepare("INSERT INTO TRAVELPRES (travelpres_destination, travelpres_img_url, travelpres_description) VALUES (:destination, :img_url, :descriptions)");
+        $request = $bdd -> prepare("INSERT INTO TRAVELPRES (travelpres_destination, travelpres_img_url, travelpres_description, travelpres_days, travelpres_price_adult, travelpres_price_child) VALUES (:destination, :img_url, :descriptions, :travelTime, :adultPrice, :childPrice)");
         $request -> bindParam(":destination",$destination);
         $request -> bindParam(":img_url",$img);
         $request -> bindParam(":descriptions",$description);
+        $request -> bindParam(":travelTime", $travelTime);
+        $request -> bindParam(":adultPrice", $adultPrice);
+        $request -> bindParam(":childPrice", $childPrice);
         $request -> execute();
     }
 
 //création d'un nouveau voyage
 // le deuxieme total places est pour remain places car voyage neuf donc toutes les places sont libres
-    function createTravel($destinationID, $departDate, $totalTime, $totalPlaces, $spaceshipType){
+    function createTravel($destinationID, $departDate){
         $bdd = getPDO();
-        $destinationTemp = $bdd -> prepare("SELECT travelpres_destination FROM TRAVELPRES WHERE travelpres_ID = :destination_ID");
+        $destinationTemp = $bdd -> prepare("SELECT travelpres_destination, travelpres_total_places FROM TRAVELPRES WHERE travelpres_ID = :destination_ID");
         $destinationTemp -> bindParam(":destination_ID", $destinationID);
         $destinationTemp -> execute();
         $destination = $destinationTemp -> fetch(PDO::FETCH_ASSOC);
-        $request = $bdd -> prepare("INSERT INTO TRAVEL (travel_destination, travel_depart_date, travel_total_time, travel_total_places, travel_remain_places, travel_spaceship_type, travelpres_ID) 
-        VALUES (:destination, :depart_date, :total_time, :total_places, :total_places, :spaceship_type, :travelpres_ID)");
+        $request = $bdd -> prepare("INSERT INTO TRAVEL (travel_destination, travel_depart_date, travel_remain_places, travelpres_ID) 
+                                    VALUES (:destination, :depart_date, :total_places, :travelpres_ID)");
         $request -> bindParam(":destination", $destination['travelpres_destination']);
         $request -> bindParam(":depart_date", $departDate);
-        $request -> bindParam(":total_time", $totalTime);
-        $request -> bindParam(":total_places", $totalPlaces);
-        $request -> bindParam(":spaceship_type", $spaceshipType);
+        $request -> bindParam(":total_places", $destination['travelpres_total_places']);
         $request -> bindParam(":travelpres_ID", $destinationID);
         $request -> execute(); 
     }

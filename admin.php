@@ -6,25 +6,26 @@
 //création nouvelle destination
     if ((isset($_POST['destination']) && $_POST['destination'] != "") &&
         (isset($_POST['img_url']) && $_POST['img_url'] != "") &&
+        (isset($_POST['time']) && $_POST['time'] != "") &&
+        (isset($_POST['adultPrice']) && $_POST['adultPrice'] != "") &&
+        (isset($_POST['childPrice']) && $_POST['childPrice'] != "") &&
         (isset($_POST['description']) && $_POST['description'] != "")){
             $destination = htmlspecialchars($_POST['destination']);
             $img = 'img/'.htmlspecialchars($_POST['img_url']);
             $description = htmlspecialchars($_POST['description']);
-            createDestination($destination, $img, $description);
+            $travelTime = htmlspecialchars($_POST['time']);
+            $adultPrice = htmlspecialchars($_POST['adultPrice']);
+            $childPrice = htmlspecialchars($_POST['childPrice']);
+            
+            createDestination($destination, $img, $description, $travelTime, $adultPrice, $childPrice);
         }
 
 //création nouveau voyage
     if ((isset($_POST['destinations']) && $_POST['destinations'] != "") &&
-        (isset($_POST['depart_date']) && $_POST['depart_date'] != "") &&
-        (isset($_POST['total_time']) && $_POST['total_time'] != "") &&
-        (isset($_POST['total_places']) && $_POST['total_places'] != "") &&
-        (isset($_POST['spaceship_type']) && $_POST['spaceship_type'] != "")){
+        (isset($_POST['depart_date']) && $_POST['depart_date'] != "")){
             $destinationID = htmlspecialchars($_POST['destinations']);
             $departDate = htmlspecialchars($_POST['depart_date']);
-            $totalPlaces = htmlspecialchars($_POST['total_places']);
-            $spaceshipType = htmlspecialchars($_POST['spaceship_type']);
-            $totalTime = htmlspecialchars($_POST['total_time']);
-            createTravel($destinationID, $departDate, $totalTime, $totalPlaces, $spaceshipType);
+            createTravel($destinationID, $departDate);
         }
 //affichage des 10 prochains vols
 
@@ -54,8 +55,21 @@
             <br>
             <input type="file" name="img_url" class="input" max="40" required>
             <br>
+            <label for="time">Travel time in days</label>
+            <br>
+            <input type="int" name="time" class="input" required>
+            <br>
+            <label for="adultPrice">Price for an Adult</label>
+            <br>
+            <input type="int" name="adultPrice" class="input" required>
+            <br>
+            <label for="childPrice">Price for a child (+15%)</label>
+            <br>
+            <input type="int" name="childPrice" class="input" required>
+            <br>
             <label for="description">Description of the destination</label>
             <br>
+            
             <textarea rows="8" cols="70" name="description" class="textarea" maxlength="500" required></textarea>
             <br>
             <input type="submit" value="Send">
@@ -76,19 +90,6 @@
             <label for="depart_date">Date of departure</label>
             <br>
             <input type="date" name="depart_date" class="input" required>
-            <br>
-            <label for="total_time">Time of the travel</label>
-            <br>
-            <input type="number" name="total_time" required>
-            <br>
-            <label for="total_places">Total places aboard</label>
-            <br>
-            <input type="number" name="total_places" class="input" required>
-            <br>
-            <label for="spaceship_type">Spaceship type</label>
-            <br>
-            <input type="text" name="spaceship_type" class="input" max="25" required>
-            <br>
             <br>
             <input type="submit" value="Send">
             <br>
