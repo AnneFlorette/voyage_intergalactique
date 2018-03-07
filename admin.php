@@ -127,13 +127,18 @@
         const sendUsers = document.getElementById('sendUsers')
         const popUp = document.getElementById('popUp')
         const btnYes = document.getElementById('yes')
+        let idToDelete = null
         let row
+        
 
         function display() {
-            let btnDeleteValue = document.getElementsByClassName('delete').value
-            console.log(document.getElementsByClassName('delete').value)
             popUp.style.display = 'block'
-            btnYes.value = btnDeleteValue
+        }
+
+        function listenOnYesButton(id) {
+            btnYes.addEventListener('click', function() {
+                btnYes.value = id
+            })
         }
         function countRow(){
             row = document.getElementsByTagName('tr').length
@@ -142,7 +147,12 @@
 
         sendUsers.addEventListener('click', countRow, false)         
         for(i = 0; i < countRow(); i++){
-            document.getElementsByClassName('delete')[i].addEventListener('click', function() {display()}, false)
+            let deleteButtonEl = document.getElementsByClassName('delete')[i]
+            deleteButtonEl.addEventListener('click', () => {
+                idToDelete = deleteButtonEl.value
+                display()
+                listenOnYesButton(idToDelete)
+            }, false)
         }
         
     </script>
