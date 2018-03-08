@@ -317,6 +317,7 @@ include 'configBdd.php';
         
     }
 
+//retourne l'id du vol et sa date de départ pour la sélection de l'utilisateur dans booking
     function getTripOptions($IDDestination){
         $bdd = getPDO();
         $optionInfos = $bdd -> prepare('SELECT travel_ID, travel_depart_date FROM TRAVEL WHERE travelpres_ID = :ID');
@@ -330,6 +331,7 @@ include 'configBdd.php';
         }
     }
 
+//retourne l'image de la destination pour le fond de booking suivant la destination choisie
     function getImageDestinations($IDDestination){
         $bdd = getPDO();
         $imgDestination = $bdd -> prepare('SELECT travelpres_img_url FROM TRAVELPRES WHERE travelpres_ID = :ID');
@@ -339,5 +341,20 @@ include 'configBdd.php';
         echo 'background="'.$imgURL['travelpres_img_url'].'"';
     }
 
+//réservation des places
+    function bookATrip($totalPlaces, $travelID){
+        $bdd = getPDO();
+        $getPlaces = $bdd -> prepare('SELECT travel_remain_places FROM TRAVEL WHERE travel_ID = :travelID');
+        $getPlaces -> bindParam(":travelID", $travelID);
+        $getPlaces -> execute();
+        $placesTemp = $getPlaces -> fetch(PDO::FETCH_ASSOC);
+
+        $places = $placesTemp - $totalPlaces;
+
+        $request = $bdd -> prepare('UPDATE TRAVEL SET travel_remain_places = :places WHERE travel_ID = :travelID');
+        $request -> bindParam(":places", $places);
+        $request -> bindParam("travelID", $travelID);
+        $request -> execute();
+    }
 
 ?>

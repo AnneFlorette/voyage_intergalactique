@@ -1,6 +1,18 @@
 <?php 
     include 'functions.php';
     session_start();
+
+
+//calcul du cout des billets et réservation des places
+    if(isset($_POST['nbAdults']) && isset($_POST['nbChildren']) && isset($_POST['tripDate'])){
+        $_SESSION['nbAdults'] = htmlspecialchars($_POST['nbAdults']);
+        $_SESSION['nbChildren'] = htmlspecialchars($_POST['nbChildren']);
+        $_SESSION['travelID'] = htmlspecialchars($_POST['tripDate']);
+        header('location: validatePayment.php');
+    }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -49,11 +61,11 @@
                 <form action="" method="POST">
                     <label for="nbAdults">Number of adults : </label>
                     <br>
-                    <input type="number" name="nbAdults" required>
+                    <input type="number" name="nbAdults" min="0" required>
                     <br>           
                     <label for="nbChildren">Number of children : </label>
                     <br>
-                    <input type="number" name="nbChildren" required>
+                    <input type="number" name="nbChildren" min="0" required>
                     <br>
                     <label for="tripChose">Chose your trip : </label>
                     <br>
