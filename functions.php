@@ -298,7 +298,7 @@ include 'configBdd.php';
 //retourne le tableau des prochains vols par l'ID de la destination
     function getNextTrip($ID){
         $bdd = getPDO();
-        $infoTemp = $bdd -> prepare('SELECT t1.travel_ID ,t1.travel_depart_date, t2.travelpres_days, t1.travel_remain_places FROM TRAVEL t1 JOIN TRAVELPRES t2 WHERE t2.travelpres_ID = :ID');
+        $infoTemp = $bdd -> prepare('SELECT t1.travel_ID ,t1.travel_depart_date, t2.travelpres_days, t2.travelpres_price_adult, t2.travelpres_price_child, t1.travel_remain_places FROM TRAVEL t1 JOIN TRAVELPRES t2 WHERE t2.travelpres_ID = :ID');
         $infoTemp -> bindParam(':ID', $ID);
         $infoTemp -> execute();
         $infos = $infoTemp -> fetchAll(PDO::FETCH_ASSOC);
@@ -308,7 +308,9 @@ include 'configBdd.php';
             $str .= '<tr><td>'.$info['travel_ID'].'</td>
                     <td>'.$info['travel_depart_date'].'</td>
                     <td>'.$info['travel_remain_places'].'</td>
-                    <td>'.$info['travelpres_days'].' days </td></tr>';
+                    <td>'.$info['travelpres_days'].' days </td>
+                    <td>'.$info['travelpres_price_adult'].' €</td>
+                    <td>'.$info['travelpres_price_child'].' €</td></tr>';
             
             echo $str;
         } 
@@ -336,5 +338,6 @@ include 'configBdd.php';
         $imgURL = $imgDestination -> fetch(PDO::FETCH_ASSOC);
         echo 'background="'.$imgURL['travelpres_img_url'].'"';
     }
+
 
 ?>

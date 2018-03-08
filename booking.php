@@ -33,10 +33,12 @@
                 <div id="tripInfo">
                     <table>
                     <tr>
-                    <th>travel's ID</th>
+                    <th>Travel's ID</th>
                     <th>Date</th>
                     <th>Available Places</th>
                     <th>Travel's time</th>
+                    <th>Adult price</th>
+                    <th>Child price</th>
                     </tr>
                     <?php getNextTrip(getIDDestination());?>
                     </table>
