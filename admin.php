@@ -41,6 +41,9 @@
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        
+    </nav>
     <div id="createDestination">
         <form action="" method="POST">
             <h3>Create a new destination</h3>
@@ -68,7 +71,7 @@
             <br>
             <textarea rows="8" cols="70" name="description" class="textarea" maxlength="500" required></textarea>
             <br>
-            <input type="submit" value="Send">
+            <input type="submit" class="submit" value="Send">
             <br>
         </form>
     </div>
@@ -87,7 +90,7 @@
             <br>
             <input type="date" name="depart_date" class="input" required>
             <br>
-            <input type="submit" value="Send">
+            <input type="submit" class="submit" value="Send">
             <br>
         </form>  
     </div>
@@ -99,7 +102,7 @@
                 <input type="text" name="search" class="input" max="40">
                 <br>
                 <br>
-                <input type="submit" value="Send" id="sendUsers">
+                <input type="submit" value="Send" class="submit" id="sendUsers">
                 <br>
         </form>
         <?php
@@ -110,6 +113,21 @@
                 echo '</table>';
             }
         ?> 
+    </div>
+    <!-- affichage des 10 prochains vols -->
+    <div>
+        <h3>Next trips</h3>
+        <table>
+            <tr>
+                <th>Travel's ID</th>
+                <th>Destination</th>
+                <th>Depart Date</th>
+                <th>Remain places</th>
+            </tr>
+            <?php
+                getNextTravels();
+            ?>
+        </table>
     </div>
     <div id="popUp">
         <div class="popUp_block">
@@ -163,11 +181,6 @@
         echo "<script>popUp.style.display = 'none'</script>";
     }
     ?>
-<!-- affichage des 10 prochains vols -->
-    <table>
-        <?php
-            getNextTravels();
-        ?>
-    </table>
+    
 </body>
 </html>
