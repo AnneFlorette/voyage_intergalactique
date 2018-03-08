@@ -27,9 +27,6 @@
             $departDate = htmlspecialchars($_POST['depart_date']);
             createTravel($destinationID, $departDate);
         }
-//affichage des 10 prochains vols
-
-
         
 ?>
 
@@ -69,7 +66,6 @@
             <br>
             <label for="description">Description of the destination</label>
             <br>
-            
             <textarea rows="8" cols="70" name="description" class="textarea" maxlength="500" required></textarea>
             <br>
             <input type="submit" value="Send">
@@ -167,5 +163,11 @@
         echo "<script>popUp.style.display = 'none'</script>";
     }
     ?>
+<!-- affichage des 10 prochains vols -->
+    <table>
+        <?php
+            getNextTravels();
+        ?>
+    </table>
 </body>
 </html>

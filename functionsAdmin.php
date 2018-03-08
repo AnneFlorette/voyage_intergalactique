@@ -134,4 +134,22 @@
         $request -> bindParam(":ID", $ID);
         $request -> execute();
     }
+
+
+//afficher les 10 prochains voyages
+    function getNextTravels(){
+        $bdd = getPDO();
+        $travels = $bdd -> query('SELECT * FROM TRAVEL WHERE travel_depart_date > CURRENT_DATE');
+        foreach($travels as $travel){
+            $str = "";
+            $str .= '<tr><td>'.$travel['travel_ID']
+            .'</td><td>'.$travel['travel_destination']
+            .'</td><td>'.$travel['travel_depart_date']
+            .'</td><td>'.$travel['travel_remain_places']
+            .'</td></tr>';
+            echo $str;
+        }
+    }
+
+
 ?>
