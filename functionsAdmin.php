@@ -121,7 +121,7 @@
             $str .= '<tr><td>'.$user['user_first_name']
             .'</td><td>'.$user['user_last_name']
             .'</td><td>'.$user['user_mail']
-            .'</td><td><button id="'.$i.'"value="'.$user['user_ID'].'" class="delete"><i class="material-icons">delete</i></button></td></tr>';
+            .'</td><td><button class="button" id="'.$i.'"value="'.$user['user_ID'].'" class="delete"><i class="material-icons">delete</i></button></td></tr>';
             echo $str;
             $i++;
         }

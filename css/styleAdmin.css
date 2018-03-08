@@ -1,3 +1,127 @@
+@font-face {
+    font-family: "Space Age";
+	src: url('space_age.ttf');
+}
+@font-face{
+    font-family: "Sansation";
+    src: url('Sansation_regular.ttf');
+}
+
+:focus{
+    outline: none;
+}
+
+body{
+    background-image: url(../img/univers_5.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    width: 100%;
+    text-align: center;
+    margin: 0px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+} 
+
+div{
+    width: 40vw;
+    background: #1b395fbd;
+    box-shadow: 2px 3px 4px #000000;
+    border-radius: 10px;
+    margin: 12px;
+    color: #ffffff;
+    font-family: "Sansation";
+}
+
+h3{
+    color: #ffffff;
+    font-family: "Space Age";
+    font-size: 1.5em;
+}
+
+label{
+    margin-bottom: 16px;
+}
+
+select{
+    margin: 6px;
+    padding: 3px;
+    height: 20px;
+    width: 200px;
+    border-radius: 6px;
+    font-size: 12px;
+    border: none;
+    background: #ffffff7a;
+    box-shadow: 2px 2px 5px #000000;
+    font-family: "Sansation";
+}
+
+textarea{
+    background-color: transparent;
+    box-shadow: 0 4px 2px -2px #ffffff6b;
+    width: 70%;
+    max-width: 90%;
+}
+
+.input{
+    border: none;
+    width: 50%;
+    border-bottom: solid #ffffff 1px;
+    box-shadow: 0 4px 2px -2px #ffffff6b;
+    background-color: transparent;
+    color: #ffffff;
+    margin-bottom: 1em;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+    -webkit-transition-delay: 99999s;
+}
+
+.submit{
+    font-family: "Space Age";
+    font-size: 14px;
+    background-color: #ffffff;
+    width: 120px;
+    height: 30px;
+    margin: 16px 50px;
+    border: none;
+    border-radius: 28px;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+.submit:Hover{  
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+
+
+.submit:focus{
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+}
+
+.button{
+    background-color: transparent;
+    border: none;
+    color: #ffffff; 
+}
+
+table{
+    margin: auto;
+}
+
+th, td, tr{
+    padding: 10px;
+}
+
 #popUp {
     display: none;
     position: fixed;
