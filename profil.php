@@ -129,11 +129,40 @@
         </div>
     </section>
     <section id="myTrip">
-        <div id="futureTrip">
+        <div id="futureTrip"> 
             <h5>My Next Trips</h5>
+            <?php
+                $nextTrips = getNextTrips($_SESSION['ID']);
+                if(count($nextTrips) == 0){
+                    echo '<div class="trip">No trip registered</div>';
+                } else{
+                    foreach($nextTrips as $nextTrip){
+                        $destination = getDestination($nextTrip["travel_ID"]);
+                        echo '<div class="trip">Destination: ' . $destination[0]["travel_Destination"] .
+                            '</br>Date: ' . $nextTrip["userbooking_booking_date"] .
+                            '</br>Nombre de places: ' . $nextTrip["userbooking_nbr_places"] .
+                            '</div>';
+                    }
+                }
+            ?>
         </div>
+
         <div id="pastTrip">
             <h5>My Old Trips</h5>
+            <?php
+                $oldTrips = getOldTrips($_SESSION['ID']);
+                if(count($oldTrips) == 0){
+                    echo '<div class="trip">No trip registered</div>';
+                } else{
+                    foreach($oldTrips as $oldTrip){
+                        $destination = getDestination($oldTrip["travel_ID"]);
+                        echo '<div class="trip">Destination: ' . $destination[0]["travel_Destination"] .
+                            '</br>Date: ' . $oldTrip["userbooking_booking_date"] .
+                            '</br>Nombre de places: ' . $oldTrip["userbooking_nbr_places"] .
+                            '</div>';
+                    }
+                }
+            ?>
         </div>
     </section>
 
