@@ -174,6 +174,31 @@ include 'configBdd.php';
         return false;
     }
 
+//PROFIL FUNCTIONS
+
+    function getNextTrips($userID){
+        $bdd = getPDO();
+        /*$request = $bdd -> prepare("SELECT * FROM `usersbooking` WHERE user_ID = :ID AND userbooking_booking_date >= CURRENT_DATE");
+        $request -> bindParam(":ID", $userID);
+        $request -> execute() -> fetchAll(PDO::FETCH_ASSOC);
+        return $request ; */
+        return $bdd -> query("SELECT * FROM `usersbooking` WHERE user_ID = " . $userID . " AND userbooking_booking_date >= CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getOldTrips($userID){
+        $bdd = getPDO();
+        /*$request = $bdd -> prepare("SELECT * FROM `usersbooking` WHERE user_ID = :ID AND userbooking_booking_date < CURRENT_DATE");
+        $request -> bindParam(":ID", $userID);
+        $result = $request -> execute();
+        return $result -> fetchAll(PDO::FETCH_ASSOC); */
+        return $bdd -> query("SELECT * FROM `usersbooking` WHERE user_ID = " . $userID . " AND userbooking_booking_date < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getDestination($travelID){
+        $bdd = getPDO();
+        return $bdd -> query("SELECT travel_Destination FROM `travel` WHERE travel_ID = " . $travelID) -> fetchAll(PDO::FETCH_ASSOC);
+    }
+
 //Vérifie qu'une session est active
 //Si oui, la navbar propose d'accéder à son profil et de se déconnecter
 //Si non, navbar proposant de se connecter ou s'inscrire

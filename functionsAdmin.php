@@ -136,6 +136,7 @@
     }
 
 
+
 //afficher les 10 prochains voyages
     function getNextTravels(){
         $bdd = getPDO();
@@ -151,5 +152,124 @@
         }
     }
 
+    //STATISTIC FUNCTIONS
+    function getNbrUser(){
+        $bdd = getPDO();
+        $request = $bdd -> query("SELECT COUNT(user_ID) FROM users WHERE user_admin != 1") -> fetchAll(PDO::FETCH_ASSOC);
+        return $request[0]["COUNT(user_ID)"];
+    }
 
+    function getDestinations(){
+        $bdd = getPDO();
+        $request = $bdd -> query("SELECT * FROM travelpres") -> fetchAll(PDO::FETCH_ASSOC);
+        return $request;
+    }
+
+    function getTravel($destinationID = null){
+        $bdd = getPDO();
+        if($destinationID != null){
+            $request = $bdd -> query("SELECT * FROM travel WHERE travel_ID =" . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
+        } else{
+            $request = $bdd -> query("SELECT * FROM travel") -> fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $request;
+    }
+
+    function getNbrReservedSit($destinationID = null){
+        $bdd = getPDO();
+        if($destinationID != null){
+            $requests = $bdd -> query("SELECT userbooking_nbr_places FROM usersbooking WHERE EXISTS (SELECT * FROM travel WHERE travelpres_ID = ". $destinationID .")") -> fetchAll(PDO::FETCH_ASSOC);
+        } else{
+            $requests = $bdd -> query("SELECT userbooking_nbr_places FROM usersbooking") -> fetchAll(PDO::FETCH_ASSOC);
+        }
+        $nbrPlaces = 0;
+        if(count($requests) > 0){
+            foreach($requests as $request){
+                $nbrPlaces += $request["userbooking_nbr_places"];
+            }
+        }
+        return $nbrPlaces;
+    }
+
+    function getPourcentSitReserved($destinationID = null){
+        $nbrSit = getNbrReservedSit($destinationID);
+        $travels = getTravel($destinationID);
+        if($travels != null){
+            $sum = 0;
+            foreach ($travels as $travel){
+                $sum += $travel["travel_total_places"];
+            }
+            return $nbrSit / $sum;
+        }
+    }
+
+    function getNbrFinisedTravel($destinationID = null){
+        $bdd = getPDO();
+        if($destinationID != null){
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travelpres_ID = ". $destinationID ." AND ADDDATE(travel_depart_date, INTERVAL travel_total_time DAY) < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+        } else{
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE ADDDATE(travel_depart_date, INTERVAL travel_total_time DAY) < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+        }
+        $finisedTravel = 0;
+        if(count($requests) > 0){
+            foreach($requests as $request){
+                $finisedTravel += $request["COUNT(travel_ID)"];
+            }
+        }
+        return $finisedTravel;
+    }
+
+    function getNbrCurrentTravel($destinationID = null){
+        $bdd = getPDO();
+        if($destinationID != null){
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travelpres_ID = ". $destinationID ." AND travel_depart_date >= CURRENT_DATE AND travel_depart_date < ADDDATE(CURRENT_DATE, INTERVAL travel_total_time DAY)") -> fetchAll(PDO::FETCH_ASSOC);
+        } else{
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travel_depart_date >= CURRENT_DATE AND travel_depart_date < ADDDATE(CURRENT_DATE, INTERVAL travel_total_time DAY)") -> fetchAll(PDO::FETCH_ASSOC);
+        }
+        $currentTravel = 0;
+        if(count($requests) > 0){
+            foreach($requests as $request){
+                $currentTravel += $request["COUNT(travel_ID)"];
+            }
+        }
+        return $currentTravel;
+    }
+
+    function getNbrCommingTravel($destinationID = null){
+        $bdd = getPDO();
+        if($destinationID != null){
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travel_depart_date > CURRENT_DATE AND travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);            
+        } else{
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travel_depart_date > CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+        }
+        $commingTravel = 0;
+        if(count($requests) > 0){
+            foreach($requests as $request){
+                $commingTravel += $request["COUNT(travel_ID)"];
+            }
+        }
+        return $commingTravel;
+    }
+
+    function getPourcentFlightCompletion($destinationID = null){
+        $bdd = getPDO();
+        if($destinationID != null){
+            $remainPlacesDest = $bdd -> query("SELECT travel_remain_places FROM travel WHERE travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
+            $totalPlacesDest = $bdd -> query("SELECT travel_total_places FROM travel WHERE travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
+        } else{
+            $remainPlacesDest = $bdd -> query("SELECT travel_remain_places FROM travel") -> fetchAll(PDO::FETCH_ASSOC);
+            $totalPlacesDest = $bdd -> query("SELECT travel_total_places FROM travel") -> fetchAll(PDO::FETCH_ASSOC);
+        }
+        $currentPlaces = 0;
+        $totalPlaces = 0;
+        for($i = 0; $i < count($remainPlacesDest); $i++){
+            $totalPlaces += $totalPlacesDest[$i]["travel_total_places"];
+            $currentPlaces += $totalPlacesDest[$i]["travel_total_places"] - $remainPlacesDest[$i]["travel_remain_places"];
+        }
+        $completion = 0;
+        if($totalPlaces > 0){
+            $completion = round(($currentPlaces / $totalPlaces) * 100, 1);
+        }
+        return $completion;
+    }
 ?>
