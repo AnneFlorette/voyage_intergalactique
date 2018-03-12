@@ -62,6 +62,52 @@
         return $IDTemp;
     }
 
+    
+//retourne le 'First Name' de l'utilisateur à partir de son ID
+    function getFirstName($ID){
+        $bdd = getPDO();
+        $name = $bdd->prepare("SELECT user_first_name FROM USERS WHERE user_ID = :ID");
+        $name-> bindParam(':ID', $ID);
+        $name-> execute();
+        $data = $name-> fetch(PDO::FETCH_ASSOC);
+        $nameTemp = $data['user_first_name'];
+        return $nameTemp;
+    }
+
+//Vérifie s'il y a une session active (quelqu'un de connecté)
+//return true si une session est bien active
+    function checkSession(){
+        if(isset($_SESSION['ID']) && $_SESSION['ID'] !== ''){
+            return true;
+        }
+        return false;
+    }     
+
+    function createNavAdmin($ID){
+        if(checkSession()){
+            $firstName = getFirstName($_SESSION['ID']);
+            echo '  <nav>
+                        <ul>
+                            <a href="#"><li>Satistics</li></a>
+                            <li id="profil">' .$firstName. '
+                                <ul id="subNav">
+                                    <a href="profil.php"><li class="subItem">Profil</li></a>
+                                    <a href="logOut.php"><li class="subItem">Log Out</li></a>
+                                </ul>
+                            </li>
+                        </ul> 
+                    </nav>
+            ';
+        }else{
+            echo '  <nav>
+                        <ul>
+                            <a href="adminConnexion.php"><li id="log">Log In / Sign Up</li></a>
+                        </ul>
+                    </nav>
+            ';
+        }
+    }
+
 //création d'une destination
     function createDestination($destination, $img, $description, $travelTime, $adultPrice, $childPrice){
         var_dump($destination, $img, $description, $travelTime, $adultPrice, $childPrice);

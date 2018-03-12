@@ -41,146 +41,148 @@
     <title>Document</title>
 </head>
 <body>
-    <nav>
-        
-    </nav>
-    <div id="createDestination">
-        <form action="" method="POST">
-            <h3>Create a new destination</h3>
-            <label for="destination">Name of the destination</label>
-            <br>
-            <input type="text" name="destination" class="input" autofocus max="40" required>
-            <br>
-            <label for="img_url">Url of the image</label>
-            <br>
-            <input type="file" name="img_url" class="input" max="40" required>
-            <br>
-            <label for="time">Travel time in days</label>
-            <br>
-            <input type="int" name="time" class="input" required>
-            <br>
-            <label for="adultPrice">Price for an Adult</label>
-            <br>
-            <input type="int" name="adultPrice" class="input" required>
-            <br>
-            <label for="childPrice">Price for a child (+15%)</label>
-            <br>
-            <input type="int" name="childPrice" class="input" required>
-            <br>
-            <label for="description">Description of the destination</label>
-            <br>
-            <textarea rows="8" cols="70" name="description" class="textarea" maxlength="500" required></textarea>
-            <br>
-            <input type="submit" class="submit" value="Send">
-            <br>
-        </form>
-    </div>
-    <div>
-        <form action="" method="POST">
-            <h3>Create a new trip</h3>
-            <label for="destinations">Name of the destination</label>
-            <br>
-            <select name="destinations" id="destinationSelect">
-                <?php
-                    createOption();
-                ?>
-            </select>
-            <br>
-            <label for="depart_date">Date of departure</label>
-            <br>
-            <input type="date" name="depart_date" class="input" required>
-            <br>
-            <input type="submit" class="submit" value="Send">
-            <br>
-        </form>  
-    </div>
-    <div>
-        <form action="" method="POST">
-            <h3>Search a user</h3>
-                <label for="search">Enter a user's last name</label>
-                <br>
-                <input type="text" name="search" class="input" max="40">
-                <br>
-                <br>
-                <input type="submit" value="Send" class="submit" id="sendUsers">
-                <br>
-        </form>
-        <?php
-            if(isset($_POST['search'])){
-                $search = htmlspecialchars($_POST['search']);
-                echo '<table id="table">';
-                searchUsers($search);
-                echo '</table>';
-            }
-        ?> 
-    </div>
-    <!-- affichage des 10 prochains vols -->
-    <div>
-        <h3>Next trips</h3>
-        <table>
-            <tr>
-                <th>Travel's ID</th>
-                <th>Destination</th>
-                <th>Depart Date</th>
-                <th>Remain places</th>
-            </tr>
-            <?php
-                getNextTravels();
-            ?>
-        </table>
-    </div>
-    <div id="popUp">
-        <div class="popUp_block">
+    <?php createNavAdmin($_SESSION['ID'])?>
+
+    <h2>Dashboard</h3>
+
+    <div id="dashboard">
+        <div id="createDestination">
             <form action="" method="POST">
-                <p>Warning ! You're about to delete an account. Are you sure ?</p>
-                <button type="submit" id="yes" class="btnYesNo" name="delete" value="">YES</button>
-                <button type="submit" class="btnYesNo" name="notDelete" value="">NO</button>
+                <h3>Create a new destination</h3>
+                <label for="destination">Name of the destination</label>
+                <br>
+                <input type="text" name="destination" class="input" autofocus max="40" required>
+                <br>
+                <label for="img_url">Url of the image</label>
+                <br>
+                <input type="file" name="img_url" class="input" max="40" required>
+                <br>
+                <label for="time">Travel time in days</label>
+                <br>
+                <input type="int" name="time" class="input" required>
+                <br>
+                <label for="adultPrice">Price for an Adult</label>
+                <br>
+                <input type="int" name="adultPrice" class="input" required>
+                <br>
+                <label for="childPrice">Price for a child (+15%)</label>
+                <br>
+                <input type="int" name="childPrice" class="input" required>
+                <br>
+                <label for="description">Description of the destination</label>
+                <br>
+                <textarea rows="8" cols="70" name="description" class="textarea" maxlength="500" required></textarea>
+                <br>
+                <input type="submit" class="submit" value="Send">
+                <br>
             </form>
         </div>
+        <div>
+            <form action="" method="POST">
+                <h3>Create a new trip</h3>
+                <label for="destinations">Name of the destination</label>
+                <br>
+                <select name="destinations" id="destinationSelect">
+                    <?php
+                        createOption();
+                    ?>
+                </select>
+                <br>
+                <label for="depart_date">Date of departure</label>
+                <br>
+                <input type="date" name="depart_date" class="input" required>
+                <br>
+                <input type="submit" class="submit" value="Send">
+                <br>
+            </form>  
+        </div>
+        <div>
+            <form action="" method="POST">
+                <h3>Search a user</h3>
+                    <label for="search">Enter a user's last name</label>
+                    <br>
+                    <input type="text" name="search" class="input" max="40">
+                    <br>
+                    <br>
+                    <input type="submit" value="Send" class="submit" id="sendUsers">
+                    <br>
+            </form>
+            <?php
+                if(isset($_POST['search'])){
+                    $search = htmlspecialchars($_POST['search']);
+                    echo '<table id="table">';
+                    searchUsers($search);
+                    echo '</table>';
+                }
+            ?> 
+        </div>
+        <!-- affichage des 10 prochains vols -->
+        <div>
+            <h3>Next trips</h3>
+            <table>
+                <tr>
+                    <th>Travel's ID</th>
+                    <th>Destination</th>
+                    <th>Depart Date</th>
+                    <th>Remain places</th>
+                </tr>
+                <?php
+                    getNextTravels();
+                ?>
+            </table>
+        </div>
+        <div id="popUp">
+            <div class="popUp_block">
+                <form action="" method="POST">
+                    <p>Warning ! You're about to delete an account. Are you sure ?</p>
+                    <button type="submit" id="yes" class="btnYesNo" name="delete" value="">YES</button>
+                    <button type="submit" class="btnYesNo" name="notDelete" value="">NO</button>
+                </form>
+            </div>
+        </div>
+        <script>
+            const sendUsers = document.getElementById('sendUsers')
+            const popUp = document.getElementById('popUp')
+            const btnYes = document.getElementById('yes')
+            let idToDelete = null
+            let row
+            
+
+            function display() {
+                popUp.style.display = 'block'
+            }
+
+            function listenOnYesButton(id) {
+                btnYes.addEventListener('click', function() {
+                    btnYes.value = id
+                })
+            }
+            function countRow(){
+                row = document.getElementsByTagName('tr').length
+                return row
+            } 
+
+            sendUsers.addEventListener('click', countRow, false)         
+            for(i = 0; i < countRow(); i++){
+                let deleteButtonEl = document.getElementsByClassName('delete')[i]
+                deleteButtonEl.addEventListener('click', () => {
+                    idToDelete = deleteButtonEl.value
+                    display()
+                    listenOnYesButton(idToDelete)
+                }, false)
+            }
+            
+        </script>
+        <?php
+    // Suppression du compte
+        if(isset($_POST['delete']) && $_POST['delete'] != ""){
+            $ID = htmlspecialchars($_POST['delete']);
+            deleteAccount($ID);
+            //echo '<meta http-equiv="refresh" content="0; URL=admin.php">';
+        } else if(isset($_POST['notDelete'])) {
+            echo "<script>popUp.style.display = 'none'</script>";
+        }
+        ?>
     </div>
-    <script>
-        const sendUsers = document.getElementById('sendUsers')
-        const popUp = document.getElementById('popUp')
-        const btnYes = document.getElementById('yes')
-        let idToDelete = null
-        let row
-        
-
-        function display() {
-            popUp.style.display = 'block'
-        }
-
-        function listenOnYesButton(id) {
-            btnYes.addEventListener('click', function() {
-                btnYes.value = id
-            })
-        }
-        function countRow(){
-            row = document.getElementsByTagName('tr').length
-            return row
-        } 
-
-        sendUsers.addEventListener('click', countRow, false)         
-        for(i = 0; i < countRow(); i++){
-            let deleteButtonEl = document.getElementsByClassName('delete')[i]
-            deleteButtonEl.addEventListener('click', () => {
-                idToDelete = deleteButtonEl.value
-                display()
-                listenOnYesButton(idToDelete)
-            }, false)
-        }
-        
-    </script>
-    <?php
-// Suppression du compte
-    if(isset($_POST['delete']) && $_POST['delete'] != ""){
-        $ID = htmlspecialchars($_POST['delete']);
-        deleteAccount($ID);
-        //echo '<meta http-equiv="refresh" content="0; URL=admin.php">';
-    } else if(isset($_POST['notDelete'])) {
-        echo "<script>popUp.style.display = 'none'</script>";
-    }
-    ?>
-    
 </body>
 </html>
