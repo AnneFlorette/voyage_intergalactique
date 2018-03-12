@@ -13,7 +13,8 @@
     $totalPlaces = $nbAdults + $nbChildren;
 
     if(isset($_POST['validate']) && $_POST['validate'] == "Validate payment"){
-        bookTrip($totalPlaces, $travelID); 
+        bookTrip($totalPlaces, $travelID);
+        addTripToUser($_SESSION['ID'], $travelID, $totalPlaces);
         //faire popUp de validation de paiement
         header('location: profil.php');
     }else if(isset($_POST['cancel']) && $_POST['cancel'] == "Cancel payment"){

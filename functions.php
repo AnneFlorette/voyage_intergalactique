@@ -180,11 +180,11 @@ include 'configBdd.php';
 
     function getNextTrips($userID){
         $bdd = getPDO();
-        /*$request = $bdd -> prepare("SELECT * FROM `usersbooking` WHERE user_ID = :ID AND userbooking_booking_date >= CURRENT_DATE");
+        /*$request = $bdd -> prepare("SELECT * FROM USERSBOOKING WHERE user_ID = :ID AND userbooking_booking_date >= CURRENT_DATE");
         $request -> bindParam(":ID", $userID);
         $request -> execute() -> fetchAll(PDO::FETCH_ASSOC);
         return $request ; */
-        return $bdd -> query("SELECT * FROM `usersbooking` WHERE user_ID = " . $userID . " AND userbooking_booking_date >= CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+        return $bdd -> query("SELECT * FROM USERSBOOKING WHERE user_ID = ". $userID ." AND userbooking_booking_date >= CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
     }
 
     function getOldTrips($userID){
@@ -193,12 +193,12 @@ include 'configBdd.php';
         $request -> bindParam(":ID", $userID);
         $result = $request -> execute();
         return $result -> fetchAll(PDO::FETCH_ASSOC); */
-        return $bdd -> query("SELECT * FROM `usersbooking` WHERE user_ID = " . $userID . " AND userbooking_booking_date < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+        return $bdd -> query("SELECT * FROM USERSBOOKING WHERE user_ID = ". $userID ." AND userbooking_booking_date < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
     }
 
     function getDestination($travelID){
         $bdd = getPDO();
-        return $bdd -> query("SELECT travel_Destination FROM `travel` WHERE travel_ID = " . $travelID) -> fetchAll(PDO::FETCH_ASSOC);
+        return $bdd -> query("SELECT travel_Destination FROM TRAVEL WHERE travel_ID = " . $travelID) -> fetchAll(PDO::FETCH_ASSOC);
     }
 
 //Vérifie qu'une session est active
@@ -417,6 +417,16 @@ include 'configBdd.php';
         $request = $bdd -> prepare('UPDATE TRAVEL SET travel_remain_places = :places WHERE travel_ID = :travelID');
         $request -> bindParam(":places", $places);
         $request -> bindParam("travelID", $travelID);
+        $request -> execute();
+    }
+
+//ajoute le voyage réservé à l'utilisateur
+    function addTripToUser($userID, $travelID, $totalPlaces){
+        $bdd = getPDO();
+        $request = $bdd -> prepare('INSERT INTO USERSBOOKING (userbooking_booking_date, userbooking_nbr_places, user_ID, travel_ID) VALUES (CURRENT_DATE, :places, :userID, :travelID)');
+        $request -> bindParam(":places", $totalPlaces);
+        $request -> bindParam(":userID", $userID);
+        $request -> bindParam(":travelID", $travelID);
         $request -> execute();
     }
 
