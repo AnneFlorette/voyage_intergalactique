@@ -14,6 +14,8 @@
 
     if(isset($_POST['validate']) && $_POST['validate'] == "Validate payment"){
         bookTrip($totalPlaces, $travelID); 
+        //faire popUp de validation de paiement
+        header('location: profil.php');
     }else if(isset($_POST['cancel']) && $_POST['cancel'] == "Cancel payment"){
         header('location: booking.php?ID='.$destinationID);
     }
