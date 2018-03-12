@@ -5,6 +5,8 @@
 
 //choppe la BDD
     function getPDO(){
+        global $host;
+        global $name;
         global $login;
         global $pass;
         try{
