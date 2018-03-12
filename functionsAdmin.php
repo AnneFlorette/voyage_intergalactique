@@ -8,7 +8,7 @@
         global $login;
         global $pass;
         try{
-            return new PDO('mysql:host=localhost;dbname=team6;charset=utf8', $login, $pass);
+            return new PDO('mysql:host=' . $host . ';dbname=' . $name . ';charset=utf8', $login, $pass);
         }
         catch(Exception $err){
             die("Debug: problème de bdd\n" . $err);
