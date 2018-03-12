@@ -9,16 +9,14 @@
     $travelID = $_SESSION['travelID'];
 
     $price = getPrice($nbAdults, $nbChildren, $travelID);
-
+    $destinationID = getDestinationID($travelID);
     $totalPlaces = $nbAdults + $nbChildren;
-    
-    if(isset($_POST['validate']) && $_POST['validate'] == "Validate payment"){
-       bookTrip($totalPlaces, $travelID); 
-    }else if(isset($_POST['cancel']) && $_POST['cancel'] == "Cancel payment"){
-        header('location: booking.php?ID='.$travelID.'');
 
+    if(isset($_POST['validate']) && $_POST['validate'] == "Validate payment"){
+        bookTrip($totalPlaces, $travelID); 
+    }else if(isset($_POST['cancel']) && $_POST['cancel'] == "Cancel payment"){
+        header('location: booking.php?ID='.$destinationID);
     }
-    
 
 ?>
 
@@ -35,8 +33,10 @@
         <h3>Number of adult places you want: <?php echo $nbAdults ?></h3>
         <h3>Number of child places you want: <?php echo $nbChildren ?></h3>
         <h3>Total price: <?php echo $price ?> €</h3>
-        <input type="submit" class="btn" name="validate" value="Validate payment">
-        <input type="submit" class="btn" name="cancel" value="Cancel payment">
+        <form action="" method="post">
+            <input type="submit" class="btn" name="validate" value="Validate payment">
+            <input type="submit" class="btn" name="cancel" value="Cancel payment">
+        </form>
     </div>
 </body>
 </html>
