@@ -323,7 +323,7 @@ include 'configBdd.php';
 //retourne le tableau des prochains vols par l'ID de la destination
     function getNextTrip($ID){
         $bdd = getPDO();
-        $infoTemp = $bdd -> prepare('SELECT t1.travel_ID ,t1.travel_depart_date, t2.travelpres_days, t2.travelpres_price_adult, t2.travelpres_price_child, t1.travel_remain_places FROM TRAVEL t1 JOIN TRAVELPRES t2 WHERE t2.travelpres_ID = :ID');
+        $infoTemp = $bdd -> prepare('SELECT t1.travel_ID ,t1.travel_depart_date, t2.travelpres_days, t2.travelpres_price_adult, t2.travelpres_price_child, t1.travel_remain_places FROM TRAVEL t1 JOIN TRAVELPRES t2 ON t1.travelpres_ID = t2.travelpres_ID WHERE t1.travelpres_ID = :ID');
         $infoTemp -> bindParam(':ID', $ID);
         $infoTemp -> execute();
         $infos = $infoTemp -> fetchAll(PDO::FETCH_ASSOC);
