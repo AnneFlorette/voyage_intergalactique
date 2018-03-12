@@ -83,6 +83,16 @@ li:focus{
     box-shadow: 2px 3px 4px #ffffff6b;
  }
 
+ h2{
+     color: #ffffff;
+     font-family: "Space Age";
+     font-size: 4em;
+     margin: 0px;
+     padding: 0px;
+     top: 0;
+     left: 0;
+     /* z-index: 1000; */
+ }
 
  #dashboard{
     background-color: transparent; 
@@ -90,29 +100,30 @@ li:focus{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    margin-top: 16vh;
  }
 
 div{
+    height: auto;
     width: 40vw;
     background: #1b395fbd;
     box-shadow: 2px 3px 4px #000000;
     border-radius: 10px;
     margin: 12px;
-    margin-top: 16vh;
     color: #ffffff;
     font-family: "Sansation";
 }
 
-h2{
-    color: #ffffff;
-    font-family: "Space Age";
-    font-size: 1.5em;
-    margin: 0px;
-    padding: 0px;
-    top: 1em;
-    left: 0;
-    /* z-index: 1000; */
+#searchUsers,
+#nextTrips{
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    width: auto;
+    height: 50vh;
+    overflow: auto;
 }
+
 
 h3{
     color: #ffffff;

@@ -107,29 +107,33 @@
                     <input type="submit" value="Send" class="submit" id="sendUsers">
                     <br>
             </form>
-            <?php
-                if(isset($_POST['search'])){
-                    $search = htmlspecialchars($_POST['search']);
-                    echo '<table id="table">';
-                    searchUsers($search);
-                    echo '</table>';
-                }
-            ?> 
+            <div id="searchUsers">
+                <?php
+                    if(isset($_POST['search'])){
+                        $search = htmlspecialchars($_POST['search']);
+                        echo '<table id="table">';
+                        searchUsers($search);
+                        echo '</table>';
+                    }
+                ?> 
+            </div>
         </div>
         <!-- affichage des 10 prochains vols -->
         <div>
             <h3>Next trips</h3>
-            <table>
-                <tr>
-                    <th>Travel's ID</th>
-                    <th>Destination</th>
-                    <th>Depart Date</th>
-                    <th>Remain places</th>
-                </tr>
-                <?php
-                    getNextTravels();
-                ?>
-            </table>
+            <div id="nextTrips">
+                <table>
+                    <tr>
+                        <th>Travel's ID</th>
+                        <th>Destination</th>
+                        <th>Depart Date</th>
+                        <th>Remain places</th>
+                    </tr>
+                    <?php
+                        getNextTravels();
+                    ?>
+                </table>
+            </div>
         </div>
         <div id="popUp">
             <div class="popUp_block">
