@@ -5,10 +5,12 @@ include 'configBdd.php';
     const KEY = "chfporndjzysthvlzpdbj25vfhg";
 //retourne la Base de données
     function getPDO(){
+        global $host;
+        global $name;
         global $login;
         global $pass;
         try{
-            return new PDO('mysql:host=localhost;dbname=bdd_faraway;charset=utf8', $login, $pass);
+            return new PDO('mysql:host=' . $host . ';dbname=' . $name . ';charset=utf8', $login, $pass);
         }
         catch(Exception $err){
             die("Debug: problème de bdd\n" . $err);
