@@ -3,12 +3,20 @@
     session_start();
 
 
-//calcul du cout des billets et réservation des places
+//vérification que les places sont disponible et renvoi vers la page approprié suivant
     if(isset($_POST['nbAdults']) && isset($_POST['nbChildren']) && isset($_POST['tripDate'])){
-        $_SESSION['nbAdults'] = htmlspecialchars($_POST['nbAdults']);
-        $_SESSION['nbChildren'] = htmlspecialchars($_POST['nbChildren']);
-        $_SESSION['travelID'] = htmlspecialchars($_POST['tripDate']);
-        header('location: validatePayment.php');
+        $travelID = htmlspecialchars($_POST['tripDate']);
+        $nbPlaces = htmlspecialchars($_POST['nbAdults']) + htmlspecialchars($_POST['nbChildren']);
+
+        $available = areAvailable();
+
+        if($available){
+            $_SESSION['nbAdults'] = htmlspecialchars($_POST['nbAdults']);
+            $_SESSION['nbChildren'] = htmlspecialchars($_POST['nbChildren']);
+            $_SESSION['travelID'] = htmlspecialchars($_POST['tripDate']);
+            header('location: validatePayment.php');
+        }
+        // popUp : nombre de places non disponible
     }
 
 

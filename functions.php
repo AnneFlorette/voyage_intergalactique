@@ -366,8 +366,8 @@ include 'configBdd.php';
         echo 'background="'.$imgURL['travelpres_img_url'].'"';
     }
 
-//réservation des places
-    function bookATrip($totalPlaces, $travelID){
+//vérification nombre de places réservées sont dispo
+    function areAvailable($totalPlaces, $travelID){
         $bdd = getPDO();
         $getPlaces = $bdd -> prepare('SELECT travel_remain_places FROM TRAVEL WHERE travel_ID = :travelID');
         $getPlaces -> bindParam(":travelID", $travelID);
@@ -375,6 +375,42 @@ include 'configBdd.php';
         $placesTemp = $getPlaces -> fetch(PDO::FETCH_ASSOC);
 
         $places = $placesTemp - $totalPlaces;
+        if($places >= 0){
+            return true;
+        }
+        return false;
+    }
+
+//calcul du prix total que l'utilisateur doit payer
+    function getPrice($nbAdults, $nbChildren, $travelID){
+        $bdd = getPDO();
+        $getDestinationID = $bdd -> prepare('SELECT travelpres_ID FROM TRAVEL WHERE travel_ID = :travelID');
+        $getDestinationID -> bindParam(":travelID", $travelID);
+        $getDestinationID -> execute();
+        $destinationID = $getDestinationID -> fetch(PDO::FETCH_ASSOC);
+
+        $getPrices = $bdd -> prepare('SELECT travelpres_price_child, travelpres_price_adult FROM TRAVELPRES WHERE travelpres_ID = :destinationID');
+        $getPrices -> bindParam(":destinationID", $destinationID['travelpres_ID']);
+        $getPrices -> execute();
+        $prices = $getPrices -> fetch(PDO::FETCH_ASSOC);
+
+        $childPrice = $prices['travelpres_price_child'] * $nbChildren;
+        $adultPrice = $prices['travelpres_price_adult'] * $nbAdults;
+
+        $totalPrice = $childPrice + $adultPrice;
+
+        return $totalPrice;
+    }
+
+//réservation des places
+    function bookTrip($totalPlaces, $travelID){
+        $bdd = getPDO();
+        $getPlaces = $bdd -> prepare('SELECT travel_remain_places FROM TRAVEL WHERE travel_ID = :travelID');
+        $getPlaces -> bindParam(":travelID", $travelID);
+        $getPlaces -> execute();
+        $placesTemp = $getPlaces -> fetch(PDO::FETCH_ASSOC);
+
+        $places = $placesTemp['travel_remain_places'] - $totalPlaces;
 
         $request = $bdd -> prepare('UPDATE TRAVEL SET travel_remain_places = :places WHERE travel_ID = :travelID');
         $request -> bindParam(":places", $places);
