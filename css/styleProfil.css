@@ -193,8 +193,20 @@ h3{
 .trip{
     background-color: #ffffff30;
     border-radius: 18px;
-    margin: 0px 15px;
+    margin: 5px 15px;
     padding: 10px;
+    justify-content: center;
+}
+
+table{
+    margin: auto;
+}
+
+tr, th, td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 h5{
@@ -203,7 +215,8 @@ h5{
 }
 
 #myTrip{
-    margin: 5vh;
+    margin: auto;
+    margin-top: 5vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -211,11 +224,11 @@ h5{
 }
 
 #futureTrip{
-    width: 40%
+    width: 45%
 }
 
 #pastTrip{
-    width: 40%
+    width: 45%
 }
 
 .input{
