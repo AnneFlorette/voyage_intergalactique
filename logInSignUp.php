@@ -52,6 +52,7 @@
     <title>Log In - Sign Up</title>
 </head>
 <body>
+    <script type="text/javascript" src="messageCard.js"></script>
     <!-- Création du menu dynamiquement -->
     <?php 
         changeNav();
@@ -103,6 +104,10 @@
             </form>          
         </div>
     </div>
+
+    <div id="message-container"></div>
+
+    <script> displayMessageCard("test") </script>
 
 </body>
 </html>
