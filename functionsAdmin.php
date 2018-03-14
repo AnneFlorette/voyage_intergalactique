@@ -65,6 +65,7 @@
     }
 
     
+    
 //retourne le 'First Name' de l'utilisateur à partir de son ID
     function getFirstName($ID){
         $bdd = getPDO();
@@ -85,14 +86,11 @@
             $userAdmin = $request -> fetch(PDO::FETCH_ASSOC);
             if($userAdmin['user_admin'] == 1){
                 return true;
-                var_dump($userAdmin['user_admin']);
             }else{
                 return false;
-                echo 'else';
             }
         }else{
             return false;
-            echo '1er else';
         }
     }
 //Vérifie s'il y a une session active (quelqu'un de connecté)
@@ -104,21 +102,44 @@
         return false;
     }     
 
-    function createNavAdmin($ID){
+    function changeNav(){
         if(checkSession()){
             $firstName = getFirstName($_SESSION['ID']);
-            echo '  <nav>
-                        <ul>
-                            <a href="#"><li>Statistics</li></a>
-                            <li id="profil">' .$firstName. '
-                                <ul id="subNav">
-                                    <a href="profil.php"><li class="subItem">Profil</li></a>
-                                    <a href="logOut.php"><li class="subItem">Log Out</li></a>
-                                </ul>
-                            </li>
-                        </ul> 
-                    </nav>
-            ';
+                if(checkAdminSession()){
+                    echo '  <nav>
+                                <ul>
+                                    <a href="index.php"><li id="home">Home</li></a>
+                                    <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
+                                    <a href="ourCompany.php"><li id="company">Our Company</li></a>
+                                    <a href="admin.php"><li id="admin">Dashboard</li></a>
+                                    <a href="statistics.php"><li id="statistics">Statistics</li></a>
+                                    <li id="profil">' .$firstName. '
+                                        <ul id="subNav">
+                                            <a href="profil.php"><li class="subItem">Profil</li></a>
+                                            <a href="logOut.php"><li class="subItem">Log Out</li></a>
+                                        </ul>
+                                    </li>
+                                </ul> 
+                            </nav>
+                     ';
+                     return;
+                }else if(!checkAdminSession()){
+                    echo '  <nav>
+                                <ul>
+                                    <a href="index.php"><li id="home">Home</li></a>
+                                    <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
+                                    <a href="ourCompany.php"><li id="company">Our Company</li></a>
+                                    <li id="profil">' .$firstName. '
+                                        <ul id="subNav">
+                                            <a href="profil.php"><li class="subItem">Profil</li></a>
+                                            <a href="logOut.php"><li class="subItem">Log Out</li></a>
+                                        </ul>
+                                    </li>
+                                </ul> 
+                            </nav>
+                    ';
+                    return;
+                } 
         }else{
             echo '  <nav>
                         <ul>
@@ -126,6 +147,7 @@
                         </ul>
                     </nav>
             ';
+            return;
         }
     }
 
@@ -222,22 +244,22 @@
     //STATISTIC FUNCTIONS
     function getNbrUser(){
         $bdd = getPDO();
-        $request = $bdd -> query("SELECT COUNT(user_ID) FROM users WHERE user_admin != 1") -> fetchAll(PDO::FETCH_ASSOC);
+        $request = $bdd -> query("SELECT COUNT(user_ID) FROM USERS WHERE user_admin != 1") -> fetchAll(PDO::FETCH_ASSOC);
         return $request[0]["COUNT(user_ID)"];
     }
 
     function getDestinations(){
         $bdd = getPDO();
-        $request = $bdd -> query("SELECT * FROM travelpres") -> fetchAll(PDO::FETCH_ASSOC);
+        $request = $bdd -> query("SELECT * FROM TRAVELPRES") -> fetchAll(PDO::FETCH_ASSOC);
         return $request;
     }
 
     function getTravel($destinationID = null){
         $bdd = getPDO();
         if($destinationID != null){
-            $request = $bdd -> query("SELECT * FROM travel WHERE travel_ID =" . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
+            $request = $bdd -> query("SELECT * FROM TRAVEL WHERE travel_ID =" . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
         } else{
-            $request = $bdd -> query("SELECT * FROM travel") -> fetchAll(PDO::FETCH_ASSOC);
+            $request = $bdd -> query("SELECT * FROM TRAVEL") -> fetchAll(PDO::FETCH_ASSOC);
         }
         return $request;
     }
@@ -245,14 +267,14 @@
     function getNbrReservedSit($destinationID = null){
         $bdd = getPDO();
         if($destinationID != null){
-            $requests = $bdd -> query("SELECT userbooking_nbr_places FROM usersbooking WHERE EXISTS (SELECT * FROM travel WHERE travelpres_ID = ". $destinationID .")") -> fetchAll(PDO::FETCH_ASSOC);
+            $requests = $bdd -> query("SELECT userbooking_child_places, userbooking_adult_places FROM USERSBOOKING WHERE EXISTS (SELECT * FROM TRAVEL WHERE travelpres_ID = ". $destinationID .")") -> fetchAll(PDO::FETCH_ASSOC);
         } else{
-            $requests = $bdd -> query("SELECT userbooking_nbr_places FROM usersbooking") -> fetchAll(PDO::FETCH_ASSOC);
+            $requests = $bdd -> query("SELECT userbooking_child_places, userbooking_adult_places FROM USERSBOOKING") -> fetchAll(PDO::FETCH_ASSOC);
         }
         $nbrPlaces = 0;
         if(count($requests) > 0){
             foreach($requests as $request){
-                $nbrPlaces += $request["userbooking_nbr_places"];
+                $nbrPlaces += $request["userbooking_child_places"] + $request["userbooking_adult_places"];
             }
         }
         return $nbrPlaces;
@@ -273,14 +295,14 @@
     function getNbrFinisedTravel($destinationID = null){
         $bdd = getPDO();
         if($destinationID != null){
-            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travelpres_ID = ". $destinationID ." AND ADDDATE(travel_depart_date, INTERVAL travel_total_time DAY) < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+            $requests = $bdd -> query("SELECT COUNT(t1.travel_ID) FROM TRAVEL t1 JOIN TRAVELPRES t2 ON t1.travelpres_ID = t2.travelpres_ID WHERE t2.travelpres_ID = ". $destinationID ." AND ADDDATE(t1.travel_depart_date, INTERVAL t2.travelpres_days DAY) < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
         } else{
-            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE ADDDATE(travel_depart_date, INTERVAL travel_total_time DAY) < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+            $requests = $bdd -> query("SELECT COUNT(t1.travel_ID) FROM TRAVEL t1 JOIN TRAVELPRES t2 ON t1.travelpres_ID = t2.travelpres_ID WHERE ADDDATE(t1.travel_depart_date, INTERVAL t2.travelpres_days DAY) < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
         }
         $finisedTravel = 0;
         if(count($requests) > 0){
             foreach($requests as $request){
-                $finisedTravel += $request["COUNT(travel_ID)"];
+                $finisedTravel += $request["COUNT(t1.travel_ID)"];
             }
         }
         return $finisedTravel;
@@ -289,9 +311,9 @@
     function getNbrCurrentTravel($destinationID = null){
         $bdd = getPDO();
         if($destinationID != null){
-            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travelpres_ID = ". $destinationID ." AND travel_depart_date >= CURRENT_DATE AND travel_depart_date < ADDDATE(CURRENT_DATE, INTERVAL travel_total_time DAY)") -> fetchAll(PDO::FETCH_ASSOC);
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM TRAVEL WHERE travelpres_ID = ". $destinationID ." AND travel_depart_date >= CURRENT_DATE AND travel_depart_date < ADDDATE(CURRENT_DATE, INTERVAL travel_total_time DAY)") -> fetchAll(PDO::FETCH_ASSOC);
         } else{
-            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travel_depart_date >= CURRENT_DATE AND travel_depart_date < ADDDATE(CURRENT_DATE, INTERVAL travel_total_time DAY)") -> fetchAll(PDO::FETCH_ASSOC);
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM TRAVEL WHERE travel_depart_date >= CURRENT_DATE AND travel_depart_date < ADDDATE(CURRENT_DATE, INTERVAL travel_total_time DAY)") -> fetchAll(PDO::FETCH_ASSOC);
         }
         $currentTravel = 0;
         if(count($requests) > 0){
@@ -305,9 +327,9 @@
     function getNbrCommingTravel($destinationID = null){
         $bdd = getPDO();
         if($destinationID != null){
-            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travel_depart_date > CURRENT_DATE AND travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);            
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM TRAVEL WHERE travel_depart_date > CURRENT_DATE AND travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);            
         } else{
-            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM travel WHERE travel_depart_date > CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+            $requests = $bdd -> query("SELECT COUNT(travel_ID) FROM TRAVEL WHERE travel_depart_date > CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
         }
         $commingTravel = 0;
         if(count($requests) > 0){
@@ -321,17 +343,25 @@
     function getPourcentFlightCompletion($destinationID = null){
         $bdd = getPDO();
         if($destinationID != null){
-            $remainPlacesDest = $bdd -> query("SELECT travel_remain_places FROM travel WHERE travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
-            $totalPlacesDest = $bdd -> query("SELECT travel_total_places FROM travel WHERE travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
+            $remainPlacesDest = $bdd -> query("SELECT travel_remain_places FROM TRAVEL WHERE travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
+            $totalPlacesDest = $bdd -> query("SELECT travelpres_total_places FROM TRAVELPRES WHERE travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
         } else{
-            $remainPlacesDest = $bdd -> query("SELECT travel_remain_places FROM travel") -> fetchAll(PDO::FETCH_ASSOC);
-            $totalPlacesDest = $bdd -> query("SELECT travel_total_places FROM travel") -> fetchAll(PDO::FETCH_ASSOC);
+            $remainPlacesDest = $bdd -> query("SELECT travel_remain_places FROM TRAVEL") -> fetchAll(PDO::FETCH_ASSOC);
+            $totalPlacesDest = $bdd -> query("SELECT travelpres_total_places FROM TRAVELPRES") -> fetchAll(PDO::FETCH_ASSOC);
         }
         $currentPlaces = 0;
         $totalPlaces = 0;
+        echo '<pre>'; 
+        print_r($remainPlacesDest);
+        echo '</pre>'; 
+        echo "size: " . count($remainPlacesDest) . "<br/>";
+        echo '<pre>'; 
+        print_r($totalPlacesDest);
+        echo '</pre>'; 
+        echo "size: " . count($totalPlacesDest) . "<br/>";
         for($i = 0; $i < count($remainPlacesDest); $i++){
-            $totalPlaces += $totalPlacesDest[$i]["travel_total_places"];
-            $currentPlaces += $totalPlacesDest[$i]["travel_total_places"] - $remainPlacesDest[$i]["travel_remain_places"];
+            $totalPlaces += $totalPlacesDest[$i]["travelpres_total_places"];
+            $currentPlaces += $totalPlacesDest[$i]["travelpres_total_places"] - $remainPlacesDest[$i]["travel_remain_places"];
         }
         $completion = 0;
         if($totalPlaces > 0){
