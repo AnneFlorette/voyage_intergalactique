@@ -416,15 +416,18 @@ include 'configBdd.php';
 
 //vérification nombre de places réservées sont dispo
     function areAvailable($totalPlaces, $travelID){
-        $bdd = getPDO();
-        $getPlaces = $bdd -> prepare('SELECT travel_remain_places FROM TRAVEL WHERE travel_ID = :travelID');
-        $getPlaces -> bindParam(":travelID", $travelID);
-        $getPlaces -> execute();
-        $placesTemp = $getPlaces -> fetch(PDO::FETCH_ASSOC);
+        if($totalPlaces >= 1){
+           $bdd = getPDO();
+            $getPlaces = $bdd -> prepare('SELECT travel_remain_places FROM TRAVEL WHERE travel_ID = :travelID');
+            $getPlaces -> bindParam(":travelID", $travelID);
+            $getPlaces -> execute();
+            $placesTemp = $getPlaces -> fetch(PDO::FETCH_ASSOC);
 
-        $places = $placesTemp - $totalPlaces;
-        if($places >= 0){
-            return true;
+            $places = $placesTemp['travel_remain_places'] - $totalPlaces;
+            if($places >= 0){
+                return true;
+            }
+            return false; 
         }
         return false;
     }
