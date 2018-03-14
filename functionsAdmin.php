@@ -4,7 +4,7 @@
     const KEY = "chfporndjzysthvlzpdbj25vfhg";
 
 //choppe la BDD
-function getPDO(){
+    function getPDO(){
         global $host;
         global $name;
         global $login;

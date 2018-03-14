@@ -427,4 +427,14 @@ include 'configBdd.php';
         $request -> execute();
     }
 
+//retourne l'ID de la destination a partir de l'ID du voyage
+    function getDestinationID($travelID){
+        $bdd = getPDO();
+        $destination = $bdd -> prepare('SELECT travelpres_ID FROM TRAVEL WHERE travel_ID = :ID');
+        $destination -> bindParam(':ID', $travelID);
+        $destination -> execute();
+        $destinationID = $destination -> fetch(PDO::FETCH_ASSOC);
+        return $destinationID['travelpres_ID'];
+    }
+
 ?>

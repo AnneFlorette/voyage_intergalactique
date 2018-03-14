@@ -104,7 +104,7 @@ li:focus{
  }
 
 div{
-    height: auto;
+    height: 70%;
     width: 40vw;
     background: #1b395fbd;
     box-shadow: 2px 3px 4px #000000;
@@ -120,8 +120,9 @@ div{
     box-shadow: none;
     background: transparent;
     width: auto;
-    height: 50vh;
+    height: 50%;
     overflow: auto;
+
 }
 
 
