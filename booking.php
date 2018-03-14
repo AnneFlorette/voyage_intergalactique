@@ -17,15 +17,17 @@
         $available = areAvailable();
 
         if($available){
-            $_SESSION['nbAdults'] = htmlspecialchars($_POST['nbAdults']);
-            $_SESSION['nbChildren'] = htmlspecialchars($_POST['nbChildren']);
-            $_SESSION['travelID'] = htmlspecialchars($_POST['tripDate']);
-            header('location: validatePayment.php');
+        $_SESSION['nbAdults'] = htmlspecialchars($_POST['nbAdults']);
+        $_SESSION['nbChildren'] = htmlspecialchars($_POST['nbChildren']);
+        $_SESSION['travelID'] = htmlspecialchars($_POST['tripDate']);
+        header('location: validatePayment.php');
         }
-        // popUp : nombre de places non disponible
+        // popUp : nombre de places non disponible 
     }
 
-
+    if(isset($_POST['connexion']) && $_POST['connexion'] == "Connexion"){
+        header('location: logInSignUp.php');
+    }
 
 ?>
 
@@ -72,25 +74,45 @@
             </div>
             <div id="booking">
                 <h3>Book a trip</h3>
-                <form action="" method="POST">
-                    <label for="nbAdults">Number of adults : </label>
-                    <br>
-                    <input type="number" name="nbAdults" min="0" required>
-                    <br>           
-                    <label for="nbChildren">Number of children : </label>
-                    <br>
-                    <input type="number" name="nbChildren" min="0" required>
-                    <br>
-                    <label for="tripChose">Chose your trip : </label>
-                    <br>
-                    <select name="tripDate" id="tripDate" required> 
-                        <?php getTripOptions(getIDDestination()); ?>
-                    </select>
-                    <br>
-                    <input id="submit" type="submit" value="Book This Trip">
-                </form>
+                <div id="bookingDiv">
+                    <form action="" method="POST">
+                        <label for="nbAdults">Number of adults : </label>
+                        <br>
+                        <input type="number" name="nbAdults" min="0" required>
+                        <br>           
+                        <label for="nbChildren">Number of children : </label>
+                        <br>
+                        <input type="number" name="nbChildren" min="0" required>
+                        <br>
+                        <label for="tripChose">Chose your trip : </label>
+                        <br>
+                        <select name="tripDate" id="tripDate" required> 
+                            <?php getTripOptions(getIDDestination()); ?>
+                        </select>
+                        <br>
+                        <input id="submit" type="submit" value="Book This Trip">
+                    </form>
+                </div>
+                <div id="connexionDiv">
+                    <form action="" method="POST">
+                        <input id="logIn" type="submit" name="connexion" value="Connexion">
+                    </form>
+                </div>
             </div>
         </section>
         
+        <script>
+            const bookingDiv = document.getElementById("bookingDiv")
+            const connexionDiv = document.getElementById("connexionDiv")
+        </script>
+
+        <?php
+            if(checkSession()){
+                echo '<script>bookingDiv.style.display = "block";
+                            connexionDiv.style.display = "none";
+                    </script>';
+            }
+        ?>
+
     </body>
 </html>

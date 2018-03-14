@@ -164,7 +164,44 @@ th, td, tr{
     width: 30%;
     display: flex;
     flex-direction: column;
-    
+}
+
+#bookingDiv{
+    display: none;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#connexionDiv{
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#logIn{
+    font-family: "Space Age";
+    font-size: 1em;
+    background: #ffffff;
+    width: 200px;
+    height: 30px;
+    margin: 16px 50px;
+    border: none;
+    border-radius: 28px;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+#logIn:Hover {
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+
+#logIn:focus {
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
 }
 
 h3{
