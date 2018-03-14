@@ -184,6 +184,7 @@ li:Hover,
     box-shadow: 2px 3px 4px #ffffff6b;
     cursor: pointer;
 }
+
 li:focus,   
 .booking:focus{
     color: white;
