@@ -65,6 +65,7 @@
     }
 
     
+    
 //retourne le 'First Name' de l'utilisateur à partir de son ID
     function getFirstName($ID){
         $bdd = getPDO();
