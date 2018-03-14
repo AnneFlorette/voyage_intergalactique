@@ -4,6 +4,7 @@
     $_SESSION['ID'] = "";
 
     $allowedSignUp = true;
+    $messageData = [];
 
 //verif inscription
     if (isset($_POST['mailSignUp']) && htmlspecialchars($_POST['mailSignUp']) != "" &&
@@ -22,6 +23,13 @@
             $passCrypt = cryptage($passwd);
             writeLog($mail, $passCrypt, $lastName, $firstName);
             header('location: logInSignUp.php');
+
+            $messageData = ["signUp Ok", "img/trobiGood.png", "SUCCES"];
+
+        } else{
+
+            $messageData = ["signUp Failed", "img/trobisad.png", "ERROR"];
+
         }
     }
 
@@ -38,6 +46,10 @@
             $_SESSION['ID'] = $ID;
             setcookie('logIn', $mail, time() + 30*24*3600, null, null, false ,true);
             header('location: profil.php');
+        } else{
+            
+            $messageData = ["Login failed", "img/trobisad.png", "ERROR"];
+
         }
     }
 ?>
@@ -49,9 +61,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/styleLogs.css">
+    <link rel="stylesheet" type="text/css" href="css/styleMessageCard.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Log In - Sign Up</title>
 </head>
 <body>
+    <script type="text/javascript" src="messageCard.js"></script>
     <!-- Création du menu dynamiquement -->
     <?php 
         changeNav();
@@ -103,6 +118,26 @@
             </form>          
         </div>
     </div>
+
+    
+
+    <div id="messageContainer"></div>
+
+    <script>
+        
+        let jArray = <?php echo json_encode($messageData); ?>;
+
+        messageType = getMessageType()
+
+        str = jArray[0]
+        img = jArray[1]
+        msgType = messageType[jArray[2]]
+
+        if (str != ""){
+            displayMessageCard(str, img, msgType, document.getElementById("messageContainer"))
+        }
+
+    </script>
 
 </body>
 </html>
