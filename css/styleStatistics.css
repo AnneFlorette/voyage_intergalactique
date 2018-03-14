@@ -1,0 +1,90 @@
+@font-face {
+    font-family: "Space Age";
+	src: url('../font/space_age.ttf');
+}
+@font-face{
+    font-family: "Sansation";
+    src: url('../font/Sansation_Regular.ttf');
+}
+
+:focus{
+    outline: none;
+}
+
+body{
+    background-image: url(../img/univers_5.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    width: 100%;
+    text-align: center;
+    margin: 0px;
+} 
+
+nav {
+    background: none;
+    position: fixed;
+    top: 1em;
+    right: 0;
+    z-index: 1000;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    margin-top: 0px;
+    display: flex;  
+}
+
+li {
+    list-style: none;
+    line-height: 3em;
+    color: #000000;
+    font-size: 12px;
+    width: 160px;
+    height: 36px;
+    border-radius: 16px;
+    font-family: "Space Age";
+    background: #ffffff;
+    margin: 0 16px;
+    border: none;
+    box-shadow: 2px 3px 4px #000000;
+    opacity: 0.80;
+}
+
+#subNav {
+    display: none;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+}
+
+#profil:hover #subNav {
+    display: flex;
+    flex-direction: column;
+}
+
+.subItem {
+    margin: 16px 16px 0 0;
+}
+
+li:Hover{  
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+    cursor: pointer;
+}
+
+li:focus{
+    color: white;
+    background: #1b395f;
+    box-shadow: 2px 3px 4px #ffffff6b;
+}
+
+ #flightStats{
+     background: #1b395f8a;
+     width: auto;
+     margin: auto;
+ }

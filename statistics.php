@@ -1,5 +1,7 @@
 <?php
     include 'functionsAdmin.php';
+    session_start();
+
     $destinations = getDestinations();
 
     $dataArray = [];
@@ -42,7 +44,8 @@
         let data = google.visualization.arrayToDataTable(dataArray)
 
         let options = {
-        title: 'Title'
+        title: 'Title',
+        backgroundColor: 'transparent'
         }
 
         let chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -58,9 +61,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/styleStatistics.css">
         <title>Document</title>
     </head>
     <body>
+        <?php changeNav() ?>
         <div id="generalStats">
             <table>
                 <tr>
