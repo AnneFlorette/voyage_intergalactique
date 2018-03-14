@@ -1,4 +1,4 @@
-function displayMessageCard(msg){
+function displayMessageCard(msg, container){
 
     const card = document.createElement('div')
     card.classList.add('message')
@@ -8,5 +8,7 @@ function displayMessageCard(msg){
 
     card.appendChild(p)
 
-    document.getElementById("messageContainer").appendChild(card)
+    container.appendChild(card)
+
+    alert("test")
 }

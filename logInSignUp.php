@@ -107,7 +107,9 @@
 
     <div id="message-container"></div>
 
-    <script> displayMessageCard("test") </script>
+    <script>
+        displayMessageCard("test", document.getElementById("messageContainer"))
+    </script>
 
 </body>
 </html>
