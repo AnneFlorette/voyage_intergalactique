@@ -102,21 +102,44 @@
         return false;
     }     
 
-    function createNavAdmin($ID){
+    function changeNav(){
         if(checkSession()){
             $firstName = getFirstName($_SESSION['ID']);
-            echo '  <nav>
-                        <ul>
-                            <a href="statistics.php"><li>Statistics</li></a>
-                            <li id="profil">' .$firstName. '
-                                <ul id="subNav">
-                                    <a href="profil.php"><li class="subItem">Profil</li></a>
-                                    <a href="logOut.php"><li class="subItem">Log Out</li></a>
-                                </ul>
-                            </li>
-                        </ul> 
-                    </nav>
-            ';
+                if(checkAdminSession()){
+                    echo '  <nav>
+                                <ul>
+                                    <a href="index.php"><li id="home">Home</li></a>
+                                    <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
+                                    <a href="ourCompany.php"><li id="company">Our Company</li></a>
+                                    <a href="admin.php"><li id="admin">Dashboard</li></a>
+                                    <a href="statistics.php"><li id="statistics">Statistics</li></a>
+                                    <li id="profil">' .$firstName. '
+                                        <ul id="subNav">
+                                            <a href="profil.php"><li class="subItem">Profil</li></a>
+                                            <a href="logOut.php"><li class="subItem">Log Out</li></a>
+                                        </ul>
+                                    </li>
+                                </ul> 
+                            </nav>
+                     ';
+                     return;
+                }else if(!checkAdminSession()){
+                    echo '  <nav>
+                                <ul>
+                                    <a href="index.php"><li id="home">Home</li></a>
+                                    <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
+                                    <a href="ourCompany.php"><li id="company">Our Company</li></a>
+                                    <li id="profil">' .$firstName. '
+                                        <ul id="subNav">
+                                            <a href="profil.php"><li class="subItem">Profil</li></a>
+                                            <a href="logOut.php"><li class="subItem">Log Out</li></a>
+                                        </ul>
+                                    </li>
+                                </ul> 
+                            </nav>
+                    ';
+                    return;
+                } 
         }else{
             echo '  <nav>
                         <ul>
@@ -124,6 +147,7 @@
                         </ul>
                     </nav>
             ';
+            return;
         }
     }
 

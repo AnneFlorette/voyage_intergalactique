@@ -87,10 +87,12 @@ li:focus{
      color: #ffffff;
      font-family: "Space Age";
      font-size: 4em;
-     margin: 0px;
+     margin-top: 10vh;
+     margin-bottom: 0px;
      padding: 0px;
      top: 0;
      left: 0;
+     cursor: pointer;
      /* z-index: 1000; */
  }
 
@@ -101,7 +103,9 @@ li:focus{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    margin-top: 16vh;
+    margin-top: 4vh;
+    margin-bottom: 0px;
+    box-shadow: none;
  }
 
 div{

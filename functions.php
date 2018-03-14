@@ -176,6 +176,23 @@ include 'configBdd.php';
         return false;
     }
 
+    function checkAdminSession(){
+        if(checkSession()){
+            $bdd = getPDO();
+            $request = $bdd -> prepare('SELECT user_admin FROM USERS WHERE user_ID =:ID');
+            $request -> bindParam(':ID', $_SESSION['ID']);
+            $request -> execute();
+            $userAdmin = $request -> fetch(PDO::FETCH_ASSOC);
+            if($userAdmin['user_admin'] == 1){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
 //check si $_GET est vide, si oui, l'utilisateur sera redirigé vers la page connexion
     function checkGet(){
         if(empty($_GET)){
@@ -215,20 +232,41 @@ include 'configBdd.php';
     function changeNav(){
         if(checkSession()){
             $firstName = getFirstName($_SESSION['ID']);
-            echo '  <nav>
-                        <ul>
-                            <a href="index.php"><li id="home">Home</li></a>
-                            <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
-                            <a href="ourCompany.php"><li id="company">Our Company</li></a>
-                            <li id="profil">' .$firstName. '
-                                <ul id="subNav">
-                                    <a href="profil.php"><li class="subItem">Profil</li></a>
-                                    <a href="logOut.php"><li class="subItem">Log Out</li></a>
-                                </ul>
-                            </li>
-                        </ul> 
-                    </nav>
-            ';
+                if(checkAdminSession()){
+                    echo '  <nav>
+                                <ul>
+                                    <a href="index.php"><li id="home">Home</li></a>
+                                    <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
+                                    <a href="ourCompany.php"><li id="company">Our Company</li></a>
+                                    <a href="admin.php"><li id="admin">Dashboard</li></a>
+                                    <a href="statistics.php"><li id="statistics">Statistics</li></a>
+                                    <li id="profil">' .$firstName. '
+                                        <ul id="subNav">
+                                            <a href="profil.php"><li class="subItem">Profil</li></a>
+                                            <a href="logOut.php"><li class="subItem">Log Out</li></a>
+                                        </ul>
+                                    </li>
+                                </ul> 
+                            </nav>
+                     ';
+                     return;
+                }else if(!checkAdminSession()){
+                    echo '  <nav>
+                                <ul>
+                                    <a href="index.php"><li id="home">Home</li></a>
+                                    <a href="ourDestinations.php"><li id="destination">Our Destinations</li></a>
+                                    <a href="ourCompany.php"><li id="company">Our Company</li></a>
+                                    <li id="profil">' .$firstName. '
+                                        <ul id="subNav">
+                                            <a href="profil.php"><li class="subItem">Profil</li></a>
+                                            <a href="logOut.php"><li class="subItem">Log Out</li></a>
+                                        </ul>
+                                    </li>
+                                </ul> 
+                            </nav>
+                    ';
+                    return;
+                }           
         }else{
             echo '  <nav>
                         <ul>
@@ -239,6 +277,7 @@ include 'configBdd.php';
                         </ul>
                     </nav>
             ';
+            return;
         }
     }
 

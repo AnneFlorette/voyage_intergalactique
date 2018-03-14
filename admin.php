@@ -46,9 +46,9 @@
     <title>Document</title>
 </head>
 <body>
-    <?php createNavAdmin($_SESSION['ID'])?>
+    <?php changeNav()?>
 
-    <h2>Dashboard</h3>
+    <a href="admin.php"><h2>Dashboard</h2></a>
 
     <div id="dashboard">
         <div id="createDestination">
