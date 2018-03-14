@@ -30,7 +30,7 @@
         $request -> bindParam(":mail", $mail);
         $request -> execute();
         $data = $request -> fetch(PDO::FETCH_ASSOC);
-        if ($data != null){
+        if ($data['user_admin'] == 1){
             return true;
         } else{
             return false;
