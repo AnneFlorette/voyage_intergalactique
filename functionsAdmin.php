@@ -86,14 +86,11 @@
             $userAdmin = $request -> fetch(PDO::FETCH_ASSOC);
             if($userAdmin['user_admin'] == 1){
                 return true;
-                var_dump($userAdmin['user_admin']);
             }else{
                 return false;
-                echo 'else';
             }
         }else{
             return false;
-            echo '1er else';
         }
     }
 //Vérifie s'il y a une session active (quelqu'un de connecté)
