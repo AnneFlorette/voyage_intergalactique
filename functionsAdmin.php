@@ -4,7 +4,9 @@
     const KEY = "chfporndjzysthvlzpdbj25vfhg";
 
 //choppe la BDD
-    function getPDO(){
+function getPDO(){
+        global $host;
+        global $name;
         global $login;
         global $pass;
         try{
@@ -74,6 +76,25 @@
         return $nameTemp;
     }
 
+    function checkAdminSession(){
+        if(checkSession()){
+            $bdd = getPDO();
+            $request = $bdd -> prepare('SELECT user_admin FROM USERS WHERE user_ID =:ID');
+            $request -> bindParam(':ID', $_SESSION['ID']);
+            $request -> execute();
+            $userAdmin = $request -> fetch(PDO::FETCH_ASSOC);
+            if($userAdmin['user_admin'] == 1){
+                return true;
+                var_dump($userAdmin['user_admin']);
+            }else{
+                return false;
+                echo 'else';
+            }
+        }else{
+            return false;
+            echo '1er else';
+        }
+    }
 //Vérifie s'il y a une session active (quelqu'un de connecté)
 //return true si une session est bien active
     function checkSession(){
@@ -88,7 +109,7 @@
             $firstName = getFirstName($_SESSION['ID']);
             echo '  <nav>
                         <ul>
-                            <a href="#"><li>Satistics</li></a>
+                            <a href="#"><li>Statistics</li></a>
                             <li id="profil">' .$firstName. '
                                 <ul id="subNav">
                                     <a href="profil.php"><li class="subItem">Profil</li></a>

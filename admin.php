@@ -2,6 +2,11 @@
     include 'functionsAdmin.php';
     session_start();
 
+//Verification que la Sessiona active est bien celle de l'Admin
+    if(!checkAdminSession()){
+        header('location: index.php');
+    }
+
 
 //création nouvelle destination
     if ((isset($_POST['destination']) && $_POST['destination'] != "") &&

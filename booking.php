@@ -2,6 +2,12 @@
     include 'functions.php';
     session_start();
 
+//Si le $_GET est vide (donc pas destination choisi)
+//redirection vers les destinations
+    if(checkGet()){
+        header('location: ourDestinations.php');
+    }
+
 
 //vérification que les places sont disponible et renvoi vers la page approprié suivant
     if(isset($_POST['nbAdults']) && isset($_POST['nbChildren']) && isset($_POST['tripDate'])){

@@ -176,6 +176,13 @@ include 'configBdd.php';
         return false;
     }
 
+//check si $_GET est vide, si oui, l'utilisateur sera redirigé vers la page connexion
+    function checkGet(){
+        if(empty($_GET)){
+            return true;
+        }
+        return false;
+    }
 //PROFIL FUNCTIONS
 
     function getNextTrips($userID){
