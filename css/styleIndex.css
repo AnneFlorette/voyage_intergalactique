@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Space Age";
-	src: url('space_age.ttf');
+	src: url('../font/space_age.ttf');
 }
 
 :focus{

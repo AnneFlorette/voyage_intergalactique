@@ -1,10 +1,10 @@
 @font-face {
     font-family: "Space Age";
-	src: url('space_age.ttf');
+	src: url('../font/space_age.ttf');
 }
 @font-face{
     font-family: "Sansation";
-    src: url('Sansation_regular.ttf');
+    src: url('../font/Sansation_Regular.ttf');
 }
 
 :focus{
@@ -97,6 +97,7 @@ li:focus{
  #dashboard{
     background-color: transparent; 
     width: auto;
+    height: auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -104,7 +105,7 @@ li:focus{
  }
 
 div{
-    height: 70%;
+    height: 600px;
     width: 40vw;
     background: #1b395fbd;
     box-shadow: 2px 3px 4px #000000;
@@ -120,7 +121,7 @@ div{
     box-shadow: none;
     background: transparent;
     width: auto;
-    height: 50%;
+    height: 80%;
     overflow: auto;
 
 }

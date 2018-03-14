@@ -1,10 +1,10 @@
 @font-face {
     font-family: "Space Age";
-	src: url('space_age.ttf');
-   }
+	src: url('../font/space_age.ttf');
+}
 @font-face{
     font-family: "Sansation";
-    src: url('Sansation_regular.ttf');
+    src: url('../font/Sansation_Regular.ttf');
 }
 
 :focus{
