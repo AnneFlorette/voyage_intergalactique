@@ -2,6 +2,11 @@
     include 'functionsAdmin.php';
     session_start();
 
+//Verification que la Sessiona active est bien celle de l'Admin
+    if(!checkAdminSession()){
+        header('location: index.php');
+    }
+
     $destinations = getDestinations();
 
     $dataArray = [];
@@ -66,61 +71,58 @@
     </head>
     <body>
         <?php changeNav() ?>
+
         <div id="generalStats">
+            <h3>General Statistics</h3>
             <table>
                 <tr>
+                    <th>Number of registered users</th>
+                    <th>Number of reserved places</th>
+                    <th>Number of flights over</th>
+                </tr>
+                <tr>
                     <td>
-                        <p>Number of registered users</p>
-                        <p>
-                            <?php
-                                echo getNbrUser();
-                            ?>
-                        </p>
+                        <?php echo getNbrUser(); ?>
                     </td>
                     <td>
-                        <p>Number of reserved places</p>
-                        <p>
-                            <?php
-                                echo getNbrReservedSit();
-                            ?>
-                        </p>
+                        <?php echo getNbrReservedSit(); ?>
                     </td>
                     <td>
-                        <p>Number of flights completed</p>
-                        <p>
-                            <?php
-                                echo getNbrFinisedTravel();
-                            ?>
-                        </p>
+                        <?php echo getNbrFinisedTravel(); ?>
                     </td>
                 </tr>
             </table>
         </div>
-        
-        <div id="completionStats">
-            <table>
-                <?php
-                    echo    "<tr>" .
-                                "<td>" . "Destination name" . "</td>" .
-                                "<td>" . "Pourcent of flight completion" . "</td>" .
-                            "</tr>" .
-                            "<tr>" .
-                                "<td>" . "Global" . "</td>" .
-                                "<td>" . getPourcentFlightCompletion() . "</td>" .
-                            "</tr>";                
-                    foreach($destinations as $destination){
-                        echo    "<tr>" .
-                                    "<td>" . $destination["travelpres_destination"] . "</td>" .
-                                    "<td>" . getPourcentFlightCompletion($destination["travelpres_ID"]) . "</td>" .
-                                "</tr>";
-                    }
-                ?>
-            </table>
-        </div>
 
-        <div id="flightStats">
-            <div id="piechart" style="width: 900px; height: 500px;"></div>
+        <div id="particularStats">
+            <div id="completionStats">
+                <h3>Completion Statistics</h3>
+                <table>
+                    <?php
+                        echo    "<tr>" .
+                                    "<td>" . "Destination name" . "</td>" .
+                                    "<td>" . "Pourcent of flight completion" . "</td>" .
+                                "</tr>" .
+                                "<tr>" .
+                                    "<td>" . "Global" . "</td>" .
+                                    "<td>" . getPourcentFlightCompletion() . " %</td>" .
+                                "</tr>";                
+                        foreach($destinations as $destination){
+                            echo    "<tr>" .
+                                        "<td>" . $destination["travelpres_destination"] . "</td>" .
+                                        "<td>" . getPourcentFlightCompletion($destination["travelpres_ID"]) . " %</td>" .
+                                    "</tr>";
+                        }
+                    ?>
+                </table>
+            </div>
+    
+            <div id="flightStats">
+                <h3>Most Booked Destinations</h3>
+                <div id="piechart"></div>
+            </div>
         </div>
+        
 
     </body>
 </html>
