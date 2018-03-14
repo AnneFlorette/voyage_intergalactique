@@ -19,6 +19,9 @@
             $_SESSION['ID'] = $ID;
             header('location: admin.php');
         }
+        else{
+            header('location: index.php');
+        }
     }
 ?>
 
