@@ -191,7 +191,7 @@ include 'configBdd.php';
         $request -> bindParam(":ID", $userID);
         $request -> execute() -> fetchAll(PDO::FETCH_ASSOC);
         return $request ; */
-        return $bdd -> query("SELECT * FROM USERSBOOKING WHERE user_ID = ". $userID ." AND userbooking_booking_date >= CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+        return $bdd -> query("SELECT u.*, t.travel_depart_date FROM USERSBOOKING u JOIN TRAVEL t ON u.travel_ID = t.travel_ID WHERE user_ID = ". $userID ." AND travel_depart_date >= CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
     }
 
     function getOldTrips($userID){
@@ -200,7 +200,7 @@ include 'configBdd.php';
         $request -> bindParam(":ID", $userID);
         $result = $request -> execute();
         return $result -> fetchAll(PDO::FETCH_ASSOC); */
-        return $bdd -> query("SELECT * FROM USERSBOOKING WHERE user_ID = ". $userID ." AND userbooking_booking_date < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+        return $bdd -> query("SELECT u.*, t.travel_depart_date FROM USERSBOOKING u JOIN TRAVEL t ON u.travel_ID = t.travel_ID WHERE user_ID = ". $userID ." AND travel_depart_date < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
     }
 
     function getDestination($travelID){
@@ -428,10 +428,11 @@ include 'configBdd.php';
     }
 
 //ajoute le voyage réservé à l'utilisateur
-    function addTripToUser($userID, $travelID, $totalPlaces){
+    function addTripToUser($userID, $travelID, $nbAdults, $nbChildren){
         $bdd = getPDO();
-        $request = $bdd -> prepare('INSERT INTO USERSBOOKING (userbooking_booking_date, userbooking_nbr_places, user_ID, travel_ID) VALUES (CURRENT_DATE, :places, :userID, :travelID)');
-        $request -> bindParam(":places", $totalPlaces);
+        $request = $bdd -> prepare('INSERT INTO USERSBOOKING (userbooking_booking_date, userbooking_child_places, userbooking_adult_places, user_ID, travel_ID) VALUES (CURRENT_DATE, :childPlaces, :adultPlaces, :userID, :travelID)');
+        $request -> bindParam(":childPlaces", $nbChildren);
+        $request -> bindParam(":adultPlaces", $nbAdults);
         $request -> bindParam(":userID", $userID);
         $request -> bindParam(":travelID", $travelID);
         $request -> execute();
