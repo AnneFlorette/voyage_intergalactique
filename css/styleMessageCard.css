@@ -26,7 +26,11 @@ body{
 }
 
 .message--success {
-    background: rgba(0, 128, 0, 0.700);
+    background: rgba(0, 255, 0, 0.700);
+}
+
+.message--warning {
+    background: rgba(255, 128, 0, 0.7);
 }
 
 .message__dismiss {

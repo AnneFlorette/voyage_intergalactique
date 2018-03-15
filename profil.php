@@ -2,6 +2,8 @@
     include 'functions.php'; 
     session_start();
 
+    $messageData = [];
+
     // Changement d'informations
     if  ((isset($_POST['firstName']) && $_POST['firstName'] != "") &&
         (isset($_POST['lastName']) && $_POST['lastName'] != "") &&
@@ -12,10 +14,10 @@
 
             modifData(($_SESSION['ID']), $firstName, $lastName, $mail);
             echo "<script>popUpInfo.style.display = 'none'</script>";
-            echo'<meta http-equiv="refresh" content="0; URL=profil.php">';
+
+            $messageData = ["Informations changed", "img/trobiInfo.png", "INFO"];
+
         }
-
-
 
     // Changement mot de passe
         if  ((isset($_POST['currentPwd']) && $_POST['currentPwd'] != "") &&
@@ -26,6 +28,13 @@
                 $newPwd = htmlspecialchars($_POST['newPwd']);
                 $password = cryptage($newPwd);
                 modifPwd($_SESSION['ID'], $password);
+
+                $messageData = ["Password changed", "img/trobiInfo.png", "INFO"];
+
+            } else{
+
+                $messageData = ["Password not changed", "img/trobiWarning.png", "WARNING"];
+
             }
         }
 // Suppression du compte
@@ -44,11 +53,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/styleProfil.css">
+    <link rel="stylesheet" type="text/css" href="css/styleMessageCard.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             
     <title>Profil</title>
 </head>
 <body>
+    <script type="text/javascript" src="messageCard.js"></script>
     <section id="top">
         <!-- Logo de la company -->
         <div id="logo">    
@@ -174,6 +185,8 @@
         </div>
     </section>
 
+    <div id="messageContainer"></div>
+
     <script>
         const popUpInfo = document.getElementById('popUpInfo')
         const popUpPassword = document.getElementById('popUpPassword')
@@ -199,6 +212,21 @@
         function clearPopUp(popUp){
             popUp.style.display = 'none'
         }
+
+        let jArray = <?php echo json_encode($messageData); ?>;
+
+        console.log(jArray)
+
+        messageType = getMessageType()
+
+        str = jArray[0]
+        img = jArray[1]
+        msgType = messageType[jArray[2]]
+
+        if (jArray.length != 0){
+            displayMessageCard(str, img, msgType, document.getElementById("messageContainer"))
+        }
+
     </script>
 
 </body>
