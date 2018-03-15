@@ -10,25 +10,29 @@
     if (isset($_POST['mailSignUp']) && htmlspecialchars($_POST['mailSignUp']) != "" &&
         isset($_POST['passwdSignUp']) && htmlspecialchars($_POST['passwdSignUp']) != "" &&
         isset($_POST['lastName']) && htmlspecialchars($_POST['lastName']) != "" &&
-        isset($_POST['firstName']) && htmlspecialchars($_POST['firstName']) != "" &&
-        htmlspecialchars($_POST['passwdSignUpVerif']) == htmlspecialchars($_POST['passwdSignUp'])) {
-        $mail = htmlspecialchars($_POST['mailSignUp']);
-        $passwd = htmlspecialchars($_POST['passwdSignUp']);
-        $lastName = htmlspecialchars($_POST['lastName']);
-        $firstName = htmlspecialchars($_POST['firstName']);
+        isset($_POST['firstName']) && htmlspecialchars($_POST['firstName']) != ""){
+        if(htmlspecialchars($_POST['passwdSignUpVerif']) == htmlspecialchars($_POST['passwdSignUp'])) {
+            $mail = htmlspecialchars($_POST['mailSignUp']);
+            $passwd = htmlspecialchars($_POST['passwdSignUp']);
+            $lastName = htmlspecialchars($_POST['lastName']);
+            $firstName = htmlspecialchars($_POST['firstName']);
 
-        $allowedSignUp = verifInscription($mail);
+            $allowedSignUp = verifInscription($mail);
 
-        if ($allowedSignUp == true){
-            $passCrypt = cryptage($passwd);
-            writeLog($mail, $passCrypt, $lastName, $firstName);
-            header('location: logInSignUp.php');
+            if ($allowedSignUp == true){
+                $passCrypt = cryptage($passwd);
+                writeLog($mail, $passCrypt, $lastName, $firstName);
 
-            $messageData = ["signUp Ok", "img/trobiGood.png", "SUCCES"];
+                $messageData = ["SignUp Ok", "img/trobiGood.png", "SUCCESS"];
+                
+            } else{
 
+                $messageData = ["SignUp Failed", "img/trobiSad.png", "ERROR"];
+
+            }
         } else{
-
-            $messageData = ["signUp Failed", "img/trobisad.png", "ERROR"];
+                
+            $messageData = ["SignUp Failed", "img/trobiSad.png", "ERROR"];
 
         }
     }
@@ -48,7 +52,7 @@
             header('location: profil.php');
         } else{
             
-            $messageData = ["Login failed", "img/trobisad.png", "ERROR"];
+            $messageData = ["Login failed", "img/trobiSad.png", "ERROR"];
 
         }
     }
@@ -119,13 +123,13 @@
         </div>
     </div>
 
-    
-
     <div id="messageContainer"></div>
 
     <script>
         
         let jArray = <?php echo json_encode($messageData); ?>;
+
+        console.log(jArray)
 
         messageType = getMessageType()
 
@@ -133,7 +137,7 @@
         img = jArray[1]
         msgType = messageType[jArray[2]]
 
-        if (str != ""){
+        if (jArray.length != 0){
             displayMessageCard(str, img, msgType, document.getElementById("messageContainer"))
         }
 

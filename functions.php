@@ -470,14 +470,13 @@ include 'configBdd.php';
     }
 
 //ajoute le voyage réservé à l'utilisateur
-    function addTripToUser($userID, $travelID, $nbAdults, $nbChildren, $totalPrice){
+    function addTripToUser($userID, $travelID, $nbAdults, $nbChildren){
         $bdd = getPDO();
-        $request = $bdd -> prepare('INSERT INTO USERSBOOKING (userbooking_booking_date, userbooking_child_places, userbooking_adult_places, userbooking_total_price, user_ID, travel_ID) VALUES (CURRENT_DATE, :childPlaces, :adultPlaces, :totalPrice, :userID, :travelID)');
+        $request = $bdd -> prepare('INSERT INTO USERSBOOKING (userbooking_booking_date, userbooking_child_places, userbooking_adult_places, user_ID, travel_ID) VALUES (CURRENT_DATE, :childPlaces, :adultPlaces, :userID, :travelID)');
         $request -> bindParam(":childPlaces", $nbChildren);
         $request -> bindParam(":adultPlaces", $nbAdults);
         $request -> bindParam(":userID", $userID);
         $request -> bindParam(":travelID", $travelID);
-        $request -> bindParam(":totalPrice", $totalPrice);
         $request -> execute();
     }
 
@@ -491,4 +490,23 @@ include 'configBdd.php';
         return $destinationID['travelpres_ID'];
     }
 
+//retourne la date de départ d'un voyage
+    function getTripDate($travelID){
+        $bdd = getPDO();
+        $trip = $bdd -> prepare('SELECT travel_depart_date FROM TRAVEL WHERE travel_ID = :ID');
+        $trip -> bindParam(':ID', $travelID);
+        $trip -> execute();
+        $tripDate = $trip -> fetch(PDO::FETCH_ASSOC);
+        return $tripDate['travel_depart_date'];
+    }
+
+//retourne le temps de voyage
+    function getTravelTime($destinationID){
+        $bdd = getPDO();
+        $travel = $bdd -> prepare('SELECT travelpres_days FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $travel -> bindParam(':ID', $destinationID);
+        $travel -> execute();
+        $travelTime = $travel -> fetch(PDO::FETCH_ASSOC);
+        return $travelTime['travelpres_days'];
+    }
 ?>
