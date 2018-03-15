@@ -26,57 +26,57 @@ include 'configBdd.php';
 //retourne le 'First Name' de l'utilisateur à partir de son ID
     function getFirstName($ID){
         $bdd = getPDO();
-        $name = $bdd->prepare("SELECT user_first_name FROM USERS WHERE user_ID = :ID");
-        $name-> bindParam(':ID', $ID);
-        $name-> execute();
-        $data = $name-> fetch(PDO::FETCH_ASSOC);
-        $nameTemp = $data['user_first_name'];
-        return $nameTemp;
+        $request = $bdd->prepare("SELECT user_first_name FROM USERS WHERE user_ID = :ID");
+        $request-> bindParam(':ID', $ID);
+        $request-> execute();
+        $data = $request-> fetch(PDO::FETCH_ASSOC);
+        $firstName = $data['user_first_name'];
+        return $firstName;
     }
 
 //retourne le 'Last Name' de l'utilisateur à partir de son ID
     function getLastName($ID){
         $bdd = getPDO();
-        $name = $bdd->prepare("SELECT user_last_name FROM USERS WHERE user_ID = :ID");
-        $name-> bindParam(':ID', $ID);
-        $name-> execute();
-        $data = $name-> fetch(PDO::FETCH_ASSOC);
-        $nameTemp = $data['user_last_name'];
-        return $nameTemp;
+        $request = $bdd->prepare("SELECT user_last_name FROM USERS WHERE user_ID = :ID");
+        $request-> bindParam(':ID', $ID);
+        $request-> execute();
+        $data = $request-> fetch(PDO::FETCH_ASSOC);
+        $lastName = $data['user_last_name'];
+        return $lastName;
     }
 
 //retourne le mail de l'utilisateur à partir de son ID
     function getMail($ID){
         $bdd = getPDO();
-        $name = $bdd->prepare("SELECT user_mail FROM USERS WHERE user_ID = :ID");
-        $name-> bindParam(':ID', $ID);
-        $name-> execute();
-        $data = $name-> fetch(PDO::FETCH_ASSOC);
-        $mailTemp = $data['user_mail'];
-        return $mailTemp;
+        $request = $bdd->prepare("SELECT user_mail FROM USERS WHERE user_ID = :ID");
+        $request-> bindParam(':ID', $ID);
+        $request-> execute();
+        $data = $request-> fetch(PDO::FETCH_ASSOC);
+        $userMail = $data['user_mail'];
+        return $userMail;
     }
 
 //Lors de la connexion, l'utilisateur démarre une session start
 //grâce au mail qu'il entre, on retourne son ID qui sera retenu dans le tableau $_SESSION
     function getID($mail){
         $bdd = getPDO();
-        $ID = $bdd->prepare("SELECT user_ID FROM USERS WHERE user_mail = :mail");
-        $ID-> bindParam(':mail', $mail);
-        $ID-> execute();
-        $data = $ID-> fetch(PDO::FETCH_ASSOC);
-        $IDTemp = $data['user_ID'];
-        return $IDTemp;
+        $request = $bdd->prepare("SELECT user_ID FROM USERS WHERE user_mail = :mail");
+        $request-> bindParam(':mail', $mail);
+        $request-> execute();
+        $data = $request-> fetch(PDO::FETCH_ASSOC);
+        $userID = $data['user_ID'];
+        return $userID;
     }
 
 ////retourne le 'password' de l'utilisateur à partir de son ID
-    function getMdp($ID){
+    function getPasswd($ID){
         $bdd = getPDO();
         $request = $bdd -> prepare("SELECT user_password FROM USERS WHERE user_ID = :ID");
         $request -> bindParam(":ID", $ID);
         $request -> execute();
         $data = $request -> fetch(PDO::FETCH_ASSOC);
-        $pwdTemp = $data['user_password'];
-        return $pwdTemp;
+        $passwd = $data['user_password'];
+        return $passwd;
     }
 
 //Vérifie si le mail n'est pas déjà utilisé
@@ -138,10 +138,10 @@ include 'configBdd.php';
 //On vérifie que le mot de passe crypté dans la base de données est le même que celui qu'on donne en argument
 //Utilisé dans la page profil pour modifier le mot de passe
 //on vérifie d'abord si 'currentPwd' est bien le même que celui dans la base de données
-    function verifPwd($ID, $mdp){
-        $mdpVerif = getMdp($ID);
-        $mdpCheck = cryptage($mdp);
-        if($mdpCheck == $mdpVerif){
+    function verifpasswd($ID, $passwd){
+        $passwdVerif = getPasswd($ID);
+        $passwdCheck = cryptage($passwd);
+        if($passwdCheck == $passwdVerif){
             return true;
         }
         return false;
@@ -150,10 +150,10 @@ include 'configBdd.php';
 //Page profil pour la modification du mot de passe
 //Après la vérification du mot de passe actuel
 //l'utilisateur va entrer son nouveau mot de passe et on l'insert dans la base de données
-    function modifPwd($ID, $mdp){
+    function modifPasswd($ID, $passwd){
         $bdd = getPDO();
-        $request = $bdd -> prepare("UPDATE USERS SET user_password = :mdp WHERE user_ID = :ID");
-        $request -> bindParam(":mdp", $mdp);
+        $request = $bdd -> prepare("UPDATE USERS SET user_password = :passwd WHERE user_ID = :ID");
+        $request -> bindParam(":passwd", $passwd);
         $request -> bindParam(":ID", $ID);
         $request -> execute();
     }
@@ -312,8 +312,8 @@ include 'configBdd.php';
 //ourDestinations.php
 //Création des sections (travel_pres) pour présenter chaque planète dynamiquement
     function createSections(){
-        $bd_log = getPDO();
-        $travels = $bd_log -> query("SELECT * FROM TRAVELPRES") -> fetchall(PDO::FETCH_ASSOC);
+        $bdd = getPDO();
+        $travels = $bdd -> query("SELECT * FROM TRAVELPRES") -> fetchall(PDO::FETCH_ASSOC);
 
         $index = 0;
         foreach($travels as $travel){
@@ -340,40 +340,40 @@ include 'configBdd.php';
 //retourne la description de la destination
     function getTripDescription($ID){
         $bdd = getPDO();
-        $descriptionTemp = $bdd -> prepare('SELECT travelpres_description FROM TRAVELPRES WHERE travelpres_ID = :ID');
-        $descriptionTemp -> bindParam(':ID', $ID);
-        $descriptionTemp -> execute();
-        $description = $descriptionTemp -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travelpres_description FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $request -> bindParam(':ID', $ID);
+        $request -> execute();
+        $description = $request -> fetch(PDO::FETCH_ASSOC);
         return $description['travelpres_description'];
     }
 
 //retourne l'image de la destination
     function getTripImage($ID){
         $bdd = getPDO();
-        $imageTemp = $bdd -> prepare('SELECT travelpres_img_url FROM TRAVELPRES WHERE travelpres_ID = :ID');
-        $imageTemp -> bindParam(':ID', $ID);
-        $imageTemp -> execute();
-        $image = $imageTemp -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travelpres_img_url FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $request -> bindParam(':ID', $ID);
+        $request -> execute();
+        $image = $request -> fetch(PDO::FETCH_ASSOC);
         return $image;
     }
 
 //retourne le nom de la destination
     function getTripName($ID){
         $bdd = getPDO();
-        $nameTemp = $bdd -> prepare('SELECT travelpres_destination FROM TRAVELPRES WHERE travelpres_ID = :ID');
-        $nameTemp -> bindParam(':ID', $ID);
-        $nameTemp -> execute();
-        $name = $nameTemp -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travelpres_destination FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $request -> bindParam(':ID', $ID);
+        $request -> execute();
+        $name = $request -> fetch(PDO::FETCH_ASSOC);
         return $name['travelpres_destination'];
     }
 
 //retourne le tableau des prochains vols par l'ID de la destination
     function getNextTrip($ID){
         $bdd = getPDO();
-        $infoTemp = $bdd -> prepare('SELECT t1.travel_ID ,t1.travel_depart_date, t2.travelpres_days, t2.travelpres_price_adult, t2.travelpres_price_child, t1.travel_remain_places FROM TRAVEL t1 JOIN TRAVELPRES t2 ON t1.travelpres_ID = t2.travelpres_ID WHERE t1.travelpres_ID = :ID');
-        $infoTemp -> bindParam(':ID', $ID);
-        $infoTemp -> execute();
-        $infos = $infoTemp -> fetchAll(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT t1.travel_ID ,t1.travel_depart_date, t2.travelpres_days, t2.travelpres_price_adult, t2.travelpres_price_child, t1.travel_remain_places FROM TRAVEL t1 JOIN TRAVELPRES t2 ON t1.travelpres_ID = t2.travelpres_ID WHERE t1.travelpres_ID = :ID');
+        $request -> bindParam(':ID', $ID);
+        $request -> execute();
+        $infos = $request -> fetchAll(PDO::FETCH_ASSOC);
         
         foreach($infos as $info){
             $str = '';
@@ -392,10 +392,10 @@ include 'configBdd.php';
 //retourne l'id du vol et sa date de départ pour la sélection de l'utilisateur dans booking
     function getTripOptions($IDDestination){
         $bdd = getPDO();
-        $optionInfos = $bdd -> prepare('SELECT travel_ID, travel_depart_date FROM TRAVEL WHERE travelpres_ID = :ID');
-        $optionInfos -> bindParam(':ID', $IDDestination);
-        $optionInfos -> execute();
-        $options = $optionInfos -> fetchAll(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travel_ID, travel_depart_date FROM TRAVEL WHERE travelpres_ID = :ID');
+        $request -> bindParam(':ID', $IDDestination);
+        $request -> execute();
+        $options = $request -> fetchAll(PDO::FETCH_ASSOC);
         foreach($options as $option){
             $str = '';
             $str .= '<option value="'.$option['travel_ID'].'">'.$option['travel_ID'].', '.$option['travel_depart_date'].'</option>';
@@ -406,10 +406,10 @@ include 'configBdd.php';
 //retourne l'image de la destination pour le fond de booking suivant la destination choisie
     function getImageDestinations($IDDestination){
         $bdd = getPDO();
-        $imgDestination = $bdd -> prepare('SELECT travelpres_img_url FROM TRAVELPRES WHERE travelpres_ID = :ID');
-        $imgDestination -> bindParam(':ID', $IDDestination);
-        $imgDestination -> execute();
-        $imgURL = $imgDestination -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travelpres_img_url FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $request -> bindParam(':ID', $IDDestination);
+        $request -> execute();
+        $imgURL = $request -> fetch(PDO::FETCH_ASSOC);
         echo 'background="'.$imgURL['travelpres_img_url'].'"';
     }
 
@@ -417,10 +417,10 @@ include 'configBdd.php';
     function areAvailable($totalPlaces, $travelID){
         if($totalPlaces >= 1){
            $bdd = getPDO();
-            $getPlaces = $bdd -> prepare('SELECT travel_remain_places FROM TRAVEL WHERE travel_ID = :travelID');
-            $getPlaces -> bindParam(":travelID", $travelID);
-            $getPlaces -> execute();
-            $placesTemp = $getPlaces -> fetch(PDO::FETCH_ASSOC);
+            $request = $bdd -> prepare('SELECT travel_remain_places FROM TRAVEL WHERE travel_ID = :travelID');
+            $request -> bindParam(":travelID", $travelID);
+            $request -> execute();
+            $placesTemp = $request -> fetch(PDO::FETCH_ASSOC);
 
             $places = $placesTemp['travel_remain_places'] - $totalPlaces;
             if($places >= 0){
@@ -434,15 +434,15 @@ include 'configBdd.php';
 //calcul du prix total que l'utilisateur doit payer
     function getPrice($nbAdults, $nbChildren, $travelID){
         $bdd = getPDO();
-        $getDestinationID = $bdd -> prepare('SELECT travelpres_ID FROM TRAVEL WHERE travel_ID = :travelID');
-        $getDestinationID -> bindParam(":travelID", $travelID);
-        $getDestinationID -> execute();
-        $destinationID = $getDestinationID -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travelpres_ID FROM TRAVEL WHERE travel_ID = :travelID');
+        $request -> bindParam(":travelID", $travelID);
+        $request -> execute();
+        $destinationID = $request -> fetch(PDO::FETCH_ASSOC);
 
-        $getPrices = $bdd -> prepare('SELECT travelpres_price_child, travelpres_price_adult FROM TRAVELPRES WHERE travelpres_ID = :destinationID');
-        $getPrices -> bindParam(":destinationID", $destinationID['travelpres_ID']);
-        $getPrices -> execute();
-        $prices = $getPrices -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travelpres_price_child, travelpres_price_adult FROM TRAVELPRES WHERE travelpres_ID = :destinationID');
+        $request -> bindParam(":destinationID", $destinationID['travelpres_ID']);
+        $request -> execute();
+        $prices = $request -> fetch(PDO::FETCH_ASSOC);
 
         $childPrice = $prices['travelpres_price_child'] * $nbChildren;
         $adultPrice = $prices['travelpres_price_adult'] * $nbAdults;
@@ -455,10 +455,10 @@ include 'configBdd.php';
 //réservation des places
     function bookTrip($totalPlaces, $travelID){
         $bdd = getPDO();
-        $getPlaces = $bdd -> prepare('SELECT travel_remain_places FROM TRAVEL WHERE travel_ID = :travelID');
-        $getPlaces -> bindParam(":travelID", $travelID);
-        $getPlaces -> execute();
-        $placesTemp = $getPlaces -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travel_remain_places FROM TRAVEL WHERE travel_ID = :travelID');
+        $request -> bindParam(":travelID", $travelID);
+        $request -> execute();
+        $placesTemp = $request -> fetch(PDO::FETCH_ASSOC);
 
         $places = $placesTemp['travel_remain_places'] - $totalPlaces;
 
@@ -483,30 +483,30 @@ include 'configBdd.php';
 //retourne l'ID de la destination a partir de l'ID du voyage
     function getDestinationID($travelID){
         $bdd = getPDO();
-        $destination = $bdd -> prepare('SELECT travelpres_ID FROM TRAVEL WHERE travel_ID = :ID');
-        $destination -> bindParam(':ID', $travelID);
-        $destination -> execute();
-        $destinationID = $destination -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travelpres_ID FROM TRAVEL WHERE travel_ID = :ID');
+        $request -> bindParam(':ID', $travelID);
+        $request -> execute();
+        $destinationID = $request -> fetch(PDO::FETCH_ASSOC);
         return $destinationID['travelpres_ID'];
     }
 
 //retourne la date de départ d'un voyage
     function getTripDate($travelID){
         $bdd = getPDO();
-        $trip = $bdd -> prepare('SELECT travel_depart_date FROM TRAVEL WHERE travel_ID = :ID');
-        $trip -> bindParam(':ID', $travelID);
-        $trip -> execute();
-        $tripDate = $trip -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travel_depart_date FROM TRAVEL WHERE travel_ID = :ID');
+        $request -> bindParam(':ID', $travelID);
+        $request -> execute();
+        $tripDate = $request -> fetch(PDO::FETCH_ASSOC);
         return $tripDate['travel_depart_date'];
     }
 
 //retourne le temps de voyage
     function getTravelTime($destinationID){
         $bdd = getPDO();
-        $travel = $bdd -> prepare('SELECT travelpres_days FROM TRAVELPRES WHERE travelpres_ID = :ID');
-        $travel -> bindParam(':ID', $destinationID);
-        $travel -> execute();
-        $travelTime = $travel -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare('SELECT travelpres_days FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $request -> bindParam(':ID', $destinationID);
+        $request -> execute();
+        $travelTime = $request -> fetch(PDO::FETCH_ASSOC);
         return $travelTime['travelpres_days'];
     }
 ?>
