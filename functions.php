@@ -508,5 +508,4 @@ include 'configBdd.php';
         $travelTime = $travel -> fetch(PDO::FETCH_ASSOC);
         return $travelTime['travelpres_days'];
     }
-
 ?>

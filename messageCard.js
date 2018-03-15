@@ -7,7 +7,7 @@ function getMessageType(){
     return MESSAGE_TYPE
 }
 
-function displayMessageCard(msg, img, type = info, container){
+function displayMessageCard(msg, img, type = "info", container){
 
     console.log(type)
 
