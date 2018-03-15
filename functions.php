@@ -83,7 +83,7 @@ include 'configBdd.php';
 //return true si le mail n'est pas encore utilisé
     function verifInscription($mail){
         $bdd = getPDO();
-        $request = $bdd -> prepare("SELECT user_mail FROM USERS WHERE mail = :mail");
+        $request = $bdd -> prepare("SELECT user_mail FROM USERS WHERE user_mail = :mail");
         $request -> bindParam(":mail", $mail);
         $request -> execute();
         $verifMail = $request->fetchAll(PDO::FETCH_ASSOC);  
