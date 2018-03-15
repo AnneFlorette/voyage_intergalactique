@@ -469,13 +469,14 @@ include 'configBdd.php';
     }
 
 //ajoute le voyage réservé à l'utilisateur
-    function addTripToUser($userID, $travelID, $nbAdults, $nbChildren){
+    function addTripToUser($userID, $travelID, $nbAdults, $nbChildren, $price){
         $bdd = getPDO();
-        $request = $bdd -> prepare('INSERT INTO USERSBOOKING (userbooking_booking_date, userbooking_child_places, userbooking_adult_places, user_ID, travel_ID) VALUES (CURRENT_DATE, :childPlaces, :adultPlaces, :userID, :travelID)');
+        $request = $bdd -> prepare('INSERT INTO USERSBOOKING (userbooking_booking_date, userbooking_child_places, userbooking_adult_places, userbooking_total_price, user_ID, travel_ID) VALUES (CURRENT_DATE, :childPlaces, :adultPlaces, :price, :userID, :travelID)');
         $request -> bindParam(":childPlaces", $nbChildren);
         $request -> bindParam(":adultPlaces", $nbAdults);
         $request -> bindParam(":userID", $userID);
         $request -> bindParam(":travelID", $travelID);
+        $request -> bindParam(":price", $price);
         $request -> execute();
     }
 
