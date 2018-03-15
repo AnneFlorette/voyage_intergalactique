@@ -34,15 +34,17 @@
 </head>
 <body <?php getImageDestinations(getDestinationID($_SESSION['travelID'])); ?>>
     <div id="validation">
-        <form action="" method="post">
-            <tr><td>Last name:</td><td><?php getLastName($_SESSION['ID']); ?></td></tr>
-            <tr><td>First name:</td><td><?php getFirstName($_SESSION['ID']); ?></td></tr>
+        <table id="validationTable">        
+            <tr><td>Last name:</td><td><?php echo ' '.getLastName($_SESSION['ID']); ?></td></tr>
+            <tr><td>First name:</td><td><?php echo ' '.getFirstName($_SESSION['ID']); ?></td></tr>
             <tr><td>Booking's date:</td><td><?php echo ' '.date("Y-m-d"); ?></td></tr>
-            <tr><td>Departure's date:</td><td><?php  ?></td></tr>
-            <tr><td>Travel's time:</td><td><?php  ?></td></tr>
-            <tr><td>Number of adult places:</td><td><?php  ?></td></tr>
-            <tr><td>Number of child places:</td><td><?php  ?></td></tr>
-            <tr><td>Total price:</td><td><?php  ?></td></tr>
+            <tr><td>Departure's date:</td><td><?php echo ' '.getTripDate($_SESSION['travelID']); ?></td></tr>
+            <tr><td>Travel's time:</td><td><?php echo ' '.getTravelTime(getDestinationID($travelID)).' days'; ?></td></tr>
+            <tr><td>Number of adult places:</td><td><?php echo ' '.$_SESSION['nbAdults']; ?></td></tr>
+            <tr><td>Number of child places:</td><td><?php echo ' '.$_SESSION['nbChildren']; ?></td></tr>
+            <tr><td>Total price:</td><td><?php echo ' '.$price.' €'; ?></td></tr>
+        </table>
+        <form action="" method="post" id="validationForm">
             <input type="submit" class="btn" name="validate" value="Validate payment">
             <input type="submit" class="btn" name="cancel" value="Cancel payment">
         </form>
