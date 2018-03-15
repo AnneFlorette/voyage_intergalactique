@@ -14,7 +14,7 @@
         $travelID = htmlspecialchars($_POST['tripDate']);
         $nbPlaces = htmlspecialchars($_POST['nbAdults']) + htmlspecialchars($_POST['nbChildren']);
 
-        $available = areAvailable();
+        $available = areAvailable($nbPlaces, $travelID);
 
         if($available){
         $_SESSION['nbAdults'] = htmlspecialchars($_POST['nbAdults']);
@@ -22,7 +22,7 @@
         $_SESSION['travelID'] = htmlspecialchars($_POST['tripDate']);
         header('location: validatePayment.php');
         }
-        // popUp : nombre de places non disponible 
+        // petitrobot : nombre de places non disponible 
     }
 
     if(isset($_POST['connexion']) && $_POST['connexion'] == "Connexion"){
