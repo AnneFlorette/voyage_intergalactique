@@ -308,6 +308,14 @@
         return $finisedTravel;
     }
 
+    function getIncome(){
+        $bdd = getPDO();
+        $request = $bdd -> prepare('SELECT SUM(userbooking_total_price) AS income FROM USERSBOOKING');
+        $request -> execute();
+        $income = $request -> fetch(PDO::FETCH_ASSOC);
+        return $income['income'];
+    }
+
     function getNbrCurrentTravel($destinationID = null){
         $bdd = getPDO();
         if($destinationID != null){

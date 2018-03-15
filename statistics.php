@@ -79,6 +79,7 @@
                     <th>Number of registered users</th>
                     <th>Number of reserved places</th>
                     <th>Number of flights over</th>
+                    <th>Income</th>
                 </tr>
                 <tr>
                     <td>
@@ -89,6 +90,9 @@
                     </td>
                     <td>
                         <?php echo getNbrFinisedTravel(); ?>
+                    </td>
+                    <td>
+                        <?php echo getIncome().'€'; ?>
                     </td>
                 </tr>
             </table>
