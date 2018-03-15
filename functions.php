@@ -309,7 +309,6 @@ include 'configBdd.php';
         }
     }
 
-
 //ourDestinations.php
 //Création des sections (travel_pres) pour présenter chaque planète dynamiquement
     function createSections(){
@@ -488,6 +487,26 @@ include 'configBdd.php';
         $destination -> execute();
         $destinationID = $destination -> fetch(PDO::FETCH_ASSOC);
         return $destinationID['travelpres_ID'];
+    }
+
+//retourne la date de départ d'un voyage
+    function getTripDate($travelID){
+        $bdd = getPDO();
+        $trip = $bdd -> prepare('SELECT travel_depart_date FROM TRAVEL WHERE travel_ID = :ID');
+        $trip -> bindParam(':ID', $travelID);
+        $trip -> execute();
+        $tripDate = $trip -> fetch(PDO::FETCH_ASSOC);
+        return $tripDate['travel_depart_date'];
+    }
+
+//retourne le temps de voyage
+    function getTravelTime($destinationID){
+        $bdd = getPDO();
+        $travel = $bdd -> prepare('SELECT travelpres_days FROM TRAVELPRES WHERE travelpres_ID = :ID');
+        $travel -> bindParam(':ID', $destinationID);
+        $travel -> execute();
+        $travelTime = $travel -> fetch(PDO::FETCH_ASSOC);
+        return $travelTime['travelpres_days'];
     }
 
 ?>
