@@ -249,12 +249,12 @@
         return $request;
     }
 
-    function getTravel($destinationID = null){
+    function getTotalPlaceDestination($destinationID = null){
         $bdd = getPDO();
         if($destinationID != null){
-            $request = $bdd -> query("SELECT * FROM TRAVEL WHERE travel_ID =" . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
+            $request = $bdd -> query("SELECT travelpres_total_places FROM `TRAVELPRES` WHERE travelpres_ID =" . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
         } else{
-            $request = $bdd -> query("SELECT * FROM TRAVEL") -> fetchAll(PDO::FETCH_ASSOC);
+            $request = $bdd -> query("SELECT travelpres_total_places FROM `TRAVELPRES`") -> fetchAll(PDO::FETCH_ASSOC);
         }
         return $request;
     }
@@ -262,7 +262,7 @@
     function getNbrReservedSit($destinationID = null){
         $bdd = getPDO();
         if($destinationID != null){
-            $requests = $bdd -> query("SELECT userbooking_child_places, userbooking_adult_places FROM USERSBOOKING WHERE EXISTS (SELECT * FROM TRAVEL WHERE travelpres_ID = ". $destinationID .")") -> fetchAll(PDO::FETCH_ASSOC);
+            $requests = $bdd -> query("SELECT userbooking_child_places, userbooking_adult_places FROM USERSBOOKING u JOIN TRAVEL t ON u.travel_ID = t.travel_ID WHERE t.travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
         } else{
             $requests = $bdd -> query("SELECT userbooking_child_places, userbooking_adult_places FROM USERSBOOKING") -> fetchAll(PDO::FETCH_ASSOC);
         }
@@ -277,11 +277,11 @@
 
     function getPourcentSitReserved($destinationID = null){
         $nbrSit = getNbrReservedSit($destinationID);
-        $travels = getTravel($destinationID);
-        if($travels != null){
+        $totalPlaceDestinations = getTotalPlaceDestination($destinationID);
+        if($totalPlaceDestinations != null){
             $sum = 0;
-            foreach ($travels as $travel){
-                $sum += $travel["travel_total_places"];
+            foreach ($totalPlaceDestinations as $totalPlaceDestination){
+                $sum += $totalPlaceDestination["travelpres_total_places"];
             }
             return $nbrSit / $sum;
         }

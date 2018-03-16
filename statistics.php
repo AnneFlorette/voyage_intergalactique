@@ -49,8 +49,17 @@
         let data = google.visualization.arrayToDataTable(dataArray)
 
         let options = {
-        title: 'Title',
-        backgroundColor: 'transparent'
+            backgroundColor: 'transparent',
+            legend:{
+                textStyle:{
+                    color: 'white',
+                    fontSize: 16
+                }
+            },
+            chartArea:{
+                width: '100%',
+                height: '100%'
+            }
         }
 
         let chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -122,7 +131,7 @@
             </div>
     
             <div id="flightStats">
-                <h3>Most Booked Destinations</h3>
+                <h3>Favorites Destinations</h3>
                 <div id="piechart"></div>
             </div>
         </div>
