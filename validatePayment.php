@@ -2,7 +2,11 @@
     include 'functions.php';
     session_start();
 
-
+//Verification qu'il y a bien une session active'
+    if(!checkSession()){
+            header('location: index.php');
+        }
+        
 //validation du paiement et validation réservation des places
     $nbAdults = $_SESSION['nbAdults']; 
     $nbChildren = $_SESSION['nbChildren'];

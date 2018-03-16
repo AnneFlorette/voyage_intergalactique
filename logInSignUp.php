@@ -6,6 +6,7 @@
     $allowedSignUp = true;
     $messageData = [];
 
+
 //verif inscription
     if (isset($_POST['mailSignUp']) && htmlspecialchars($_POST['mailSignUp']) != "" &&
         isset($_POST['passwdSignUp']) && htmlspecialchars($_POST['passwdSignUp']) != "" &&
