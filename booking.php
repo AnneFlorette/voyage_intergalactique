@@ -21,8 +21,11 @@
         $_SESSION['nbChildren'] = htmlspecialchars($_POST['nbChildren']);
         $_SESSION['travelID'] = htmlspecialchars($_POST['tripDate']);
         header('location: validatePayment.php');
+        } else{
+
+            $messageData = ["Oups your Booking informations are not valid", "img/trobiSad.png", "ERROR"];
+            
         }
-        // petitrobot : nombre de places non disponible 
     }
 
     if(isset($_POST['connexion']) && $_POST['connexion'] == "Connexion"){
@@ -37,10 +40,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="css/styleMessageCard.css">
         <link rel="stylesheet" href="css/styleBooking.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <title>Booking a trip</title>
     </head>
     <body <?php getImageDestinations(getDestinationIDByURL()); ?>>
+        <script type="text/javascript" src="messageCard.js"></script>
         <section id="top">
             <div id="logo">    
                 <a href="index.php"><img src="img/logo_blanc.png" alt="Logo of the Far Away Company"></a>
@@ -113,6 +119,26 @@
                     </script>';
             }
         ?>
+
+        <div id="messageContainer"></div>
+
+        <script>
+            
+            let jArray = <?php echo json_encode($messageData); ?>;
+
+            console.log(jArray)
+
+            messageType = getMessageType()
+
+            str = jArray[0]
+            img = jArray[1]
+            msgType = messageType[jArray[2]]
+
+            if (jArray.length != 0){
+                displayMessageCard(str, img, msgType, document.getElementById("messageContainer"))
+            }
+
+        </script>
 
     </body>
 </html>
