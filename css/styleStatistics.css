@@ -138,11 +138,12 @@ h3{
 }
 
 #flightStats{
-     width: auto;
-     height: 80vh;
- }
+    width: auto;
+    height: 80vh;
+}
 
 #piechart{
-     width: 40vw;
-     height: auto;
- }
+    margin-top: 20%;
+    width: 40vw;
+    height: auto;
+}
