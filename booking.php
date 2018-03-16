@@ -40,7 +40,7 @@
         <link rel="stylesheet" href="css/styleBooking.css">
         <title>Booking a trip</title>
     </head>
-    <body <?php getImageDestinations(getIDDestination()); ?>>
+    <body <?php getImageDestinations(getDestinationIDByURL()); ?>>
         <section id="top">
             <div id="logo">    
                 <a href="index.php"><img src="img/logo_blanc.png" alt="Logo of the Far Away Company"></a>
@@ -53,10 +53,10 @@
         <section id="content">
             
             <div id="resume">
-                <h3><?php echo getTripName(getIDDestination()) ?></h3>
+                <h3><?php echo getTripName(getDestinationIDByURL()) ?></h3>
                 <div id="tripResume">
                     <h4>Trip's description</h4>
-                    <p><?php echo getTripDescription(getIDDestination()) ?></p>
+                    <p><?php echo getTripDescription(getDestinationIDByURL()) ?></p>
                 </div>
                 <div id="tripInfo">
                     <table>
@@ -68,7 +68,7 @@
                     <th>Adult price</th>
                     <th>Child price</th>
                     </tr>
-                    <?php getNextTrip(getIDDestination());?>
+                    <?php getNextTrip(getDestinationIDByURL());?>
                     </table>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                         <label for="tripChose">Chose your trip : </label>
                         <br>
                         <select name="tripDate" id="tripDate" required> 
-                            <?php getTripOptions(getIDDestination()); ?>
+                            <?php getTripOptions(getDestinationIDByURL()); ?>
                         </select>
                         <br>
                         <input id="submit" type="submit" value="Book This Trip">

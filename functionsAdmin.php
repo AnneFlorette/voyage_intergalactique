@@ -29,8 +29,8 @@
         $request = $bdd -> prepare("SELECT user_admin FROM USERS WHERE user_mail = :mail");
         $request -> bindParam(":mail", $mail);
         $request -> execute();
-        $data = $request -> fetch(PDO::FETCH_ASSOC);
-        if ($data['user_admin'] == 1){
+        $user = $request -> fetch(PDO::FETCH_ASSOC);
+        if ($user['user_admin'] == 1){
             return true;
         } else{
             return false;
@@ -45,8 +45,8 @@
         $request -> bindParam(":mail", $mail);
         $request -> bindParam(":pass", $passwd);
         $request -> execute();
-        $data = $request -> fetchall(PDO::FETCH_ASSOC);
-        if ($data != null){
+        $user = $request -> fetchall(PDO::FETCH_ASSOC);
+        if ($user != null){
             return true;
         } else{
             return false;
@@ -56,25 +56,21 @@
 //retourne l'ID de l'utilisateur
     function getID($mail){
         $bdd = getPDO();
-        $ID = $bdd->prepare("SELECT user_ID FROM USERS WHERE user_mail = :mail");
-        $ID-> bindParam(':mail', $mail);
-        $ID-> execute();
-        $data = $ID-> fetch(PDO::FETCH_ASSOC);
-        $IDTemp = $data['user_ID'];
-        return $IDTemp;
+        $request = $bdd->prepare("SELECT user_ID FROM USERS WHERE user_mail = :mail");
+        $request-> bindParam(':mail', $mail);
+        $request-> execute();
+        $userID = $request-> fetch(PDO::FETCH_ASSOC);
+        return $userID['user_ID'];
     }
 
-    
-    
 //retourne le 'First Name' de l'utilisateur à partir de son ID
     function getFirstName($ID){
         $bdd = getPDO();
-        $name = $bdd->prepare("SELECT user_first_name FROM USERS WHERE user_ID = :ID");
-        $name-> bindParam(':ID', $ID);
-        $name-> execute();
-        $data = $name-> fetch(PDO::FETCH_ASSOC);
-        $nameTemp = $data['user_first_name'];
-        return $nameTemp;
+        $request = $bdd->prepare("SELECT user_first_name FROM USERS WHERE user_ID = :ID");
+        $request-> bindParam(':ID', $ID);
+        $request-> execute();
+        $userFirstName = $request-> fetch(PDO::FETCH_ASSOC);
+        return $userFirstName['user_first_name'];
     }
 
     function checkAdminSession(){
@@ -93,6 +89,7 @@
             return false;
         }
     }
+
 //Vérifie s'il y a une session active (quelqu'un de connecté)
 //return true si une session est bien active
     function checkSession(){
@@ -102,6 +99,7 @@
         return false;
     }     
 
+//change le nav suivant le statut de la personne connectée
     function changeNav(){
         if(checkSession()){
             $firstName = getFirstName($_SESSION['ID']);
@@ -153,7 +151,6 @@
 
 //création d'une destination
     function createDestination($destination, $img, $description, $travelTime, $adultPrice, $childPrice){
-        var_dump($destination, $img, $description, $travelTime, $adultPrice, $childPrice);
         $bdd = getPDO();
         $request = $bdd -> prepare("INSERT INTO TRAVELPRES (travelpres_destination, travelpres_img_url, travelpres_description, travelpres_days, travelpres_price_adult, travelpres_price_child) VALUES (:destination, :img_url, :descriptions, :travelTime, :adultPrice, :childPrice)");
         $request -> bindParam(":destination",$destination);
@@ -169,10 +166,10 @@
 // le deuxieme total places est pour remain places car voyage neuf donc toutes les places sont libres
     function createTravel($destinationID, $departDate){
         $bdd = getPDO();
-        $destinationTemp = $bdd -> prepare("SELECT travelpres_destination, travelpres_total_places FROM TRAVELPRES WHERE travelpres_ID = :destination_ID");
-        $destinationTemp -> bindParam(":destination_ID", $destinationID);
-        $destinationTemp -> execute();
-        $destination = $destinationTemp -> fetch(PDO::FETCH_ASSOC);
+        $request = $bdd -> prepare("SELECT travelpres_destination, travelpres_total_places FROM TRAVELPRES WHERE travelpres_ID = :destination_ID");
+        $request -> bindParam(":destination_ID", $destinationID);
+        $request -> execute();
+        $destination = $request -> fetch(PDO::FETCH_ASSOC);
         $request = $bdd -> prepare("INSERT INTO TRAVEL (travel_destination, travel_depart_date, travel_remain_places, travelpres_ID) 
                                     VALUES (:destination, :depart_date, :total_places, :travelpres_ID)");
         $request -> bindParam(":destination", $destination['travelpres_destination']);
@@ -185,7 +182,7 @@
 //création du select pour creation nouveau voyage
     function createOption(){
         $bdd = getPDO();
-        $travels = $bdd->query('SELECT travelpres_ID, travelpres_destination FROM TRAVELPRES')->fetchall(PDO::FETCH_ASSOC);
+        $travels = $bdd -> query('SELECT travelpres_ID, travelpres_destination FROM TRAVELPRES')->fetchall(PDO::FETCH_ASSOC);
         foreach ($travels as $travel){
             $str = "";
             $str .= '<option value="'.$travel['travelpres_ID'].'">'.$travel['travelpres_destination'].'</option>';
@@ -197,13 +194,13 @@
     function searchUsers($lastName){
         $bdd = getPDO();
         if($lastName != ""){
-            $usersTemp = $bdd -> prepare('SELECT user_ID, user_first_name, user_last_name, user_mail FROM USERS WHERE user_last_name = :lastName AND user_admin != 1');
-            $usersTemp -> bindParam("lastName", $lastName);
-            $usersTemp -> execute();
+            $request = $bdd -> prepare('SELECT user_ID, user_first_name, user_last_name, user_mail FROM USERS WHERE user_last_name = :lastName AND user_admin != 1');
+            $request -> bindParam("lastName", $lastName);
+            $request -> execute();
         } else{
-            $usersTemp = $bdd -> query('SELECT user_ID, user_first_name, user_last_name, user_mail FROM USERS WHERE user_admin != 1');
+            $request = $bdd -> query('SELECT user_ID, user_first_name, user_last_name, user_mail FROM USERS WHERE user_admin != 1');
         }
-        $users = $usersTemp -> fetchall(PDO::FETCH_ASSOC);
+        $users = $request -> fetchall(PDO::FETCH_ASSOC);
         $i = 0;
         foreach ($users as $user){
             $str = "";
@@ -224,9 +221,7 @@
         $request -> execute();
     }
 
-
-
-//afficher les 10 prochains voyages
+//afficher les prochains voyages
     function getNextTravels(){
         $bdd = getPDO();
         $travels = $bdd -> query('SELECT * FROM TRAVEL WHERE travel_depart_date > CURRENT_DATE');

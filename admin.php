@@ -123,7 +123,7 @@
                 ?> 
             </div>
         </div>
-        <!-- affichage des 10 prochains vols -->
+        <!-- affichage des prochains vols -->
         <div>
             <h3>Next trips</h3>
             <div id="nextTrips">
@@ -187,7 +187,6 @@
         if(isset($_POST['delete']) && $_POST['delete'] != ""){
             $ID = htmlspecialchars($_POST['delete']);
             deleteAccount($ID);
-            //echo '<meta http-equiv="refresh" content="0; URL=admin.php">';
         } else if(isset($_POST['notDelete'])) {
             echo "<script>popUp.style.display = 'none'</script>";
         }

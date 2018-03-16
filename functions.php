@@ -200,24 +200,24 @@ include 'configBdd.php';
         }
         return false;
     }
-//PROFIL FUNCTIONS
 
+//PROFIL FUNCTIONS
     function getNextTrips($userID){
         $bdd = getPDO();
-        /*$request = $bdd -> prepare("SELECT * FROM USERSBOOKING WHERE user_ID = :ID AND userbooking_booking_date >= CURRENT_DATE");
+        $request = $bdd -> prepare("SELECT u.*, t.travel_depart_date FROM USERSBOOKING u JOIN TRAVEL t ON u.travel_ID = t.travel_ID WHERE user_ID = :ID AND travel_depart_date >= CURRENT_DATE");
         $request -> bindParam(":ID", $userID);
-        $request -> execute() -> fetchAll(PDO::FETCH_ASSOC);
-        return $request ; */
-        return $bdd -> query("SELECT u.*, t.travel_depart_date FROM USERSBOOKING u JOIN TRAVEL t ON u.travel_ID = t.travel_ID WHERE user_ID = ". $userID ." AND travel_depart_date >= CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+        $request -> execute(); 
+        $nextTrips = $request -> fetchAll(PDO::FETCH_ASSOC);
+        return $nextTrips ; 
     }
 
     function getOldTrips($userID){
         $bdd = getPDO();
-        /*$request = $bdd -> prepare("SELECT * FROM `usersbooking` WHERE user_ID = :ID AND userbooking_booking_date < CURRENT_DATE");
+        $request = $bdd -> prepare("SELECT u.*, t.travel_depart_date FROM USERSBOOKING u JOIN TRAVEL t ON u.travel_ID = t.travel_ID WHERE user_ID = :ID AND travel_depart_date < CURRENT_DATE");
         $request -> bindParam(":ID", $userID);
-        $result = $request -> execute();
-        return $result -> fetchAll(PDO::FETCH_ASSOC); */
-        return $bdd -> query("SELECT u.*, t.travel_depart_date FROM USERSBOOKING u JOIN TRAVEL t ON u.travel_ID = t.travel_ID WHERE user_ID = ". $userID ." AND travel_depart_date < CURRENT_DATE") -> fetchAll(PDO::FETCH_ASSOC);
+        $request -> execute();
+        $oldTrips = $request -> fetchAll(PDO::FETCH_ASSOC);
+        return $oldTrips;
     }
 
     function getDestination($travelID){
@@ -332,7 +332,7 @@ include 'configBdd.php';
    }
 
 //retourne l'ID de la destination stocké dans l'url
-    function getIDDestination(){
+    function getDestinationIDByURL(){
        $IDDestination = $_GET['ID'];
        return $IDDestination;
     }
@@ -481,7 +481,7 @@ include 'configBdd.php';
     }
 
 //retourne l'ID de la destination a partir de l'ID du voyage
-    function getDestinationID($travelID){
+    function getDestinationIDByBDD($travelID){
         $bdd = getPDO();
         $request = $bdd -> prepare('SELECT travelpres_ID FROM TRAVEL WHERE travel_ID = :ID');
         $request -> bindParam(':ID', $travelID);
