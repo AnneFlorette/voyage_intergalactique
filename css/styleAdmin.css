@@ -93,7 +93,6 @@ li:focus{
      top: 0;
      left: 0;
      cursor: pointer;
-     /* z-index: 1000; */
  }
 
  #dashboard{
@@ -125,9 +124,15 @@ div{
     box-shadow: none;
     background: transparent;
     width: auto;
-    height: 80%;
     overflow: auto;
+}
 
+#nextTrips{
+    height: 80%;
+}
+
+#searchUsers{
+    height: 60%;
 }
 
 
@@ -209,6 +214,7 @@ textarea{
     background-color: transparent;
     border: none;
     color: #ffffff; 
+    z-index: 100;
 }
 
 table{
