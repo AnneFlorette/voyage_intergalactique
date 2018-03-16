@@ -236,7 +236,6 @@ th, td, tr{
 
 #popUp {
     display: none;
-    display: flex;
     align-items: center;
     margin: auto;
     position: fixed;
