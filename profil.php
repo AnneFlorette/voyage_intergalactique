@@ -4,6 +4,12 @@
 
     $messageData = [];
 
+
+//Verification qu'il y a bien une session active'
+    if(!checkSession()){
+            header('location: index.php');
+        }
+        
     // Changement d'informations
     if  ((isset($_POST['firstName']) && $_POST['firstName'] != "") &&
         (isset($_POST['lastName']) && $_POST['lastName'] != "") &&
