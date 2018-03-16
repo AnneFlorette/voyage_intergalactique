@@ -353,10 +353,10 @@
             $totalPlacesDest = $bdd -> query("SELECT SUM(travelpres_total_places) FROM TRAVELPRES") -> fetchAll(PDO::FETCH_ASSOC);
         }
         $totalPlaces = $totalPlacesDest[0]["SUM(travelpres_total_places)"] * $remainPlacesDest[0]["COUNT(travel_ID)"];
-        $currentPlaces = $totalPlaces - $remainPlacesDest[0]["SUM(travel_remain_places)"];
+        $currentPlaces = $remainPlacesDest[0]["SUM(travel_remain_places)"];
         $completion = 0;
         if($totalPlaces > 0){
-            $completion = round(($currentPlaces / $totalPlaces) * 100, 1);
+            $completion = round(($totalPlaces / $currentPlaces), 1);
         }
         return $completion;
     }
