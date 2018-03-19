@@ -159,10 +159,14 @@
             </div>
         </div>
         <script>
+            //bouton send Users
             const sendUsers = document.getElementById('sendUsers')
+            //PopUp en display none
             const popUp = document.getElementById('popUp')
+            //bouton "yes" pour supprimer un compte
             const btnYes = document.getElementById('yes')
             let idToDelete = null
+            let deleteButtonEl
             let row
             
 
@@ -180,7 +184,7 @@
                 row = document.getElementsByClassName('trUsers').length
                 if(row > 0) {
                     for(i = 0; i < row; i++){
-                        let deleteButtonEl = document.getElementsByClassName('delete')[i]
+                        deleteButtonEl = document.getElementsByClassName('delete')[i]
                         deleteButtonEl.addEventListener('click', () => {
                             idToDelete = deleteButtonEl.value
                             display()
