@@ -219,11 +219,15 @@ textarea{
     margin-left: 10px;
 }
 
-.button{
+.delete{
     background-color: transparent;
     border: none;
     color: #ffffff; 
     z-index: 100;
+}
+
+.iconBin{
+    cursor: pointer;
 }
 
 table{
