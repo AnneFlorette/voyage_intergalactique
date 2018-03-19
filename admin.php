@@ -111,7 +111,7 @@
             </form>  
         </div>
         <div>
-            <form action="" method="POST">
+            <form method="POST">
                 <h3>Search a user</h3>
                     <label for="search">Enter a user's last name</label>
                     <br>
@@ -171,6 +171,7 @@
             
 
             function display() {
+                console.log("Display block")
                 popUp.style.display = 'block'
             }
 
@@ -185,7 +186,9 @@
                 if(row > 0) {
                     for(i = 0; i < row; i++){
                         deleteButtonEl = document.getElementsByClassName('delete')[i]
+                        console.log(deleteButtonEl)
                         deleteButtonEl.addEventListener('click', () => {
+                            console.log('poubelle')
                             idToDelete = deleteButtonEl.value
                             display()
                             listenOnYesButton(idToDelete)
@@ -203,6 +206,7 @@
             $ID = htmlspecialchars($_POST['delete']);
             deleteAccount($ID);
         } else if(isset($_POST['notDelete'])) {
+            var_dump('None');
             echo "<script>popUp.style.display = 'none'</script>";
         }
         ?>
