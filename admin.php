@@ -166,10 +166,10 @@
                     btnYes.value = id
                 })
             }
+
             function countRow(){
-                row = document.getElementsByTagName('tr').length
+                row = document.getElementsByClassName('trUsers').length
                 if(row > 0) {
-                    console.log('coucou')
                     for(i = 0; i < row; i++){
                         let deleteButtonEl = document.getElementsByClassName('delete')[i]
                         deleteButtonEl.addEventListener('click', () => {

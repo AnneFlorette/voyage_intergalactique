@@ -236,7 +236,6 @@ th, td, tr{
 
 #popUp {
     display: none;
-    align-items: center;
     margin: auto;
     position: fixed;
     top: 0;
@@ -244,7 +243,9 @@ th, td, tr{
     bottom: 0;
     left: 0;
     height: 20vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: none;
+    border: none;
+    box-shadow: none;
     z-index: 1000;
 }
 
