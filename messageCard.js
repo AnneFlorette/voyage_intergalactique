@@ -9,8 +9,6 @@ function getMessageType(){
 
 function displayMessageCard(msg, img, type = "info", container){
 
-    console.log(type)
-
     const card = document.createElement('div')
     card.classList.add('message', `message--${type}`)
 
@@ -36,4 +34,8 @@ function displayMessageCard(msg, img, type = "info", container){
     card.appendChild(i)
 
     container.appendChild(card)
+
+    setTimeout(() => {
+        card.remove()
+    }, 4000)
 }
