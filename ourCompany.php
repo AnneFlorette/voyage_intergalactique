@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/styleCompany.css">
     <link rel="stylesheet" href="css/styleOurTeam.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Our company</title>
+    <title>Our Company</title>
 </head>
 
 

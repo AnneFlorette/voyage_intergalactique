@@ -51,7 +51,7 @@
     <link rel="stylesheet" href="css/styleAdmin.css">
     <link rel="stylesheet" type="text/css" href="css/styleMessageCard.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 <body>
     <script type="text/javascript" src="messageCard.js"></script>
