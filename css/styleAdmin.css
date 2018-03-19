@@ -81,21 +81,21 @@ li:focus{
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
- }
+}
 
- h2{
-     color: #ffffff;
-     font-family: "Space Age";
-     font-size: 4em;
-     margin-top: 10vh;
-     margin-bottom: 0px;
-     padding: 0px;
-     top: 0;
-     left: 0;
-     cursor: pointer;
- }
+h2{
+    color: #ffffff;
+    font-family: "Space Age";
+    font-size: 4em;
+    margin-top: 10vh;
+    margin-bottom: 0px;
+    padding: 0px;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
 
- #dashboard{
+#dashboard{
     background-color: transparent; 
     width: auto;
     height: auto;
@@ -105,9 +105,9 @@ li:focus{
     margin-top: 4vh;
     margin-bottom: 0px;
     box-shadow: none;
- }
+}
 
-div{
+div:not(.messageContainer):not(.message){
     height: 600px;
     width: 40vw;
     background: #1b395fbd;

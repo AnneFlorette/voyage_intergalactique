@@ -23,6 +23,9 @@
             $childPrice = htmlspecialchars($_POST['childPrice']);
             
             createDestination($destination, $img, $description, $travelTime, $adultPrice, $childPrice);
+
+            $messageData = ["New destination created", "img/trobiGood.png", "SUCCESS"];
+            
         }
 
 //création nouveau voyage
@@ -30,7 +33,11 @@
         (isset($_POST['depart_date']) && $_POST['depart_date'] != "")){
             $destinationID = htmlspecialchars($_POST['destinations']);
             $departDate = htmlspecialchars($_POST['depart_date']);
+
             createTravel($destinationID, $departDate);
+
+            $messageData = ["New trip created", "img/trobiGood.png", "SUCCESS"];
+
         }
         
 ?>
@@ -42,10 +49,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/styleAdmin.css">
+    <link rel="stylesheet" type="text/css" href="css/styleMessageCard.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
+    <script type="text/javascript" src="messageCard.js"></script>
     <?php changeNav()?>
 
     <a href="admin.php"><h2>Dashboard</h2></a>
@@ -64,15 +73,15 @@
                 <br>
                 <label for="time">Travel time in days</label>
                 <br>
-                <input type="int" name="time" class="input" required>
+                <input type="number" name="time" class="input" required>
                 <br>
                 <label for="adultPrice">Price for an Adult</label>
                 <br>
-                <input type="int" name="adultPrice" class="input" required>
+                <input type="number" name="adultPrice" class="input" required>
                 <br>
                 <label for="childPrice">Price for a child (+15%)</label>
                 <br>
-                <input type="int" name="childPrice" class="input" required>
+                <input type="number" name="childPrice" class="input" required>
                 <br>
                 <label for="description">Description of the destination</label>
                 <br>
@@ -194,5 +203,25 @@
         }
         ?>
     </div>
+
+    <div id="messageContainer" class = "messageContainer"></div>
+
+    <script>
+        
+        let jArray = <?php echo json_encode($messageData); ?>;
+
+        console.log(jArray)
+
+        messageType = getMessageType()
+
+        str = jArray[0]
+        img = jArray[1]
+        msgType = messageType[jArray[2]]
+
+        if (jArray.length != 0){
+            displayMessageCard(str, img, msgType, document.getElementById("messageContainer"))
+        }
+
+    </script>
 </body>
 </html>
