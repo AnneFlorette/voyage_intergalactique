@@ -6,6 +6,10 @@
     font-family: "Sansation";
     src: url('../font/Sansation_Regular.ttf');
 }
+@font-face{
+    font-family: "SansationBold";
+    src: url('../font/Sansation_Bold.ttf');
+}
 
 :focus {
     outline: none;
@@ -203,4 +207,12 @@ p {
     font-family: "Sansation";
     text-align: justify;
     padding: 20px;
+}
+
+.nameDescription{
+    font-family: "SansationBold";
+}
+
+#intro p{
+    text-align: center;
 }
