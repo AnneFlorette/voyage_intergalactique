@@ -101,7 +101,7 @@
                 </div>
                 <div id="connexionDiv">
                     <form action="" method="POST">
-                        <input id="logIn" type="submit" name="connexion" value="Connexion">
+                        <input id="logIn" type="submit" name="connexion" value="Log In / Sign Up">
                     </form>
                 </div>
             </div>
