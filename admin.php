@@ -168,18 +168,20 @@
             }
             function countRow(){
                 row = document.getElementsByTagName('tr').length
-                return row
+                if(row > 0) {
+                    console.log('coucou')
+                    for(i = 0; i < row; i++){
+                        let deleteButtonEl = document.getElementsByClassName('delete')[i]
+                        deleteButtonEl.addEventListener('click', () => {
+                            idToDelete = deleteButtonEl.value
+                            display()
+                            listenOnYesButton(idToDelete)
+                        }, false)
+                    }
+                }
             } 
 
             sendUsers.addEventListener('click', countRow, false)         
-            for(i = 0; i < countRow(); i++){
-                let deleteButtonEl = document.getElementsByClassName('delete')[i]
-                deleteButtonEl.addEventListener('click', () => {
-                    idToDelete = deleteButtonEl.value
-                    display()
-                    listenOnYesButton(idToDelete)
-                }, false)
-            }
             
         </script>
         <?php
