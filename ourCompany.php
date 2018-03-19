@@ -61,7 +61,7 @@
     <section id="ourTeam">
         <div class="left">
             <h4>Our team</h4>
-            <p id= "intro">A beautiful band of losers</p>
+            <p id= "intro">Click on us to learn more about us</p>
             <div id="teamMate"></div>
         </div>
         <div id="container">
