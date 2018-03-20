@@ -8,7 +8,7 @@
     }
 
 
-//création nouvelle destination
+//Création nouvelle destination
     if ((isset($_POST['destination']) && $_POST['destination'] != "") &&
         (isset($_POST['img_url']) && $_POST['img_url'] != "") &&
         (isset($_POST['time']) && $_POST['time'] != "") &&
@@ -28,7 +28,7 @@
             
         }
 
-//création nouveau voyage
+//Création nouveau voyage
     if ((isset($_POST['destinations']) && $_POST['destinations'] != "") &&
         (isset($_POST['depart_date']) && $_POST['depart_date'] != "")){
             $destinationID = htmlspecialchars($_POST['destinations']);
@@ -37,9 +37,7 @@
             createTravel($destinationID, $departDate);
 
             $messageData = ["New trip created", "img/trobiGood.png", "SUCCESS"];
-
-        }
-        
+    }        
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +53,8 @@
 </head>
 <body>
     <script type="text/javascript" src="messageCard.js"></script>
+
+    //Change le menu en fonction de l'utilisateur
     <?php changeNav()?>
 
     <a href="admin.php"><h2>Dashboard</h2></a>
@@ -159,16 +159,15 @@
             </div>
         </div>
         <script>
-            //bouton send Users
+            //Bouton send Users
             const sendUsers = document.getElementById('sendUsers')
             //PopUp en display none
             const popUp = document.getElementById('popUp')
-            //bouton "yes" pour supprimer un compte
+            //Bouton "yes" pour supprimer un compte
             const btnYes = document.getElementById('yes')
+            //Variable qui va retenir l'ID de l'utilisateur à supprimer
             let idToDelete = null
-            let row
             
-
             function display() {
                 popUp.style.display = 'block'
             }
@@ -189,20 +188,21 @@
                     }, false)
                 }
             } 
-
-            countRow();       
             
+            countRow();                   
         </script>
+
         <?php
     // Suppression du compte
         if(isset($_POST['delete']) && $_POST['delete'] != ""){
             $ID = htmlspecialchars($_POST['delete']);
             echo $ID;
             deleteAccount($ID);
+    // Sinon fermeture du popUp (display : none)
         } else if(isset($_POST['notDelete'])) {
             echo "<script>popUp.style.display = 'none'</script>";
         }
-        ?>
+        ?>        
     </div>
 
     <div id="messageContainer" class="messageContainer"></div>
