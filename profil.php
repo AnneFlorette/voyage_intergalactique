@@ -21,7 +21,7 @@
             modifData(($_SESSION['ID']), $firstName, $lastName, $mail);
             echo "<script>popUpInfo.style.display = 'none'</script>";
 
-            $messageData = ["Informations changed", "img/trobiGood.png", "SUCCESS"];
+            $messageData = ["Your informations have been changed", "img/trobiGood.png", "SUCCESS"];
 
         }
 
@@ -35,11 +35,11 @@
                 $password = cryptage($newPwd);
                 modifPwd($_SESSION['ID'], $password);
 
-                $messageData = ["Password changed", "img/trobiGood.png", "SUCCESS"];
+                $messageData = ["Your password have been changed", "img/trobiGood.png", "SUCCESS"];
 
             } else{
 
-                $messageData = ["Password not changed", "img/trobiSad.png", "ERROR"];
+                $messageData = ["Your password hasn't been changed", "img/trobiSad.png", "ERROR"];
 
             }
         }
