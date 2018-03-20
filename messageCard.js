@@ -37,5 +37,5 @@ function displayMessageCard(msg, img, type = "info", container){
 
     setTimeout(() => {
         card.remove()
-    }, 4000)
+    }, 5000)
 }
