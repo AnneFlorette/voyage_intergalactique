@@ -54,7 +54,7 @@
 <body>
     <script type="text/javascript" src="messageCard.js"></script>
 
-    //Change le menu en fonction de l'utilisateur
+<!-- Change le menu en fonction de l'utilisateur -->
     <?php changeNav()?>
 
     <a href="admin.php"><h2>Dashboard</h2></a>
@@ -104,7 +104,7 @@
                 <br>
                 <label for="depart_date">Date of departure</label>
                 <br>
-                <input type="date" name="depart_date" class="input" required>
+                <?php echo '<input type="date" name="depart_date" class="input" min="'.date("Y-m-d").'" required>' ?>
                 <br>
                 <input type="submit" class="submit" value="Send">
                 <br>
