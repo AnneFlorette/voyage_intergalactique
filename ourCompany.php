@@ -14,17 +14,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Our Company</title>
 </head>
-
-
 <body>
     <script type="text/javascript" src="teamMate.js"></script>
-
     <section id="front">
-
         <?php 
             changeNav();
         ?>  
-
         <div id="titleBox">
             <a href="index.php"><h1>Far Away</h1></a>
             <p id="caption">Go deeper in Space</p>   
@@ -34,8 +29,6 @@
             <a href="#city"><button id="scroll"><i id="iconScroll" class="material-icons">keyboard_arrow_down</i></button></a>
         </div>
     </section>
-
-
     <section id="city">
         <div class="left">
             <h4>Our Headquarter</h4>
@@ -44,8 +37,6 @@
             </p>
         </div>   
     </section>
-
-
     <section id="ship">
         <div class="left">
             <h4>Our space ship</h4>
@@ -57,7 +48,6 @@
             </p>
         </div> 
     </section>
-
     <section id="ourTeam">
         <div class="left">
             <h4>Our team</h4>
@@ -84,6 +74,5 @@
             </ul>
         </div>
     </section>
-
 </body>
 </html>

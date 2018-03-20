@@ -10,7 +10,7 @@
             header('location: index.php');
         }
         
-    // Changement d'informations
+// Changement d'informations
     if  ((isset($_POST['firstName']) && $_POST['firstName'] != "") &&
         (isset($_POST['lastName']) && $_POST['lastName'] != "") &&
         (isset($_POST['mail']) && $_POST['mail'] != "")){
@@ -22,27 +22,24 @@
             echo "<script>popUpInfo.style.display = 'none'</script>";
 
             $messageData = ["Informations changed", "img/trobiGood.png", "SUCCESS"];
-
         }
 
-    // Changement mot de passe
-        if  ((isset($_POST['currentPwd']) && $_POST['currentPwd'] != "") &&
-            (isset($_POST['newPwd']) && $_POST['newPwd'] != "") &&
-            (isset($_POST['checkNewPwd']) && $_POST['checkNewPwd'] != "")){
-            if  ((verifPwd($_SESSION['ID'], $_POST['currentPwd']) == true) && 
-                (htmlspecialchars($_POST['newPwd']) == htmlspecialchars($_POST['checkNewPwd']))){
-                $newPwd = htmlspecialchars($_POST['newPwd']);
-                $password = cryptage($newPwd);
-                modifPwd($_SESSION['ID'], $password);
+// Changement mot de passe
+    if  ((isset($_POST['currentPwd']) && $_POST['currentPwd'] != "") &&
+        (isset($_POST['newPwd']) && $_POST['newPwd'] != "") &&
+        (isset($_POST['checkNewPwd']) && $_POST['checkNewPwd'] != "")){
+        if  ((verifPwd($_SESSION['ID'], $_POST['currentPwd']) == true) && 
+            (htmlspecialchars($_POST['newPwd']) == htmlspecialchars($_POST['checkNewPwd']))){
+            $newPwd = htmlspecialchars($_POST['newPwd']);
+            $password = cryptage($newPwd);
+            modifPwd($_SESSION['ID'], $password);
 
-                $messageData = ["Password changed", "img/trobiGood.png", "SUCCESS"];
-
-            } else{
-
-                $messageData = ["Password not changed", "img/trobiSad.png", "ERROR"];
-
-            }
+            $messageData = ["Password changed", "img/trobiGood.png", "SUCCESS"];
+        } else{
+            $messageData = ["Password not changed", "img/trobiSad.png", "ERROR"];
         }
+    }
+
 // Suppression du compte
     if(isset($_POST['delete']) && $_POST['delete'] == "YES"){
         deleteAccount($_SESSION['ID']);
@@ -60,8 +57,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/styleProfil.css">
     <link rel="stylesheet" type="text/css" href="css/styleMessageCard.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
     <title>Profil</title>
 </head>
 <body>
@@ -91,7 +87,6 @@
                     <button id="btnPopUpPassword">Modify password</button>
                     <button id="btnPopUpDeleteAccount">Delete account</button>
                 </div>
-                
                 <!-- PopUp pour modifier les informations -->
                 <div id="popUpInfo">
                     <div class="popUp_block">
@@ -163,7 +158,6 @@
                 }
             ?>
         </div>
-
         <div id="pastTrip">
             <h5>My Old Trips</h5>
             <?php
@@ -182,9 +176,7 @@
             ?>
         </div>
     </section>
-
     <div id="messageContainer"></div>
-
     <script>
         const popUpInfo = document.getElementById('popUpInfo')
         const popUpPassword = document.getElementById('popUpPassword')
@@ -213,8 +205,6 @@
 
         let jArray = <?php echo json_encode($messageData); ?>;
 
-        console.log(jArray)
-
         messageType = getMessageType()
 
         str = jArray[0]
@@ -224,8 +214,6 @@
         if (jArray.length != 0){
             displayMessageCard(str, img, msgType, document.getElementById("messageContainer"))
         }
-
     </script>
-
 </body>
 </html>
