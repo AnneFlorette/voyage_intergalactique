@@ -23,7 +23,7 @@
         header('location: validatePayment.php');
         } else{
 
-            $messageData = ["Oups your Booking informations are not valid", "img/trobiSad.png", "ERROR"];
+            $messageData = ["Oops your Booking informations are not valid", "img/trobiSad.png", "ERROR"];
             
         }
     }
