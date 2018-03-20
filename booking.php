@@ -28,7 +28,7 @@
         }
     }
 
-    if(isset($_POST['connexion']) && $_POST['connexion'] == "Connexion"){
+    if(isset($_POST['connexion']) && $_POST['connexion'] == "Log In / Sign Up"){
         header('location: logInSignUp.php');
     }
 
