@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/styleDestinations.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <title>Our destinations</title>
+    <title>Our Destinations</title>
 </head>
 <body>
     <section id="front">

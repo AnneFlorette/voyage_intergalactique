@@ -201,15 +201,13 @@
             $request = $bdd -> query('SELECT user_ID, user_first_name, user_last_name, user_mail FROM USERS WHERE user_admin != 1');
         }
         $users = $request -> fetchall(PDO::FETCH_ASSOC);
-        $i = 0;
         foreach ($users as $user){
             $str = "";
             $str .= '<tr class="trUsers"><td>'.$user['user_first_name']
             .'</td><td>'.$user['user_last_name']
             .'</td><td>'.$user['user_mail']
-            .'</td><td><button id="'.$i.'"value="'.$user['user_ID'].'" class="delete"><i class="material-icons iconBin">delete</i></button></td></tr>';
+            .'</td><td><button data-id="'.$user['user_ID'].'" class="delete"><i class="material-icons iconBin">delete</i></button></td></tr>';
             echo $str;
-            $i++;
         }
     }
 
@@ -347,16 +345,17 @@
         $bdd = getPDO();
         if($destinationID != null){
             $remainPlacesDest = $bdd -> query("SELECT SUM(travel_remain_places), COUNT(travel_ID) FROM TRAVEL WHERE travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
-            $totalPlacesDest = $bdd -> query("SELECT SUM(travelpres_total_places) FROM TRAVELPRES WHERE travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
+            $totalPlacesDest = $bdd -> query("SELECT SUM(travelpres_total_places), COUNT(travelpres_ID) FROM TRAVELPRES WHERE travelpres_ID = " . $destinationID) -> fetchAll(PDO::FETCH_ASSOC);
         } else{
             $remainPlacesDest = $bdd -> query("SELECT SUM(travel_remain_places), COUNT(travel_ID) FROM TRAVEL") -> fetchAll(PDO::FETCH_ASSOC);
-            $totalPlacesDest = $bdd -> query("SELECT SUM(travelpres_total_places) FROM TRAVELPRES") -> fetchAll(PDO::FETCH_ASSOC);
+            $totalPlacesDest = $bdd -> query("SELECT SUM(travelpres_total_places), COUNT(travelpres_ID) FROM TRAVELPRES") -> fetchAll(PDO::FETCH_ASSOC);
         }
-        $totalPlaces = $totalPlacesDest[0]["SUM(travelpres_total_places)"] * $remainPlacesDest[0]["COUNT(travel_ID)"];
-        $currentPlaces = $remainPlacesDest[0]["SUM(travel_remain_places)"];
+        $totalPlaces = $totalPlacesDest[0]["SUM(travelpres_total_places)"] / $totalPlacesDest[0]["COUNT(travelpres_ID)"]* $remainPlacesDest[0]["COUNT(travel_ID)"];
+        $remainPlaces = $remainPlacesDest[0]["SUM(travel_remain_places)"];
+        $currentPlaces = $totalPlaces - $remainPlaces;
         $completion = 0;
         if($totalPlaces > 0){
-            $completion = round(($totalPlaces / $currentPlaces), 1);
+            $completion = round(($currentPlaces * 100 / $totalPlaces), 2);
         }
         return $completion;
     }

@@ -1,8 +1,8 @@
 <?php
 
 $host = 'localhost';
-$name = 'bdd_faraway';
-$pass = 'root';
-$login = 'root';
+$name = 'team6';
+$pass = 'MadHatter';
+$login = 'team6';
 
 ?>

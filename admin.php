@@ -51,7 +51,7 @@
     <link rel="stylesheet" href="css/styleAdmin.css">
     <link rel="stylesheet" type="text/css" href="css/styleMessageCard.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 <body>
     <script type="text/javascript" src="messageCard.js"></script>
@@ -111,7 +111,7 @@
             </form>  
         </div>
         <div>
-            <form action="" method="POST">
+            <form method="POST">
                 <h3>Search a user</h3>
                     <label for="search">Enter a user's last name</label>
                     <br>
@@ -166,7 +166,6 @@
             //bouton "yes" pour supprimer un compte
             const btnYes = document.getElementById('yes')
             let idToDelete = null
-            let deleteButtonEl
             let row
             
 
@@ -180,27 +179,25 @@
                 })
             }
 
-            function countRow(){
-                row = document.getElementsByClassName('trUsers').length
-                if(row > 0) {
-                    for(i = 0; i < row; i++){
-                        deleteButtonEl = document.getElementsByClassName('delete')[i]
-                        deleteButtonEl.addEventListener('click', () => {
-                            idToDelete = deleteButtonEl.value
-                            display()
-                            listenOnYesButton(idToDelete)
-                        }, false)
-                    }
+            function countRow () {
+                const rows = document.querySelectorAll('.delete')
+                for (const el of rows){
+                    el.addEventListener('click', event => {
+                        display()
+                        let idToDelete = event.target.parentNode.dataset.id
+                        listenOnYesButton(idToDelete)
+                    }, false)
                 }
             } 
 
-            sendUsers.addEventListener('click', countRow, false)         
+            countRow();       
             
         </script>
         <?php
     // Suppression du compte
         if(isset($_POST['delete']) && $_POST['delete'] != ""){
             $ID = htmlspecialchars($_POST['delete']);
+            echo $ID;
             deleteAccount($ID);
         } else if(isset($_POST['notDelete'])) {
             echo "<script>popUp.style.display = 'none'</script>";
@@ -208,7 +205,7 @@
         ?>
     </div>
 
-    <div id="messageContainer" class = "messageContainer"></div>
+    <div id="messageContainer" class="messageContainer"></div>
 
     <script>
         

@@ -204,7 +204,7 @@ include 'configBdd.php';
 //PROFIL FUNCTIONS
     function getNextTrips($userID){
         $bdd = getPDO();
-        $request = $bdd -> prepare("SELECT u.*, t.travel_depart_date FROM USERSBOOKING u JOIN TRAVEL t ON u.travel_ID = t.travel_ID WHERE user_ID = :ID AND travel_depart_date >= CURRENT_DATE");
+        $request = $bdd -> prepare("SELECT u.*, t.travel_depart_date FROM USERSBOOKING u JOIN TRAVEL t ON u.travel_ID = t.travel_ID WHERE user_ID = :ID AND travel_depart_date >= CURRENT_DATE ORDER BY travel_depart_date");
         $request -> bindParam(":ID", $userID);
         $request -> execute(); 
         $nextTrips = $request -> fetchAll(PDO::FETCH_ASSOC);
@@ -370,7 +370,7 @@ include 'configBdd.php';
 //retourne le tableau des prochains vols par l'ID de la destination
     function getNextTrip($ID){
         $bdd = getPDO();
-        $request = $bdd -> prepare('SELECT t1.travel_ID ,t1.travel_depart_date, t2.travelpres_days, t2.travelpres_price_adult, t2.travelpres_price_child, t1.travel_remain_places FROM TRAVEL t1 JOIN TRAVELPRES t2 ON t1.travelpres_ID = t2.travelpres_ID WHERE t1.travelpres_ID = :ID');
+        $request = $bdd -> prepare('SELECT t1.travel_ID ,t1.travel_depart_date, t2.travelpres_days, t2.travelpres_price_adult, t2.travelpres_price_child, t1.travel_remain_places FROM TRAVEL t1 JOIN TRAVELPRES t2 ON t1.travelpres_ID = t2.travelpres_ID WHERE t1.travelpres_ID = :ID ORDER BY t1.travel_depart_date');
         $request -> bindParam(':ID', $ID);
         $request -> execute();
         $infos = $request -> fetchAll(PDO::FETCH_ASSOC);
