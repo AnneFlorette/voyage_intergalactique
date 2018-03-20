@@ -151,7 +151,7 @@
                     foreach($nextTrips as $nextTrip){
                         $destination = getDestination($nextTrip["travel_ID"]);
                         echo '<div class="trip"><table>
-                        <tr><th>Destination</th><th>Booking\'s date</th><th>Travel\'s date</th><th>Adult places</th><th>Children places</th><th>Price payed</th></tr>
+                        <tr><th>Destination</th><th>Booking\'s date</th><th>Travel\'s date</th><th>Adult places</th><th>Children places</th><th>Price</th></tr>
                         <tr><td>'.$destination[0]["travel_Destination"].'</td><td>'.$nextTrip["userbooking_booking_date"].'</td><td>'.$nextTrip["travel_depart_date"].'</td><td>'.$nextTrip["userbooking_adult_places"].'</td><td>'.$nextTrip["userbooking_child_places"].'</td><td>'.getPrice($nextTrip["userbooking_adult_places"], $nextTrip["userbooking_child_places"], $nextTrip["travel_ID"]).' €</td></tr>
                         </table></div>';
                     }
