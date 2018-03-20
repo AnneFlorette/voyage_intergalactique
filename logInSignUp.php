@@ -24,16 +24,16 @@
                 $passCrypt = cryptage($passwd);
                 writeLog($mail, $passCrypt, $lastName, $firstName);
 
-                $messageData = ["SignUp Ok", "img/trobiGood.png", "SUCCESS"];
+                $messageData = ["You're now registered", "img/trobiGood.png", "SUCCESS"];
                 
             } else{
 
-                $messageData = ["SignUp Failed", "img/trobiSad.png", "ERROR"];
+                $messageData = ["Oops your sign up didn't work", "img/trobiSad.png", "ERROR"];
 
             }
         } else{
                 
-            $messageData = ["SignUp Failed", "img/trobiSad.png", "ERROR"];
+            $messageData = ["It would seem that your check password is not correct", "img/trobiSad.png", "ERROR"];
 
         }
     }
@@ -53,7 +53,7 @@
             header('location: profil.php');
         } else{
             
-            $messageData = ["Login failed", "img/trobiSad.png", "ERROR"];
+            $messageData = ["Oops we couldn't connect you", "img/trobiSad.png", "ERROR"];
 
         }
     }
