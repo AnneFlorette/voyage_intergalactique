@@ -201,15 +201,13 @@
             $request = $bdd -> query('SELECT user_ID, user_first_name, user_last_name, user_mail FROM USERS WHERE user_admin != 1');
         }
         $users = $request -> fetchall(PDO::FETCH_ASSOC);
-        $i = 0;
         foreach ($users as $user){
             $str = "";
             $str .= '<tr class="trUsers"><td>'.$user['user_first_name']
             .'</td><td>'.$user['user_last_name']
             .'</td><td>'.$user['user_mail']
-            .'</td><td><button id="'.$i.'"value="'.$user['user_ID'].'" class="delete"><i class="material-icons iconBin">delete</i></button></td></tr>';
+            .'</td><td><button data-id="'.$user['user_ID'].'" class="delete"><i class="material-icons iconBin">delete</i></button></td></tr>';
             echo $str;
-            $i++;
         }
     }
 
