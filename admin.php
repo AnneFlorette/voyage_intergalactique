@@ -166,12 +166,10 @@
             //bouton "yes" pour supprimer un compte
             const btnYes = document.getElementById('yes')
             let idToDelete = null
-            let deleteButtonEl
             let row
             
 
             function display() {
-                console.log("Display block")
                 popUp.style.display = 'block'
             }
 
@@ -181,38 +179,33 @@
                 })
             }
 
-            function countRow(){
-                row = document.getElementsByClassName('trUsers').length
-                if(row > 0) {
-                    for(i = 0; i < row; i++){
-                        deleteButtonEl = document.getElementsByClassName('delete')[i]
-                        console.log(deleteButtonEl)
-                        deleteButtonEl.addEventListener('click', () => {
-                            console.log('poubelle')
-                            idToDelete = deleteButtonEl.value
-                            display()
-                            listenOnYesButton(idToDelete)
-                        }, false)
-                    }
+            function countRow () {
+                const rows = document.querySelectorAll('.delete')
+                for (const el of rows){
+                    el.addEventListener('click', event => {
+                        display()
+                        let idToDelete = event.target.parentNode.dataset.id
+                        listenOnYesButton(idToDelete)
+                    }, false)
                 }
             } 
 
-            sendUsers.addEventListener('click', countRow, false)         
+            countRow();       
             
         </script>
         <?php
     // Suppression du compte
         if(isset($_POST['delete']) && $_POST['delete'] != ""){
             $ID = htmlspecialchars($_POST['delete']);
+            echo $ID;
             deleteAccount($ID);
         } else if(isset($_POST['notDelete'])) {
-            var_dump('None');
             echo "<script>popUp.style.display = 'none'</script>";
         }
         ?>
     </div>
 
-    <div id="messageContainer" class = "messageContainer"></div>
+    <div id="messageContainer" class="messageContainer"></div>
 
     <script>
         
