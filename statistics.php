@@ -2,7 +2,7 @@
     include 'functionsAdmin.php';
     session_start();
 
-//Verification que la Sessiona active est bien celle de l'Admin
+//Verification que la Session active est bien celle de l'Admin
     if(!checkAdminSession()){
         header('location: index.php');
     }
@@ -40,14 +40,11 @@
         return dataArray
     }
 
+//création du diagramme
     function drawChart() {
-
         dataArray = getDataArray();
         dataArray.splice(0, 0, ['Destination', 'In pourcent'])
-        console.log(dataArray)
-
         let data = google.visualization.arrayToDataTable(dataArray)
-
         let options = {
             backgroundColor: 'transparent',
             legend:{
@@ -61,9 +58,7 @@
                 height: '100%'
             }
         }
-
         let chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
         chart.draw(data, options);
     }
 
@@ -80,7 +75,6 @@
     </head>
     <body>
         <?php changeNav() ?>
-
         <div id="generalStats">
             <h3>General Statistics</h3>
             <table>
@@ -106,7 +100,6 @@
                 </tr>
             </table>
         </div>
-
         <div id="particularStats">
             <div id="completionStats">
                 <h3>Completion Statistics</h3>
@@ -129,13 +122,10 @@
                     ?>
                 </table>
             </div>
-    
             <div id="flightStats">
                 <h3>Favorites Destinations</h3>
                 <div id="piechart"></div>
             </div>
         </div>
-        
-
     </body>
 </html>
