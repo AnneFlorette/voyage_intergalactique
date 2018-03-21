@@ -16,12 +16,12 @@
     $destinationID = getDestinationIDByBDD($travelID);
     $totalPlaces = $nbAdults + $nbChildren;
 
-    if(isset($_POST['validate']) && $_POST['validate'] == "Validate payment"){
+    if(isset($_GET['validate'])){
         bookTrip($totalPlaces, $travelID);
         addTripToUser($_SESSION['ID'], $travelID, $nbAdults, $nbChildren, $price);
         //faire popUp de validation de paiement
         header('location: profil.php');
-    }else if(isset($_POST['cancel']) && $_POST['cancel'] == "Cancel payment"){
+    }else if(isset($_GET['cancel'])){
         header('location: booking.php?ID='.$destinationID);
     }
 
@@ -48,10 +48,58 @@
             <tr><td>Number of child places:</td><td><?php echo ' '.$_SESSION['nbChildren']; ?></td></tr>
             <tr><td>Total price:</td><td><?php echo ' '.$price.' €'; ?></td></tr>
         </table>
-        <form action="" method="post" id="validationForm">
-            <input type="submit" class="btn" name="validate" value="Validate payment">
-            <input type="submit" class="btn" name="cancel" value="Cancel payment">
-        </form>
+        <input id="validate" type="submit" class="btn" name="validate" value="Validate payment">
+        <input id="cancel" type="submit" class="btn" name="cancel" value="Cancel payment">
     </div>
+
+    <div id="divRocket"><img id="imgRocket" src="img/rocket.png"></div>
+
+    <script>
+    
+        const btnVal = document.getElementById("validate")
+        const btnCan = document.getElementById("cancel")
+        const rocket = document.getElementById("imgRocket")
+        
+        let i = 0
+        let j = 0
+        let speed = 0
+        let angle = 0
+
+        btnVal.addEventListener("click", () => {
+            interval = setInterval(() => {
+                i += 0.4
+                speed = i * i
+                rocket.style.bottom = speed + "px"
+                if(parseFloat(rocket.style.bottom, 10) > screen.height){
+                    clearInterval(interval)
+                    document.location.href="validatePayment.php?validate"
+                }
+            }, 30)
+        }, false)
+
+        btnCan.addEventListener("click", () => {
+            interval = setInterval(() => {
+                if (i == 0){
+                    rocket.src = "img/rocketFall.gif"
+                }else if (i == 1){
+                    rocket.style.width = "192px"
+                }else if (i == 42){
+                    rocket.src = "img/rocketFall.png"
+                }
+                if (i > 30){
+                    j += 0.2
+                    speed = j * j
+                    rocket.style.left = speed + "px"
+                    if (parseFloat(rocket.style.left, 10) > screen.width){
+                        clearInterval(interval)
+                        document.location.href="validatePayment.php?cancel"
+                    }
+                }
+                i++
+            }, 10)
+        }, false)
+
+    </script>
+
 </body>
 </html>
