@@ -124,7 +124,6 @@ div:not(.messageContainer):not(.message){
     box-shadow: none;
     background: transparent;
     width: auto;
-    overflow: auto;
 }
 
 #nextTrips{
@@ -133,8 +132,13 @@ div:not(.messageContainer):not(.message){
 
 #searchUsers{
     height: 60%;
+    overflow: auto;
 }
 
+#tripsDiv{
+    overflow: auto;
+    height: 70%;
+}
 
 h3{
     color: #ffffff;

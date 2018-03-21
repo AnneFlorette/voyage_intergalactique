@@ -137,15 +137,19 @@
             <h3>Next trips</h3>
             <div id="nextTrips">
                 <table>
+                    <thead>
                     <tr>
                         <th>Travel's ID</th>
                         <th>Destination</th>
                         <th>Depart Date</th>
                         <th>Remain places</th>
                     </tr>
-                    <?php
-                        getNextTravels();
-                    ?>
+                    </thead>
+                    <tbody id="tripsDiv">
+                            <?php
+                                getNextTravels();
+                            ?>
+                    </tbody>
                 </table>
             </div>
         </div>
