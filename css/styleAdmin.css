@@ -108,7 +108,7 @@ h2{
 }
 
 div:not(.messageContainer):not(.message){
-    height: 600px;
+    height: auto;
     width: 40vw;
     background: #1b395fbd;
     box-shadow: 2px 3px 4px #000000;
@@ -135,9 +135,22 @@ div:not(.messageContainer):not(.message){
     overflow: auto;
 }
 
-#tripsDiv{
-    overflow: auto;
-    height: 70%;
+#tripsHead, #tripsBody{
+    display: block;
+    width: 38vw;
+}
+
+#tripsHead th{
+    padding: 1em;
+}
+
+#tripsBody{
+    overflow: auto !important;
+    height: 50vh;
+}
+
+#tripsBody td{
+    padding-left: 3em;
 }
 
 h3{

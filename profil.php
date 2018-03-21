@@ -31,7 +31,7 @@
         if  ((verifPwd($_SESSION['ID'], $_POST['currentPwd']) == true) && 
             (htmlspecialchars($_POST['newPwd']) == htmlspecialchars($_POST['checkNewPwd']))){
             $newPwd = htmlspecialchars($_POST['newPwd']);
-            $password = cryptage($newPwd);
+            $password = encrypt($newPwd);
             modifPwd($_SESSION['ID'], $password);
 
             $messageData = ["Password changed", "img/trobiGood.png", "SUCCESS"];

@@ -91,6 +91,27 @@
                 <br>
             </form>
         </div>
+        <!-- affichage des prochains vols -->
+        <div>
+            <h3>Next trips</h3>
+            <div id="nextTrips">
+                <table>
+                    <thead id="tripsHead">
+                    <tr>
+                        <th>Travel's ID</th>
+                        <th>Destination</th>
+                        <th>Depart Date</th>
+                        <th>Remain places</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tripsBody">
+                            <?php
+                                getNextTravels();
+                            ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div>
             <form action="" method="POST">
                 <h3>Create a new trip</h3>
@@ -132,27 +153,7 @@
                 ?> 
             </div>
         </div>
-        <!-- affichage des prochains vols -->
-        <div>
-            <h3>Next trips</h3>
-            <div id="nextTrips">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Travel's ID</th>
-                        <th>Destination</th>
-                        <th>Depart Date</th>
-                        <th>Remain places</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tripsDiv">
-                            <?php
-                                getNextTravels();
-                            ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        
         <div id="popUp">
             <div class="popUp_block">
                 <form action="" method="POST">

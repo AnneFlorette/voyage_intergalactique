@@ -18,7 +18,7 @@ include 'configBdd.php';
     }
 
 //Crypte le mot de passe grâce à un clé (KEY) et le Sha256
-    function cryptage($passwd){
+    function encrypt($passwd){
         $passCrypt = $passwd.KEY.KEY.$passwd.KEY;
         return hash('sha256', $passCrypt, false);
     }
@@ -140,7 +140,7 @@ include 'configBdd.php';
 //on vérifie d'abord si 'currentPwd' est bien le même que celui dans la base de données
     function verifpasswd($ID, $passwd){
         $passwdVerif = getPasswd($ID);
-        $passwdCheck = cryptage($passwd);
+        $passwdCheck = encrypt($passwd);
         if($passwdCheck == $passwdVerif){
             return true;
         }
@@ -395,7 +395,8 @@ include 'configBdd.php';
 //retourne l'id du vol et sa date de départ pour la sélection de l'utilisateur dans booking
     function getTripOptions($IDDestination){
         $bdd = getPDO();
-        $request = $bdd -> prepare('SELECT travel_ID, travel_depart_date FROM TRAVEL WHERE travelpres_ID = :ID');
+        $request = $bdd -> prepare('SELECT travel_ID, travel_depart_date FROM TRAVEL WHERE travelpres_ID = :ID 
+        AND travel_depart_date >= CURRENT_DATE ORDER BY travel_depart_date');
         $request -> bindParam(':ID', $IDDestination);
         $request -> execute();
         $options = $request -> fetchAll(PDO::FETCH_ASSOC);

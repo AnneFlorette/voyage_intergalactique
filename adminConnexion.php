@@ -11,7 +11,7 @@
         isset($_POST['passwdLogIn']) && htmlspecialchars($_POST['passwdLogIn']) != "") {
         $mail = htmlspecialchars($_POST['mailLogIn']);
         $passwd = htmlspecialchars($_POST['passwdLogIn']);
-        $logCrypt = cryptage($passwd);
+        $logCrypt = encrypt($passwd);
         $allowedLogin = verifConnexion($mail, $logCrypt);
         $admin = isAdmin($mail);
         if($allowedLogin == true && $admin == true){

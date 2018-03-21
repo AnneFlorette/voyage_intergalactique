@@ -130,16 +130,31 @@ h3{
     border-radius: 18px;
     box-shadow: 2px 3px 4px #000000;
     margin: 20px;
+    width: auto;
+    height: auto;
 }
 
 #completionStats{
-    width: auto;
-    height: 80vh;
+    padding: 1em;
 }
 
-#flightStats{
-    width: auto;
-    height: 80vh;
+#completionHead,
+#completionBody {
+    display: block;
+}
+
+#completionBody{
+    overflow: auto;
+    height: 50vh;
+    padding-left: 3em;
+}
+
+#completionHead th{
+    padding-left: 1.5em;
+}
+
+#completionBody td{
+    padding-right: 8em;
 }
 
 #piechart{

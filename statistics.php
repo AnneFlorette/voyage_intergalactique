@@ -105,11 +105,11 @@
                 <h3>Completion Statistics</h3>
                 <table>
                     <?php
-                        echo    "<tr>" .
-                                    "<td>" . "Destination name" . "</td>" .
-                                    "<td>" . "Pourcent of flight completion" . "</td>" .
-                                "</tr>" .
-                                "<tr>" .
+                        echo    "<thead id='completionHead'><tr>" .
+                                    "<th>" . "Destination name" . "</th>" .
+                                    "<th>" . "Pourcent of flight completion" . "</th>" .
+                                "</tr></thead>" .
+                                "<tbody id='completionBody'><tr>" .
                                     "<td>" . "Global" . "</td>" .
                                     "<td>" . getPourcentFlightCompletion() . " %</td>" .
                                 "</tr>";                
@@ -119,6 +119,7 @@
                                         "<td>" . getPourcentFlightCompletion($destination["travelpres_ID"]) . " %</td>" .
                                     "</tr>";
                         }
+                        echo "</tbody>";
                     ?>
                 </table>
             </div>

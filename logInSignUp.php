@@ -21,7 +21,7 @@
             $allowedSignUp = verifInscription($mail);
 
             if ($allowedSignUp == true){
-                $passCrypt = cryptage($passwd);
+                $passCrypt = encrypt($passwd);
                 writeLog($mail, $passCrypt, $lastName, $firstName);
 
                 $messageData = ["You're now registered", "img/trobiGood.png", "SUCCESS"];
@@ -44,7 +44,7 @@
         isset($_POST['passwdLogIn']) && htmlspecialchars($_POST['passwdLogIn']) != "") {
         $mail = htmlspecialchars($_POST['mailLogIn']);
         $passwd = htmlspecialchars($_POST['passwdLogIn']);
-        $logCrypt = cryptage($passwd);
+        $logCrypt = encrypt($passwd);
         $allowedLogin = verifConnexion($mail, $logCrypt);
         if($allowedLogin == true){
             $ID = getID($mail);
