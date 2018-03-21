@@ -52,7 +52,7 @@
         <input id="cancel" type="submit" class="btn" name="cancel" value="Cancel payment">
     </div>
 
-    <div id="divRocket"><img id="imgRocket" src="img/rocket.png"></div>
+    <div id="divRocket"><img id="imgRocket" src="img/rocket.png"><img class="preLoadImg"></div>
 
     <script>
     
