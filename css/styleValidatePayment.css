@@ -36,8 +36,6 @@ body {
     margin-bottom: 2vh;
 }
 
-
-
 .btn {
     list-style: none;
     line-height: 3em;
@@ -65,4 +63,23 @@ body {
     color: white;
     background: #1b395f;
     box-shadow: 2px 3px 4px #ffffff6b;
+}
+
+#divRocket{
+    position: fixed;
+    left: 10px;
+    bottom: 0px;
+}
+
+#imgRocket{
+    position: relative;
+    width: 96px;
+}
+
+.preLoadImg{
+    display: none;
+    width: 0;
+    height: 0;
+    background: url(img/rocketFall.gif),
+                url(img/rocketFall.png),
 }
